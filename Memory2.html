@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nova Post — Робоче місце оператора (Stress Test)</title>
+  <style>
+    :root {
+      --np-red: #EC1C24;
+      --np-red-dark: #C81319;
+      --np-dark: #221F1F;
+      --np-gray: #F4F4F5;
+      --np-border: #E4E4E7;
+      --np-green: #10B981;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+
+    body {
+      background-color: #EAEAEB;
+      color: var(--np-dark);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Шапка CRM */
+    .top-bar {
+      background: var(--np-dark);
+      color: white;
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
+      color: var(--np-red);
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: -1px;
+    }
+
+    .counter-badge {
+      background: #333;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+      border: 1px solid #444;
+    }
+
+    .counter-badge span {
+      color: var(--np-red);
+      font-weight: 800;
+    }
+
+    /* Контейнери экранів */
+    .screen {
+      padding: 24px;
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 32px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      max-width: 600px;
+      margin: 0 auto;
+      width: 100%;
+      text-align: center;
+    }
+
+    .btn {
+      background-color: var(--np-red);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 15px;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      transition: background 0.2s;
+      margin-top: 12px;
+    }
+
+    .btn:hover {
+      background-color: var(--np-red-dark);
+    }
+
+    .btn:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    /* Вхід / Факти */
+    .form-group {
+      text-align: left;
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      border: 2px solid var(--np-border);
+      border-radius: 6px;
+    }
+
+    .facts-grid {
+      text-align: left;
+      display: grid;
+      gap: 8px;
+      margin: 16px 0;
+    }
+
+    .fact-item {
+      background: var(--np-gray);
+      padding: 10px 14px;
+      border-radius: 6px;
+      border-left: 4px solid var(--np-red);
+      font-size: 14px;
+    }
+
+    /* Робочий стіл з 3 колонками */
+    .workspace-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr 1fr;
+      gap: 20px;
+      align-items: start;
+      margin-top: 10px;
+    }
+
+    .column-header {
+      font-weight: 800;
+      font-size: 15px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--np-border);
+    }
+
+    /* Картки завдань */
+    .task-card {
+      background: white;
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 16px;
+      border: 1px solid var(--np-border);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      position: relative;
+    }
+
+    .task-card.done {
+      opacity: 0.5;
+      pointer-events: none;
+      background: #F0FDF4;
+      border-color: var(--np-green);
+    }
+
+    .task-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .task-title {
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .timer-tag {
+      background: #FFF5F5;
+      color: var(--np-red);
+      font-weight: 800;
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      border: 1px solid #FECDD3;
+    }
+
+    .task-q {
+      font-size: 13px;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+    }
+
+    .opt-btn {
+      background: var(--np-gray);
+      border: 1px solid var(--np-border);
+      padding: 8px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .opt-btn:hover {
+      border-color: var(--np-red);
+      background: #FFF5F5;
+    }
+
+    /* Дзвінки (Центр) */
+    .call-box {
+      background: white;
+      border-radius: 12px;
+      border: 2px solid var(--np-red);
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(236, 28, 36, 0.15);
+    }
+
+    .call-icon {
+      font-size: 40px;
+      margin-bottom: 8px;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .break-state {
+      background: #F4F4F5;
+      border: 2px dashed #CBD5E1;
+      padding: 30px;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ВЕРХНЯ ПАНЕЛЬ ОПЕРАТОРА -->
+  <div class="top-bar">
+    <div class="brand">
+      <div class="logo">Nova Post</div>
+      <span style="color: #888; font-size: 14px;">| Stress-Test CRM</span>
+    </div>
+    <div class="counter-badge">
+      Опрацьовано звернень: <span id="cnt-total">0</span>/10 
+      (Дзвінків: <span id="cnt-calls">0</span>/3, 
+      Чатів: <span id="cnt-chats">0</span>/3, 
+      Листів: <span id="cnt-emails">0</span>/4)
+    </div>
+  </div>
+
+  <div class="screen">
+
+    <!-- ЕКРАН 1: Авторизація -->
+    <div id="screen-auth" class="card">
+      <h2 style="margin-bottom: 8px;">Вхід у систему підтримки</h2>
+      <p style="color: #666; font-size: 14px; margin-bottom: 20px;">Введіть дані кандидата для початку зміни</p>
+      <div class="form-group">
+        <label>Ім'я</label>
+        <input type="text" id="fname" placeholder="Іван">
+      </div>
+      <div class="form-group">
+        <label>Прізвище</label>
+        <input type="text" id="lname" placeholder="Франко">
+      </div>
+      <button class="btn" onclick="startMemorize()">Розпочати тест</button>
+    </div>
+
+    <!-- ЕКРАН 2: Запам'ятовування фактів (60 сек) -->
+    <div id="screen-memorize" class="card hidden" style="max-width: 750px;">
+      <h2>Пам'ятка оператора (Запам'ятайте правила)</h2>
+      <p style="color: #666; font-size: 14px; margin-top: 4px;">
+        У вас є <strong id="mem-timer" style="color: var(--np-red); font-size: 18px;">60</strong> сек. Далі почнеться потік звернень!
+      </p>
+      <div class="facts-grid" id="facts-container"></div>
+      <button class="btn" onclick="startWorkspace()">Я готовий(а) до роботи</button>
+    </div>
+
+    <!-- ЕКРАН 3: Робочий стіл з чатами, дзвінками та листами -->
+    <div id="screen-workspace" class="hidden">
+      <div class="workspace-grid">
+        
+        <!-- ЛІВА КОЛОНКА: ЧАТИ (3) -->
+        <div>
+          <div class="column-header">💬 Онлайн-чати (3)</div>
+          <div id="chats-container"></div>
+        </div>
+
+        <!-- ЦЕНТРАЛЬНА КОЛОНКА: ДЗВІНКИ (3) -->
+        <div>
+          <div class="column-header">📞 Вхідна лінія дзвінків</div>
+          
+          <!-- Вікно активного дзвінка -->
+          <div id="call-active-box" class="call-box">
+            <div class="call-icon">📞</div>
+            <div style="font-weight: 800; color: var(--np-red);" id="call-title">Дзвінок #1</div>
+            <div style="margin: 8px 0;" class="timer-tag">Таймер відповіді: <span id="call-timer">45</span>s</div>
+            <div class="task-q" id="call-q-text">Питання...</div>
+            <div class="options-grid" id="call-options"></div>
+          </div>
+
+          <!-- Вікно перерви між дзвінками -->
+          <div id="call-break-box" class="break-state hidden">
+            <div style="font-size: 28px; margin-bottom: 8px;">☕</div>
+            <div style="font-weight: 700;">Перерва між дзвінками</div>
+            <p style="font-size: 12px; color: #666; margin: 6px 0;">Наступний дзвінок через <b id="break-timer">60</b> сек</p>
+            <button class="btn" style="padding: 6px 12px; font-size: 12px;" onclick="skipBreak()">Прийняти дзвінок достроково</button>
+          </div>
+
+          <!-- Стан коли всі дзвінки завершено -->
+          <div id="call-finished-box" class="break-state hidden" style="background: #F0FDF4; border-color: var(--np-green);">
+            <div style="font-size: 28px; margin-bottom: 8px;">✅</div>
+            <div style="font-weight: 700;">Усі дзвінки опрацьовано</div>
+            <p style="font-size: 12px; color: #666;">Завершіть чати та листи в інших колонках</p>
+          </div>
+        </div>
+
+        <!-- ПРАВА КОЛОНКА: ЛИСТИ (4) -->
+        <div>
+          <div class="column-header">✉️ Email-звернення (4)</div>
+          <div id="emails-container"></div>
+        </div>
+
+      </div>
+
+      <button class="btn" id="finish-btn" onclick="finishWorkspace()" style="margin-top: 24px;">Завершити зміну та отримати оцінку</button>
+    </div>
+
+    <!-- ЕКРАН 4: Результати -->
+    <div id="screen-result" class="card hidden">
+      <h2>Результати зміни</h2>
+      <p id="res-candidate" style="color: #666; margin-top: 4px;"></p>
+      
+      <div style="font-size: 56px; font-weight: 900; color: var(--np-red); margin: 20px 0;" id="res-score">0 / 100</div>
+      <p id="res-comment" style="font-weight: 700; font-size: 16px;"></p>
+      
+      <button class="btn" onclick="location.reload()" style="margin-top: 20px;">Пройти ще раз</button>
+    </div>
+
+  </div>
+
+  <script>
+    const bank = [
+      { fact: "Доставка з України до Чехії коштує від 200 грн.", q: "Мінімальна вартість доставки з України до Чехії?", options: ["150 грн", "200 грн", "250 грн", "300 грн"], correct: 1 },
+      { fact: "Гранична вага посилки з Румунії до Словаччини — 30 кг.", q: "Максимальна вага посилки з Румунії до Словаччини?", options: ["10 кг", "20 кг", "30 кг", "50 кг"], correct: 2 },
+      { fact: "Термін доставки між відділеннями в Польщі — 1 робочий день.", q: "Термін доставки між відділеннями в Польщі?", options: ["1 робочий день", "2 дні", "3 дні", "5 днів"], correct: 0 },
+      { fact: "Безкоштовне зберігання у відділенні в Німеччині — 7 днів.", q: "Скільки днів безкоштовного зберігання в Німеччині?", options: ["3 дні", "5 днів", "7 днів", "10 днів"], correct: 2 },
+      { fact: "Доставка до поштомату в Молдові — оціночна вартість до 500 євро.", q: "Ліміт оціночної вартості для поштомату в Молдові?", options: ["200 євро", "300 євро", "500 євро", "1000 євро"], correct: 2 },
+      { fact: "Максимальна сторона коробки з Литви до Латвії — 120 см.", q: "Максимальна довжина коробки Литва -> Латвія?", options: ["80 см", "100 см", "120 см", "150 см"], correct: 2 },
+      { fact: "Забір посилки кур'єром у Чехії коштує 100 крон.", q: "Вартість кур'єрського забору в Чехії?", options: ["50 крон", "100 крон", "150 крон", "200 крон"], correct: 1 },
+      { fact: "Відправка документів з України до Естонії коштує 450 грн.", q: "Ціна відправки документів до Естонії?", options: ["350 грн", "400 грн", "450 грн", "500 грн"], correct: 2 },
+      { fact: "Максимальна вага для міжнародної адресної доставки — 1000 кг.", q: "Гранична вага для міжнародної адресної доставки?", options: ["500 кг", "700 кг", "1000 кг", "1500 кг"], correct: 2 },
+      { fact: "Перепад температури для спецвантажів — не більше 5°C.", q: "Допустимий перепад температури для спецвантажів?", options: ["2°C", "5°C", "8°C", "10°C"], correct: 1 },
+      { fact: "Термін виконання міжнародного переказу — до 15 хвилин.", q: "Час виконання міжнародного грошового переказу?", options: ["До 15 хвилин", "До 1 години", "До 3 годин", "За добу"], correct: 0 },
+      { fact: "Комісія за оголошену вартість понад 100 євро в Угорщині — 1%.", q: "Комісія за вартість понад 100 євро в Угорщині?", options: ["0.5%", "1%", "2%", "3%"], correct: 1 },
+      { fact: "Вантажі до Італії понад 15 кг маркуються Fragile.", q: "Від якої ваги вантаж до Італії маркується Fragile?", options: ["Понад 5 кг", "Понад 10 кг", "Понад 15 кг", "Понад 20 кг"], correct: 2 },
+      { fact: "Повернення товару з Іспанії здійснюється протягом 14 днів.", q: "Термін повернення товару з Іспанії?", options: ["7 днів", "10 днів", "14 днів", "30 днів"], correct: 2 },
+      { fact: "Сплата мита в Німеччині — протягом 3 робочих днів.", q: "Скільки днів дається на сплату мита в Німеччині?", options: ["1 день", "3 робочі дні", "5 днів", "7 днів"], correct: 1 },
+      { fact: "Базове страхове покриття у Словаччині — до 200 євро.", q: "Базове страхове покриття у Словаччині?", options: ["100 євро", "200 євро", "300 євро", "500 євро"], correct: 1 },
+      { fact: "Шини та диски до Франції везуть комплектами по 4 шт.", q: "Комплектація доставки шин до Франції?", options: ["Поштучно", "По 2 шт.", "Комплектами по 4 шт.", "Без обмежень"], correct: 2 },
+      { fact: "Переадресація по місту в Румунії коштує 15 лей.", q: "Вартість переадресації по місту в Румунії?", options: ["Безкоштовно", "10 лей", "15 лей", "25 лей"], correct: 2 },
+      { fact: "Пакування в коробку 5 кг у Британії коштує 2 фунти.", q: "Ціна коробки 5 кг у Великій Британії?", options: ["1 фунт", "2 фунти", "3 фунти", "5 фунтів"], correct: 1 },
+      { fact: "Гранична висота палети в Австрію — 170 см.", q: "Максимальна висота палети в Австрію?", options: ["150 см", "170 см", "180 см", "200 см"], correct: 1 }
+    ];
+
+    let selectedTasks = [];
+    let userAnswers = {};
+    let candidateName = "";
+    
+    // Лічильники
+    let countCalls = 0, countChats = 0, countEmails = 0;
+
+    // Таймери
+    let memInterval, callInterval, breakInterval;
+    let chatIntervals = [], emailIntervals = [];
+    let currentCallIndex = 0;
+
+    function startMemorize() {
+      const f = document.getElementById('fname').value.trim();
+      const l = document.getElementById('lname').value.trim();
+      if (!f || !l) return alert("Введіть ім'я та прізвище!");
+
+      candidateName = `${f} ${l}`;
+      
+      // Вибираємо 10 фактів
+      selectedTasks = [...bank].sort(() => 0.5 - Math.random()).slice(0, 10);
+
+      document.getElementById('facts-container').innerHTML = selectedTasks
+        .map(t => `<div class="fact-item">${t.fact}</div>`).join('');
+
+      document.getElementById('screen-auth').classList.add('hidden');
+      document.getElementById('screen-memorize').classList.remove('hidden');
+
+      let t = 60;
+      memInterval = setInterval(() => {
+        t--;
+        document.getElementById('mem-timer').innerText = t;
+        if (t <= 0) startWorkspace();
+      }, 1000);
+    }
+
+    function startWorkspace() {
+      clearInterval(memInterval);
+      document.getElementById('screen-memorize').classList.add('hidden');
+      document.getElementById('screen-workspace').classList.remove('hidden');
+
+      // Розподіляємо завдання: 3 дзвінки (0..2), 3 чати (3..5), 4 листи (6..9)
+      setupCalls();
+      setupChats();
+      setupEmails();
+    }
+
+    /* --- 1. ДЗВІНКИ (3) --- */
+    function setupCalls() {
+      renderCall(0);
+    }
+
+    function renderCall(idx) {
+      if (idx >= 3) {
+        document.getElementById('call-active-box').classList.add('hidden');
+        document.getElementById('call-break-box').classList.add('hidden');
+        document.getElementById('call-finished-box').classList.remove('hidden');
+        return;
+      }
+
+      currentCallIndex = idx;
+      const task = selectedTasks[idx];
+
+      document.getElementById('call-title').innerText = `Дзвінок #${idx + 1}`;
+      document.getElementById('call-q-text').innerText = task.q;
+      
+      const optContainer = document.getElementById('call-options');
+      optContainer.innerHTML = task.options.map((opt, oIdx) => `
+        <button class="opt-btn" onclick="answerCall(${idx}, ${oIdx})">${opt}</button>
+      `).join('');
+
+      document.getElementById('call-active-box').classList.remove('hidden');
+      document.getElementById('call-break-box').classList.add('hidden');
+
+      let left = 45;
+      document.getElementById('call-timer').innerText = left;
+      clearInterval(callInterval);
+      callInterval = setInterval(() => {
+        left--;
+        document.getElementById('call-timer').innerText = left;
+        if (left <= 0) {
+          answerCall(idx, -1); // Пропущено/не відповіли
+        }
+      }, 1000);
+    }
+
+    function answerCall(taskIdx, optionIdx) {
+      clearInterval(callInterval);
+      if (optionIdx !== -1) userAnswers[taskIdx] = optionIdx;
+      
+      countCalls++;
+      updateCounters();
+
+      // Запуск перерви 60 секунд
+      document.getElementById('call-active-box').classList.add('hidden');
+      document.getElementById('call-break-box').classList.remove('hidden');
+
+      let bLeft = 60;
+      document.getElementById('break-timer').innerText = bLeft;
+      clearInterval(breakInterval);
+      breakInterval = setInterval(() => {
+        bLeft--;
+        document.getElementById('break-timer').innerText = bLeft;
+        if (bLeft <= 0) {
+          skipBreak();
+        }
+      }, 1000);
+    }
+
+    function skipBreak() {
+      clearInterval(breakInterval);
+      renderCall(currentCallIndex + 1);
+    }
+
+    /* --- 2. ЧАТИ (3) --- */
+    function setupChats() {
+      const container = document.getElementById('chats-container');
+      const chatTasks = [selectedTasks[3], selectedTasks[4], selectedTasks[5]];
+
+      container.innerHTML = chatTasks.map((t, i) => {
+        const taskIdx = i + 3;
+        return `
+          <div class="task-card" id="chat-card-${taskIdx}">
+            <div class="task-header">
+              <span class="task-title">Чат #${i + 1}</span>
+              <span class="timer-tag">⏱ <span id="chat-timer-${taskIdx}">180</span>s</span>
+            </div>
+            <div class="task-q">${t.q}</div>
+            <div class="options-grid">
+              ${t.options.map((opt, oIdx) => `
+                <button class="opt-btn" onclick="answerTask(${taskIdx}, ${oIdx}, 'chat-card-${taskIdx}', 'chat')">${opt}</button>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // Таймери по 3 хв (180 сек)
+      chatTasks.forEach((_, i) => {
+        const taskIdx = i + 3;
+        let left = 180;
+        const timer = setInterval(() => {
+          left--;
+          const el = document.getElementById(`chat-timer-${taskIdx}`);
+          if (el) el.innerText = left;
+          if (left <= 0) {
+            clearInterval(timer);
+            answerTask(taskIdx, -1, `chat-card-${taskIdx}`, 'chat');
+          }
+        }, 1000);
+        chatIntervals.push(timer);
+      });
+    }
+
+    /* --- 3. ЛИСТИ (4) --- */
+    function setupEmails() {
+      const container = document.getElementById('emails-container');
+      const emailTasks = [selectedTasks[6], selectedTasks[7], selectedTasks[8], selectedTasks[9]];
+
+      container.innerHTML = emailTasks.map((t, i) => {
+        const taskIdx = i + 6;
+        return `
+          <div class="task-card" id="email-card-${taskIdx}">
+            <div class="task-header">
+              <span class="task-title">Лист #${i + 1}</span>
+              <span class="timer-tag">⏱ <span id="email-timer-${taskIdx}">300</span>s</span>
+            </div>
+            <div class="task-q">${t.q}</div>
+            <div class="options-grid">
+              ${t.options.map((opt, oIdx) => `
+                <button class="opt-btn" onclick="answerTask(${taskIdx}, ${oIdx}, 'email-card-${taskIdx}', 'email')">${opt}</button>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // Таймери по 5 хв (300 сек)
+      emailTasks.forEach((_, i) => {
+        const taskIdx = i + 6;
+        let left = 300;
+        const timer = setInterval(() => {
+          left--;
+          const el = document.getElementById(`email-timer-${taskIdx}`);
+          if (el) el.innerText = left;
+          if (left <= 0) {
+            clearInterval(timer);
+            answerTask(taskIdx, -1, `email-card-${taskIdx}`, 'email');
+          }
+        }, 1000);
+        emailIntervals.push(timer);
+      });
+    }
+
+    /* Відповідь на Чат або Лист */
+    function answerTask(taskIdx, optionIdx, cardId, type) {
+      if (optionIdx !== -1) userAnswers[taskIdx] = optionIdx;
+      
+      const card = document.getElementById(cardId);
+      if (card) card.classList.add('done');
+
+      if (type === 'chat') countChats++;
+      if (type === 'email') countEmails++;
+
+      updateCounters();
+    }
+
+    function updateCounters() {
+      const total = countCalls + countChats + countEmails;
+      document.getElementById('cnt-total').innerText = total;
+      document.getElementById('cnt-calls').innerText = countCalls;
+      document.getElementById('cnt-chats').innerText = countChats;
+      document.getElementById('cnt-emails').innerText = countEmails;
+    }
+
+    function finishWorkspace() {
+      // Очищення всіх таймерів
+      clearInterval(callInterval);
+      clearInterval(breakInterval);
+      chatIntervals.forEach(clearInterval);
+      emailIntervals.forEach(clearInterval);
+
+      // Підрахунок точних правильних відповідей
+      let score = 0;
+      selectedTasks.forEach((task, idx) => {
+        if (userAnswers[idx] === task.correct) {
+          score += 10;
+        }
+      });
+
+      document.getElementById('screen-workspace').classList.add('hidden');
+      document.getElementById('screen-result').classList.remove('hidden');
+
+      document.getElementById('res-candidate').innerText = `Оператор: ${candidateName}`;
+      document.getElementById('res-score').innerText = `${score} / 100`;
+
+      const comm = document.getElementById('res-comment');
+      if (score >= 80) {
+        comm.innerText = "Фантастична стресостійкість та оперативна пам'ять!";
+        comm.style.color = "var(--np-green)";
+      } else if (score >= 50) {
+        comm.innerText = "Добре впоралися з багатозадачністю в умовах стресу.";
+        comm.style.color = "orange";
+      } else {
+        comm.innerText = "Високий рівень стресу завадив точності. Варто тренуватися.";
+        comm.style.color = "var(--np-red)";
+      }
+    }
+  </script>
+</body>
+</html>
