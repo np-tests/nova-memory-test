@@ -37,13 +37,11 @@
     .form-group label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 4px; }
     .form-group input, .form-group select { width: 100%; padding: 10px; border: 2px solid var(--np-border); border-radius: 6px; font-size: 14px; }
 
-    /* Екран фактів у 3 колонки */
     .facts-3col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin: 16px 0; text-align: left; }
-    .col-card { background: #FAFARA; border: 1px solid var(--np-border); border-radius: 8px; padding: 14px; }
+    .col-card { background: #FAFAFA; border: 1px solid var(--np-border); border-radius: 8px; padding: 14px; }
     .category-title { font-weight: 800; font-size: 13px; color: var(--np-red); margin-bottom: 10px; border-bottom: 2px solid var(--np-border); padding-bottom: 4px; text-transform: uppercase; }
     .fact-item { background: white; padding: 8px 10px; border-radius: 6px; border-left: 3px solid var(--np-red); font-size: 12px; margin-bottom: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
 
-    /* CRM Grid */
     .workspace-grid { display: grid; grid-template-columns: 1.1fr 1.2fr 1fr; gap: 16px; align-items: start; margin-top: 10px; }
     .column-header { font-weight: 800; font-size: 14px; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 2px solid var(--np-border); }
 
@@ -52,7 +50,6 @@
     .task-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
     .timer-tag { background: #FFF5F5; color: var(--np-red); font-weight: 800; font-size: 11px; padding: 3px 6px; border-radius: 4px; border: 1px solid #FECDD3; }
 
-    /* Чат-бабли */
     .chat-history { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; max-height: 220px; overflow-y: auto; padding: 4px; }
     .bubble { max-width: 85%; padding: 8px 12px; border-radius: 12px; font-size: 12px; line-height: 1.4; word-wrap: break-word; }
     .bubble-client { background: #E2E8F0; color: #1E293B; align-self: flex-start; border-bottom-left-radius: 2px; }
@@ -89,39 +86,39 @@
       
       <div class="form-group">
         <label>Ім'я</label>
-        <input type="text" id="fname" placeholder="Іван">
+        <input type="text" id="fname" placeholder="Ім'я">
       </div>
       <div class="form-group">
         <label>Прізвище</label>
-        <input type="text" id="lname" placeholder="Франко">
+        <input type="text" id="lname" placeholder="Прізвище">
       </div>
       <div class="form-group">
         <label>Країна та мова обслуговування</label>
         <select id="country-lang">
-          <option value="🇵🇱 Польща (Польська)">🇵🇱 Польща (Польська)</option>
-          <option value="🇩🇪 Німеччина (Німецька)">🇩🇪 Німеччина (Німецька)</option>
-          <option value="🇨🇿 Чехія (Чеська)">🇨🇿 Чехія (Чеська)</option>
-          <option value="🇱🇹 Литва (Литовська)">🇱🇹 Литва (Литовська)</option>
-          <option value="🇱🇻 Латвія (Латиська)">🇱🇻 Латвія (Латиська)</option>
-          <option value="🇪🇪 Естонія (Естонська)">🇪🇪 Естонія (Естонська)</option>
-          <option value="🇷🇴 Румунія (Румунська)">🇷🇴 Румунська (Румунська)</option>
-          <option value="🇸🇰 Словаччина (Словацька)">🇸🇰 Словаччина (Словацька)</option>
-          <option value="🇭🇺 Угорщина (Угорська)">🇭🇺 Угорщина (Угорська)</option>
-          <option value="🇲🇩 Молдова (Молдовська)">🇲🇩 Молдова (Молдовська)</option>
-          <option value="🇮🇹 Італія (Італійська)">🇮🇹 Італія (Італійська)</option>
-          <option value="🇪🇸 Іспанія (Іспанська)">🇪🇸 Іспанія (Іспанська)</option>
-          <option value="🇫🇷 Франція (Французька)">🇫🇷 Франція (Французька)</option>
-          <option value="🇬🇧 Велика Британія (Англійська)">🇬🇧 Велика Британія (Англійська)</option>
-          <option value="🇦🇹 Австрія (Німецька)">🇦🇹 Австрія (Німецька)</option>
-          <option value="🇳🇱 Нідерланди (Англійська)">🇳🇱 Нідерланди (Англійська)</option>
-          <option value="🇺🇦 Україна (Українська)" selected>🇺🇦 Україна (Українська)</option>
+          <option value="ua" selected>🇺🇦 Україна (Українська)</option>
+          <option value="pl">🇵🇱 Польща (Польська)</option>
+          <option value="de">🇩🇪 Німеччина (Німецька)</option>
+          <option value="cz">🇨🇿 Чехія (Чеська)</option>
+          <option value="lt">🇱🇹 Литва (Литовська)</option>
+          <option value="lv">🇱🇻 Латвія (Латиська)</option>
+          <option value="ee">🇪🇪 Естонія (Естонська)</option>
+          <option value="ro">🇷🇴 Румунія (Румунська)</option>
+          <option value="sk">🇸🇰 Словаччина (Словацька)</option>
+          <option value="hu">🇭🇺 Угорщина (Угорська)</option>
+          <option value="md">🇲🇩 Молдова (Молдовська)</option>
+          <option value="it">🇮🇹 Італія (Італійська)</option>
+          <option value="es">🇪🇸 Іспанія (Іспанська)</option>
+          <option value="fr">🇫🇷 Франція (Французька)</option>
+          <option value="gb">🇬🇧 Велика Британія (Англійська)</option>
+          <option value="at">🇦🇹 Австрія (Німецька)</option>
+          <option value="nl">🇳🇱 Нідерланди (Нідерландська)</option>
         </select>
       </div>
 
       <button class="btn" onclick="startMemorize()">Розпочати тест</button>
     </div>
 
-    <!-- ЕКРАН 2: Пам'ятка у 3 колонки -->
+    <!-- ЕКРАН 2: Пам'ятка -->
     <div id="screen-memorize" class="card hidden" style="max-width: 1000px;">
       <h2>База знань (Запам’ятайте 12 фактів)</h2>
       <p style="color: #666; font-size: 13px; margin: 4px 0 12px 0;">
@@ -150,13 +147,11 @@
     <div id="screen-workspace" class="hidden">
       <div class="workspace-grid">
         
-        <!-- ЛІВА КОЛОНКА: ЧАТИ -->
         <div>
           <div class="column-header">💬 Онлайн-чати (2)</div>
           <div id="chats-container"></div>
         </div>
 
-        <!-- ЦЕНТР: ДЗВІНКИ -->
         <div>
           <div class="column-header">📞 Вхідна лінія</div>
           
@@ -182,7 +177,6 @@
           </div>
         </div>
 
-        <!-- ПРАВА КОЛОНКА: ЛИСТИ -->
         <div>
           <div class="column-header">✉️ Email-звернення (2)</div>
           <div id="emails-container"></div>
@@ -193,7 +187,7 @@
       <button class="btn" onclick="finishWorkspace()" style="margin-top: 16px;">Завершити зміну та підрахувати бали</button>
     </div>
 
-    <!-- ЕКРАН 4: Результати (Зірочки) -->
+    <!-- ЕКРАН 4: Результати -->
     <div id="screen-result" class="card hidden">
       <h2>Підсумки тестування</h2>
       <p id="res-candidate" style="color: #666; margin-top: 4px; font-size: 14px;"></p>
@@ -207,30 +201,348 @@
   </div>
 
   <script>
-    const bank = {
-      restrictions: [
-        { fact: "Заборонено відправляти сало та свіже м'ясо до Польщі.", q: "Чи можна відправити свіже сало до Польщі?", options: ["Так, до 5 кг", "Категорично заборонено", "Тільки у вакуумі", "Тільки з чеком"], correct: 1 },
-        { fact: "Ліки заборонені для відправки в Іспанію та Австрій.", q: "У які країни заборонено відправляти будь-які ліки?", options: ["Польща та Чехія", "Іспанія та Австрія", "Німеччина та Франція", "Литва та Латвія"], correct: 1 },
-        { fact: "До Румунії ліки дозволені тільки в заводській упаковці з чеком.", q: "Яка умова відправки ліків до Румунії?", options: ["Тільки з рецептом", "Заводська упаковка + чек", "До 1 кг без обмежень", "Заборонено"], correct: 1 },
-        { fact: "Тютюнові вироби та вейпи заборонені для відправки в усі країни ЄС.", q: "Чи дозволено пересилати стики або вейпи в ЄС?", options: ["Дозволено до 2 блоків", "Заборонено в усі країни ЄС", "Тільки в Чехію", "Тільки з митом"], correct: 1 }
-      ],
-      tariffs: [
-        { fact: "Доставка з Чехії в Україну коштує від 100 крон.", q: "Яка мінімальна вартість доставки з Чехії в Україну?", options: ["50 крон", "100 крон", "150 крон", "200 крон"], correct: 1 },
-        { fact: "Тариф на документи до Польщі становить 300 грн.", q: "Скільки коштує відправка конверта з документами до Польщі?", options: ["200 грн", "300 грн", "450 грн", "500 грн"], correct: 1 },
-        { fact: "Доплата за адресний забір у Німеччині становить 3 євро.", q: "Який розмір доплати за забір кур'єром у Німеччині?", options: ["1 євро", "3 євро", "5 євро", "10 євро"], correct: 1 },
-        { fact: "Посилка до 2 кг в Італію коштує 500 грн.", q: "Вартість відправки посилки до 2 кг в Італію?", options: ["350 грн", "500 грн", "650 грн", "800 грн"], correct: 1 }
-      ],
-      terms: [
-        { fact: "Термін доставки з України в Литву становить орієнтовно 7 днів.", q: "Який орієнтовний термін доставки з України в Литву?", options: ["3 дні", "5 днів", "7 днів", "10 днів"], correct: 2 },
-        { fact: "Доставка між відділеннями в межах Чехії займе 1-2 дні.", q: "Скільки днів триває доставка по Чехії?", options: ["1-2 дні", "3-4 дні", "5 днів", "Тиждень"], correct: 0 },
-        { fact: "Експрес-доставка документів до Британії займає 3 робочі дні.", q: "За скільки робочих днів доставлять документи в Британію?", options: ["1 день", "3 робочі дні", "5 робочих днів", "10 днів"], correct: 1 },
-        { fact: "Вантажі до Іспанії доставляються за 8-10 днів.", q: "Скільки днів іде вантажна посилка до Іспанії?", options: ["3-5 днів", "5-7 днів", "8-10 днів", "14 днів"], correct: 2 }
-      ]
+    // МОВНІ БАНКИ
+    const localizedBanks = {
+      ua: {
+        thanksCall: "Дякую за відповіді, на все добре!",
+        thanksChat: "Дякую за допомогу, гарного дня!",
+        restrictions: [
+          { fact: "Заборонено відправляти сало та свіже м'ясо до Польщі.", q: "Чи можна відправити свіже сало до Польщі?", options: ["Так, до 5 кг", "Категорично заборонено", "Тільки у вакуумі", "Тільки з чеком"], correct: 1 },
+          { fact: "Ліки заборонені для відправки в Іспанію та Австрію.", q: "У які країни заборонено відправляти будь-які ліки?", options: ["Польща та Чехія", "Іспанія та Австрія", "Німеччина та Франція", "Литва та Латвія"], correct: 1 },
+          { fact: "До Румунії ліки дозволені тільки в заводській упаковці з чеком.", q: "Яка умова відправки ліків до Румунії?", options: ["Тільки з рецептом", "Заводська упаковка + чек", "До 1 кг без обмежень", "Заборонено"], correct: 1 },
+          { fact: "Тютюнові вироби та вейпи заборонені для відправки в усі країни ЄС.", q: "Чи дозволено пересилати стики або вейпи в ЄС?", options: ["Дозволено до 2 блоків", "Заборонено в усі країни ЄС", "Тільки в Чехію", "Тільки з митом"], correct: 1 }
+        ],
+        tariffs: [
+          { fact: "Доставка з Чехії в Україну коштує від 100 крон.", q: "Яка мінімальна вартість доставки з Чехії в Україну?", options: ["50 крон", "100 крон", "150 крон", "200 крон"], correct: 1 },
+          { fact: "Тариф на документи до Польщі становить 300 грн.", q: "Скільки коштує відправка конверта з документами до Польщі?", options: ["200 грн", "300 грн", "450 грн", "500 грн"], correct: 1 },
+          { fact: "Доплата за адресний забір у Німеччині становить 3 євро.", q: "Який розмір доплати за забір кур'єром у Німеччині?", options: ["1 євро", "3 євро", "5 євро", "10 євро"], correct: 1 },
+          { fact: "Посилка до 2 кг в Італію коштує 500 грн.", q: "Вартість відправки посилки до 2 кг в Італію?", options: ["350 грн", "500 грн", "650 грн", "800 грн"], correct: 1 }
+        ],
+        terms: [
+          { fact: "Термін доставки з України в Литву становить орієнтовно 7 днів.", q: "Який орієнтовний термін доставки з України в Литву?", options: ["3 дні", "5 днів", "7 днів", "10 днів"], correct: 2 },
+          { fact: "Доставка між відділеннями в межах Чехії займе 1-2 дні.", q: "Скільки днів триває доставка по Чехії?", options: ["1-2 дні", "3-4 дні", "5 днів", "Тиждень"], correct: 0 },
+          { fact: "Експрес-доставка документів до Британії займає 3 робочі дні.", q: "За скільки робочих днів доставлять документи в Британію?", options: ["1 день", "3 робочі дні", "5 робочих днів", "10 днів"], correct: 1 },
+          { fact: "Вантажі до Іспанії доставляються за 8-10 днів.", q: "Скільки днів іде вантажна посилка до Іспанії?", options: ["3-5 днів", "5-7 днів", "8-10 днів", "14 днів"], correct: 2 }
+        ]
+      },
+      pl: {
+        thanksCall: "Dziękuję za odpowiedzi, miłego dnia!",
+        thanksChat: "Dziękuję za pomoc, miłego dnia!",
+        restrictions: [
+          { fact: "Wysyłka słoniny i świeżego mięsa do Polski jest zabroniona.", q: "Czy można wysłać świeżą słoninę do Polski?", options: ["Tak, do 5 kg", "Kategorycznie zabronione", "Tylko w próżni", "Tylko z paragonem"], correct: 1 },
+          { fact: "Leki są zabronione do wysyłki do Hiszpanii i Austrii.", q: "Do których krajów nie wolno wysyłać żadnych leków?", options: ["Polska i Czechy", "Hiszpania i Austria", "Niemcy i Francja", "Litwa i Łotwa"], correct: 1 },
+          { fact: "Do Rumunii leki są dozwolone tylko w fabrycznym opakowaniu z paragonem.", q: "Jaki jest warunek wysyłki leków do Rumunii?", options: ["Tylko na receptę", "Opakowanie fabryczne + paragon", "Do 1 kg bez limitu", "Zabronione"], correct: 1 },
+          { fact: "Wyroby tytoniowe i vape są zabronione do wszystkich krajów UE.", q: "Czy wolno wysyłać wkłady tytoniowe lub vape do UE?", options: ["Dozwolone do 2 wagonów", "Zabronione do wszystkich krajów UE", "Tylko do Czech", "Tylko z cłem"], correct: 1 }
+        ],
+        tariffs: [
+          { fact: "Dostawa z Czech do Ukrainy kosztuje od 100 CZK.", q: "Jaka jest minimalna cena dostawy z Czech do Ukrainy?", options: ["50 CZK", "100 CZK", "150 CZK", "200 CZK"], correct: 1 },
+          { fact: "Taryfa na dokumenty do Polski wynosi 300 UAH.", q: "Ile kosztuje wysyłka koperty z dokumentami do Polski?", options: ["200 UAH", "300 UAH", "450 UAH", "500 UAH"], correct: 1 },
+          { fact: "Dopłata za odbiór kurierski w Niemczech wynosi 3 EUR.", q: "Ile wynosi dopłata za odbiór przez kuriera w Niemczech?", options: ["1 EUR", "3 EUR", "5 EUR", "10 EUR"], correct: 1 },
+          { fact: "Paczka do 2 kg do Włoch kosztuje 500 UAH.", q: "Koszt wysyłki paczki do 2 kg do Włoch?", options: ["350 UAH", "500 UAH", "650 UAH", "800 UAH"], correct: 1 }
+        ],
+        terms: [
+          { fact: "Czas dostawy z Ukrainy na Litwę wynosi około 7 dni.", q: "Jaki jest przewidywany czas dostawy z Ukrainy na Litwę?", options: ["3 dni", "5 dni", "7 dni", "10 dni"], correct: 2 },
+          { fact: "Dostawa między oddziałami w Czechach zajmuje 1-2 dni.", q: "Ile dni trwa dostawa na terenie Czech?", options: ["1-2 dni", "3-4 dni", "5 dni", "Tydzień"], correct: 0 },
+          { fact: "Ekspresowa dostawa dokumentów do Wielkiej Brytanii zajmuje 3 dni robocze.", q: "W ile dni roboczych dokumenty zostaną doręczone do UK?", options: ["1 dzień", "3 dni robocze", "5 dni roboczych", "10 dni"], correct: 1 },
+          { fact: "Przesyłki towarowe do Hiszpanii są doręczane w 8-10 dni.", q: "Ile dni idzie przesyłka towarowa do Hiszpanii?", options: ["3-5 dni", "5-7 dni", "8-10 dni", "14 dni"], correct: 2 }
+        ]
+      },
+      gb: {
+        thanksCall: "Thank you for the answers, have a great day!",
+        thanksChat: "Thank you for your help, have a nice day!",
+        restrictions: [
+          { fact: "It is prohibited to send lard and fresh meat to Poland.", q: "Can I send fresh lard to Poland?", options: ["Yes, up to 5 kg", "Strictly prohibited", "Only vacuum sealed", "Only with a receipt"], correct: 1 },
+          { fact: "Medicines are prohibited for shipment to Spain and Austria.", q: "To which countries is it forbidden to send any medicine?", options: ["Poland & Czechia", "Spain & Austria", "Germany & France", "Lithuania & Latvia"], correct: 1 },
+          { fact: "To Romania, medicines are allowed only in original packaging with a receipt.", q: "What is the condition for sending medicine to Romania?", options: ["Prescription only", "Original packaging + receipt", "Up to 1 kg no limit", "Prohibited"], correct: 1 },
+          { fact: "Tobacco products and vapes are prohibited to all EU countries.", q: "Are tobacco sticks or vapes allowed to be sent to the EU?", options: ["Allowed up to 2 blocks", "Prohibited to all EU countries", "Only to Czechia", "Allowed with customs tax"], correct: 1 }
+        ],
+        tariffs: [
+          { fact: "Delivery from Czechia to Ukraine starts at 100 CZK.", q: "What is the minimum delivery cost from Czechia to Ukraine?", options: ["50 CZK", "100 CZK", "150 CZK", "200 CZK"], correct: 1 },
+          { fact: "Document tariff to Poland costs 300 UAH.", q: "How much does sending an envelope with documents to Poland cost?", options: ["200 UAH", "300 UAH", "450 UAH", "500 UAH"], correct: 1 },
+          { fact: "Address pick-up surcharge in Germany is 3 EUR.", q: "What is the surcharge for courier pick-up in Germany?", options: ["1 EUR", "3 EUR", "5 EUR", "10 EUR"], correct: 1 },
+          { fact: "Parcel up to 2 kg to Italy costs 500 UAH.", q: "Cost of sending a parcel up to 2 kg to Italy?", options: ["350 UAH", "500 UAH", "650 UAH", "800 UAH"], correct: 1 }
+        ],
+        terms: [
+          { fact: "Delivery time from Ukraine to Lithuania takes approximately 7 days.", q: "What is the estimated delivery time from Ukraine to Lithuania?", options: ["3 days", "5 days", "7 days", "10 days"], correct: 2 },
+          { fact: "Domestic delivery between branches in Czechia takes 1-2 days.", q: "How many days does delivery within Czechia take?", options: ["1-2 days", "3-4 days", "5 days", "1 week"], correct: 0 },
+          { fact: "Express document delivery to the UK takes 3 business days.", q: "In how many business days are documents delivered to the UK?", options: ["1 day", "3 business days", "5 business days", "10 days"], correct: 1 },
+          { fact: "Cargo to Spain is delivered in 8-10 days.", q: "How long does cargo delivery to Spain take?", options: ["3-5 days", "5-7 days", "8-10 days", "14 days"], correct: 2 }
+        ]
+      },
+      de: {
+        thanksCall: "Vielen Dank für die Antworten, einen schönen Tag noch!",
+        thanksChat: "Vielen Dank für Ihre Hilfe, einen schönen Tag noch!",
+        restrictions: [
+          { fact: "Es ist verboten, Speck und frisches Fleisch nach Polen zu senden.", q: "Kann man frischen Speck nach Polen schicken?", options: ["Ja, bis zu 5 kg", "Strengstens verboten", "Nur vakuumverpackt", "Nur mit Quittung"], correct: 1 },
+          { fact: "Medikamente dürfen nicht nach Spanien und Österreich versendet werden.", q: "In welche Länder dürfen keine Medikamente verschickt werden?", options: ["Polen & Tschechien", "Spanien & Österreich", "Deutschland & Frankreich", "Litauen & Lettland"], correct: 1 },
+          { fact: "Nach Rumänien sind Medikamente nur in Originalverpackung mit Quittung erlaubt.", q: "Was ist die Bedingung für den Versand von Medikamenten nach Rumänien?", options: ["Nur mit Rezept", "Originalverpackung + Quittung", "Bis zu 1 kg ohne Limit", "Verboten"], correct: 1 },
+          { fact: "Tabakwaren und Vapes sind in alle EU-Länder verboten.", q: "Dürfen Tabaksticks oder Vapes in die EU verschickt werden?", options: ["Erlaubt bis zu 2 Stangen", "In alle EU-Länder verboten", "Nur nach Tschechien", "Nur mit Zollgebühr"], correct: 1 }
+        ],
+        tariffs: [
+          { fact: "Der Versand von Tschechien in die Ukraine kostet ab 100 CZK.", q: "Was sind die Mindestversandkosten von Tschechien in die Ukraine?", options: ["50 CZK", "100 CZK", "150 CZK", "200 CZK"], correct: 1 },
+          { fact: "Tarif für Dokumente nach Polen beträgt 300 UAH.", q: "Wie viel kostet der Versand eines Umschlags mit Dokumenten nach Polen?", options: ["200 UAH", "300 UAH", "450 UAH", "500 UAH"], correct: 1 },
+          { fact: "Aufpreis für Abholung in Deutschland beträgt 3 EUR.", q: "Wie hoch ist der Aufpreis für die Kurierabholung in Deutschland?", options: ["1 EUR", "3 EUR", "5 EUR", "10 EUR"], correct: 1 },
+          { fact: "Ein Paket bis 2 kg nach Italien kostet 500 UAH.", q: "Kosten für den Versand eines Pakets bis 2 kg nach Italien?", options: ["350 UAH", "500 UAH", "650 UAH", "800 UAH"], correct: 1 }
+        ],
+        terms: [
+          { fact: "Die Lieferzeit von der Ukraine nach Litauen beträgt ca. 7 Tage.", q: "Wie lang ist die geschätzte Lieferzeit von der Ukraine nach Litauen?", options: ["3 Tage", "5 Tage", "7 Tage", "10 Tage"], correct: 2 },
+          { fact: "Inlandszustellung zwischen Filialen in Tschechien dauert 1-2 Tage.", q: "Wie viele Tage dauert die Zustellung innerhalb Tschechiens?", options: ["1-2 Tage", "3-4 Tage", "5 Tage", "1 Woche"], correct: 0 },
+          { fact: "Express-Dokumentenlieferung nach GB dauert 3 Werktage.", q: "In wie vielen Werktagen werden Dokumente nach GB geliefert?", options: ["1 Tag", "3 Werktage", "5 Werktage", "10 Tage"], correct: 1 },
+          { fact: "Fracht nach Spanien wird in 8-10 Tagen geliefert.", q: "Wie lange dauert der Frachttransport nach Spanien?", options: ["3-5 Tage", "5-7 Tage", "8-10 Tage", "14 Tage"], correct: 2 }
+        ]
+      },
+      cz: {
+        thanksCall: "Děkuji za odpovědi, hezký den!",
+        thanksChat: "Děkuji za pomoc, hezký den!",
+        restrictions: [
+          { fact: "Je zakázáno posílat sádlo a čerstvé maso do Polska.", q: "Lze poslat čerstvé sádlo do Polska?", options: ["Ano, do 5 kg", "Kategoricky zakázáno", "Pouze ve vakuu", "Pouze s účtenkou"], correct: 1 },
+          { fact: "Léky je zakázáno posílat do Španělska a Rakouska.", q: "Do kterých zemí je zakázáno posílat jakékoli léky?", options: ["Polsko a Česko", "Španělsko a Rakousko", "Německo a Francie", "Litva a Lotyšsko"], correct: 1 },
+          { fact: "Do Rumunska jsou léky povoleny pouze v originálním balení s účtenkou.", q: "Jaká je podmínka pro zasílání léků do Rumunska?", options: ["Pouze na lékařský předpis", "Originální balení + účtenka", "Do 1 kg bez omezení", "Zakázáno"], correct: 1 },
+          { fact: "Tabákové výrobky a vape jsou zakázány do všech zemí EU.", q: "Je povoleno posílat tabákové náplně nebo vape do EU?", options: ["Povoleno do 2 kartonů", "Zakázáno do všech zemí EU", "Pouze do Česka", "Pouze s clem"], correct: 1 }
+        ],
+        tariffs: [
+          { fact: "Doručení z Česka na Ukrajinu stojí od 100 CZK.", q: "Jaká je minimální cena doručení z Česka na Ukrajinu?", options: ["50 CZK", "100 CZK", "150 CZK", "200 CZK"], correct: 1 },
+          { fact: "Tarif za dokumenty do Polska stojí 300 UAH.", q: "Kolik stojí odeslání obálky s dokumenty do Polska?", options: ["200 UAH", "300 UAH", "450 UAH", "500 UAH"], correct: 1 },
+          { fact: "Příplatek za vyzvednutí kurýrem v Německu je 3 EUR.", q: "Jaký je příplatek za vyzvednutí kurýrem v Německu?", options: ["1 EUR", "3 EUR", "5 EUR", "10 EUR"], correct: 1 },
+          { fact: "Zásilka do 2 kg do Itálie stojí 500 UAH.", q: "Cena za odeslání zásilky do 2 kg do Itálie?", options: ["350 UAH", "500 UAH", "650 UAH", "800 UAH"], correct: 1 }
+        ],
+        terms: [
+          { fact: "Doba doručení z Ukrajiny do Litvy je přibližně 7 dní.", q: "Jaká je odhadovaná doba doručení z Ukrajiny do Litvy?", options: ["3 dny", "5 dní", "7 dní", "10 dní"], correct: 2 },
+          { fact: "Doručení mezi pobočkami v Česku trvá 1-2 dny.", q: "Kolik dní trvá doručení po Česku?", options: ["1-2 dny", "3-4 dny", "5 dní", "Týden"], correct: 0 },
+          { fact: "Expresní doručení dokumentů do UK trvá 3 pracovní dny.", q: "Za kolik pracovních dnů budou dokumenty doručeny do UK?", options: ["1 den", "3 pracovní dny", "5 pracovních dnů", "10 dní"], correct: 1 },
+          { fact: "Náklad do Španělska je doručen za 8-10 dní.", q: "Jak dlouho trvá doručení nákladu do Španělska?", options: ["3-5 dní", "5-7 dní", "8-10 dní", "14 dní"], correct: 2 }
+        ]
+      },
+      lt: {
+        thanksCall: "Ačiū už atsakymus, geros dienos!",
+        thanksChat: "Ačiū už pagalbą, geros dienos!",
+        restrictions: [
+          { fact: "Draudžiama siųsti lašinius ir šviežią mėsą į Lenkiją.", q: "Ar galima siųsti šviežius lašinius į Lenkiją?", options: ["Taip, iki 5 kg", "Griežtai draudžiama", "Tik vakuume", "Tik su čekiu"], correct: 1 },
+          { fact: "Vaistus draudžiama siųsti į Ispaniją ir Austriją.", q: "Į kurias šalis draudžiama siųsti bet kokius vaistus?", options: ["Lenkija ir Čekija", "Ispanija ir Austrija", "Vokietija ir Prancūzija", "Lietuva ir Latvija"], correct: 1 },
+          { fact: "Į Rumuniją vaistai leidžiami tik gamyklinėje pakuotėje su čekiu.", q: "Kokia sąlyga siunčiant vaistus į Rumuniją?", options: ["Tik su receptu", "Gamyklinė pakuotė + čekis", "Iki 1 kg be apribojimų", "Draudžiama"], correct: 1 },
+          { fact: "Tabako gaminiai ir garintuvai draudžiami į visas ES šalis.", q: "Ar leidžiama siųsti kaitinamojo tabako ganius į ES?", options: ["Leidžiama iki 2 blokų", "Draudžiama į visas ES šalis", "Tik į Čekiją", "Tik su muito mokesčiu"], correct: 1 }
+        ],
+        tariffs: [
+          { fact: "Pristatymas iš Čekijos į Ukrainą kainuoja nuo 100 CZK.", q: "Kokia minimali pristatymo kaina iš Čekijos į Ukrainą?", options: ["50 CZK", "100 CZK", "150 CZK", "200 CZK"], correct: 1 },
+          { fact: "Dokumentų tarifai į Lenkiją siekia 300 UAH.", q: "Kiek kainuoja voko su dokumentais siuntimas į Lenkiją?", options: ["200 UAH", "300 UAH", "450 UAH", "500 UAH"], correct: 1 },
+          { fact: "Kurjerio paėmimo priemoka Vokietijoje yra 3 EUR.", q: "Koks kurjerio paėmimo priedas Vokietijoje?", options: ["1 EUR", "3 EUR", "5 EUR", "10 EUR"], correct: 1 },
+          { fact: "Siunta iki 2 kg į Italiją kainuoja 500 UAH.", q: "Kiek kainuoja siuntos iki 2 kg siuntimas į Italiją?", options: ["350 UAH", "500 UAH", "650 UAH", "800 UAH"], correct: 1 }
+        ],
+        terms: [
+          { fact: "Pristatymo terminas iš Ukrainos į Lietuvą yra apie 7 dienos.", q: "Koks numatomas pristatymo laikas iš Ukrainos į Lietuvą?", options: ["3 dienos", "5 dienos", "7 dienos", "10 dienų"], correct: 2 },
+          { fact: "Pristatymas tarp skyrių Čekijoje trunka 1-2 dienas.", q: "Kiek dienų trunka pristatymas Čekijoje?", options: ["1-2 dienas", "3-4 dienas", "5 dienas", "Savaitę"], correct: 0 },
+          { fact: "Skubus dokumentų pristatymas į JK užtrunka 3 darbo dienas.", q: "Per kiek darbo dienų dokumentai pristatomi į JK?", options: ["1 dieną", "3 darbo dienas", "5 darbo dienas", "10 dienų"], correct: 1 },
+          { fact: "Kroviniai į Ispaniją pristatomi per 8-10 dienų.", q: "Kiek laiko gabenamas krovinys į Ispaniją?", options: ["3-5 dienas", "5-7 dienas", "8-10 dienų", "14 dienų"], correct: 2 }
+        ]
+      },
+      lv: {
+        thanksCall: "Paldies par atbildēm, jauku dienu!",
+        thanksChat: "Paldies par palīdzību, jauku dienu!",
+        restrictions: [
+          { fact: "Cūku taukus un svaigu gaļu uz Poliju sūtīt ir aizliegts.", q: "Vai drīkst sūtīt svaigu cūku tauku uz Poliju?", options: ["Jā, līdz 5 kg", "Kategoriski aizliegts", "Tikai vakuumā", "Tikai ar čeku"], correct: 1 },
+          { fact: "Zāles ir aizliegts sūtīt uz Spāniju un Austriju.", q: "Uz kurām valstīm ir aizliegts sūtīt jebkādas zāles?", options: ["Polija un Čehija", "Spānija un Austrija", "Vācija un Francija", "Lietuva un Latvija"], correct: 1 },
+          { fact: "Uz Rumāniju zāles atļautas tikai oriģinālajā iepakojumā ar čeku.", q: "Kāds ir nosacījums zāļu sūtīšanai uz Rumāniju?", options: ["Tikai ar recepti", "Oriģinālais iepakojums + čeks", "Līdz 1 kg bez ierobežojumiem", "Aizliegts"], correct: 1 },
+          { fact: "Tabakas izstrādājumi un e-cigaretes ir aizliegti uz visām ES valstīm.", q: "Vai ES drīkst sūtīt karsējamo tabaku vai veipus?", options: ["Atļauts līdz 2 blokiem", "Aizliegts uz visām ES valstīm", "Tikai uz Čehiju", "Tikai ar muitas nodokli"], correct: 1 }
+        ],
+        tariffs: [
+          { fact: "Piegāde no Čehijas uz Ukrainu maksā no 100 CZK.", q: "Kāda ir minimālā piegādes maksa no Čehijas uz Ukrainu?", options: ["50 CZK", "100 CZK", "150 CZK", "200 CZK"], correct: 1 },
+          { fact: "Dokumentu tarifs uz Poliju ir 300 UAH.", q: "Cik maksā aploksnes ar dokumentiem nosūtīšana uz Poliju?", options: ["200 UAH", "300 UAH", "450 UAH", "500 UAH"], correct: 1 },
+          { fact: "Kustīgā kurjera piemaksa Vācijā ir 3 EUR.", q: "Cik liela ir piemaksa par kurjera izsaukumu Vācijā?", options: ["1 EUR", "3 EUR", "5 EUR", "10 EUR"], correct: 1 },
+          { fact: "Sūtījums līdz 2 kg uz Itāliju maksā 500 UAH.", q: "Cik maksā sūtījums līdz 2 kg uz Itāliju?", options: ["350 UAH", "500 UAH", "650 UAH", "800 UAH"], correct: 1 }
+        ],
+        terms: [
+          { fact: "Piegādes laiks no Ukrainas uz Lietuvu ir aptuveni 7 dienas.", q: "Kāds ir aptuvenais piegādes laiks no Ukrainas uz Lietuvu?", options: ["3 dienas", "5 dienas", "7 dienas", "10 dienas"], correct: 2 },
+          { fact: "Piegāde starp nodaļām Čehijā aizņem 1-2 dienas.", q: "Cik dienas aizņem piegāde Čehijā?", options: ["1-2 dienas", "3-4 dienas", "5 dienas", "Nedēļu"], correct: 0 },
+          { fact: "Ekspress dokumentu piegāde uz Lielbritāniju aizņem 3 darbdienas.", q: "Cik darbdienās dokumenti tiek piegādāti uz UK?", options: ["1 dienā", "3 darbdienās", "5 darbdienās", "10 dienās"], correct: 1 },
+          { fact: "Kravas uz Spāniju tiek piegādātas 8-10 dienās.", q: "Cik ilgu laiku aizņem kravas piegāde uz Spāniju?", options: ["3-5 dienas", "5-7 dienas", "8-10 dienas", "14 dienas"], correct: 2 }
+        ]
+      },
+      ee: {
+        thanksCall: "Tänan vastuste eest, head päeva!",
+        thanksChat: "Tänan abi eest, head päeva!",
+        restrictions: [
+          { fact: "Seapeki ja värske liha saatmine Poolasse on keelatud.", q: "Kas Poolasse tohib saata värsket seapekki?", options: ["Jah, kuni 5 kg", "Rangelt keelatud", "Ainult vaakumis", "Ainult tšekiga"], correct: 1 },
+          { fact: "Ravimite saatmine Hispaaniasse ja Austriasse on keelatud.", q: "Millistesse riikidesse on ravimite saatmine keelatud?", options: ["Poola ja Tšehhi", "Hispaania ja Austria", "Saksamaa ja Prantsusmaa", "Leedu ja Läti"], correct: 1 },
+          { fact: "Rumeeniasse on ravimid lubatud ainult originaalpakendis koos tšekiga.", q: "Mis on Rumeeniasse ravimite saatmise tingimus?", options: ["Ainult retseptiga", "Originaalpakend + tšekk", "Kuni 1 kg piiranguta", "Keelatud"], correct: 1 },
+          { fact: "Tubakatooted ja e-sigaretid on keelatud kõigisse ELi riikidesse.", q: "Kas ELi on lubatud saata tubakatooteid või e-sigarette?", options: ["Lubatud kuni 2 plokki", "Keelatud kõigisse ELi riikidesse", "Ainult Tšehhisse", "Ainult tollimaksuga"], correct: 1 }
+        ],
+        tariffs: [
+          { fact: "Kohaletoimetamine Tšehhist Ukrainasse maksab alates 100 CZK.", q: "Mis on kohaletoimetamise miinimumhind Tšehhist Ukrainasse?", options: ["50 CZK", "100 CZK", "150 CZK", "200 CZK"], correct: 1 },
+          { fact: "Dokumentide tariif Poolasse on 300 UAH.", q: "Kui palju maksab dokumentide saatmine Poolasse?", options: ["200 UAH", "300 UAH", "450 UAH", "500 UAH"], correct: 1 },
+          { fact: "Kulleri korje lisatasu Saksamaal on 3 EUR.", q: "Kui suur on kulleri korje lisatasu Saksamaal?", options: ["1 EUR", "3 EUR", "5 EUR", "10 EUR"], correct: 1 },
+          { fact: "Kuni 2 kg pakk Itaaliasse maksab 500 UAH.", q: "Kui palju maksab kuni 2 kg paki saatmine Itaaliasse?", options: ["350 UAH", "500 UAH", "650 UAH", "800 UAH"], correct: 1 }
+        ],
+        terms: [
+          { fact: "Tarneaeg Ukrainast Leetu on umbes 7 päeva.", q: "Mis on eeldatav tarneaeg Ukrainast Leetu?", options: ["3 päeva", "5 päeva", "7 päeva", "10 päeva"], correct: 2 },
+          { fact: "Kohalik tarne Tšehhi esinduste vahel võtab 1-2 päeva.", q: "Mitu päeva võtab tarne Tšehhi piires?", options: ["1-2 päeva", "3-4 päeva", "5 päeva", "Nädal"], correct: 0 },
+          { fact: "Dokumentide kiirtarne Ühendkuningriiki võtab 3 tööpäeva.", q: "Mitu tööpäeva võtab dokumentide tarne Ühendkuningriiki?", options: ["1 päev", "3 tööpäeva", "5 tööpäeva", "10 päeva"], correct: 1 },
+          { fact: "Kaubad Hispaaniasse toimetatakse kohale 8-10 päevaga.", q: "Kui kaua võtab kaubavedu Hispaaniasse?", options: ["3-5 päeva", "5-7 päeva", "8-10 päeva", "14 päeva"], correct: 2 }
+        ]
+      },
+      ro: {
+        thanksCall: "Vă mulțumesc pentru răspunsuri, o zi bună!",
+        thanksChat: "Vă mulțumesc pentru ajutor, o zi bună!",
+        restrictions: [
+          { fact: "Este interzisă trimiterea de slănină și carne proaspătă în Polonia.", q: "Se poate trimite slănină proaspătă în Polonia?", options: ["Da, până la 5 kg", "Categoric interzis", "Doar în vid", "Doar cu chitanță"], correct: 1 },
+          { fact: "Medicamentele sunt interzise la expediere în Spania și Austria.", q: "În ce țări este interzisă trimiterea oricăror medicamente?", options: ["Polonia și Cehia", "Spania și Austria", "Germania și Franța", "Lituania și Letonia"], correct: 1 },
+          { fact: "În România medicamentele sunt permise doar în ambalaj original cu chitanță.", q: "Care este condiția pentru trimiterea medicamentelor în România?", options: ["Doar cu rețetă", "Ambalaj original + chitanță", "Până la 1 kg fără limită", "Interzis"], correct: 1 },
+          { fact: "Produsele din tutun și vape-urile sunt interzise în toate țările UE.", q: "Este permisă trimiterea de vape-uri în UE?", options: ["Permis până la 2 pachete", "Interzis în toate țările UE", "Doar în Cehia", "Doar cu taxă vamală"], correct: 1 }
+        ],
+        tariffs: [
+          { fact: "Livrarea din Cehia în Ucraina costă de la 100 CZK.", q: "Care este costul minim de livrare din Cehia în Ucraina?", options: ["50 CZK", "100 CZK", "150 CZK", "200 CZK"], correct: 1 },
+          { fact: "Tariful pentru documente în Polonia este de 300 UAH.", q: "Cât costă trimiterea unui plic cu documente în Polonia?", options: ["200 UAH", "300 UAH", "450 UAH", "500 UAH"], correct: 1 },
+          { fact: "Suprataxa pentru preluarea de către curier în Germania este de 3 EUR.", q: "Care este taxa de preluare curier în Germania?", options: ["1 EUR", "3 EUR", "5 EUR", "10 EUR"], correct: 1 },
+          { fact: "Un colet de până la 2 kg în Italia costă 500 UAH.", q: "Costul trimiterii unui colet de până la 2 kg în Italia?", options: ["350 UAH", "500 UAH", "650 UAH", "800 UAH"], correct: 1 }
+        ],
+        terms: [
+          { fact: "Timpul de livrare din Ucraina în Lituania este de aproximativ 7 zile.", q: "Care este timpul estimat de livrare din Ucraina în Lituania?", options: ["3 zile", "5 zile", "7 zile", "10 zile"], correct: 2 },
+          { fact: "Livrarea între sucursale în Cehia durează 1-2 zile.", q: "Câte zile durează livrarea în Cehia?", options: ["1-2 zile", "3-4 zile", "5 zile", "O săptămână"], correct: 0 },
+          { fact: "Livrarea expres de documente în Marea Britanie durează 3 zile lucrătoare.", q: "În câte zile lucrătoare sunt livrate documentele în UK?", options: ["1 zi", "3 zile lucrătoare", "5 zile lucrătoare", "10 zile"], correct: 1 },
+          { fact: "Mărfurile către Spania sunt livrate în 8-10 zile.", q: "Cât timp durează livrarea mărfurilor în Spania?", options: ["3-5 zile", "5-7 zile", "8-10 zile", "14 zile"], correct: 2 }
+        ]
+      },
+      sk: {
+        thanksCall: "Ďakujem za odpovede, prajem pekný deň!",
+        thanksChat: "Ďakujem za pomoc, prajem pekný deň!",
+        restrictions: [
+          { fact: "Posielanie slaniny a čerstvého mäsa do Poľska je zakázané.", q: "Je možné poslať čerstvú slaninu do Poľska?", options: ["Áno, do 5 kg", "Kategoricky zakázané", "Len vo vakuu", "Len s dokladom"], correct: 1 },
+          { fact: "Lieky je zakázané posielať do Španielska a Rakúska.", q: "Do ktorých krajín je zakázané posielať akékoľvek lieky?", options: ["Poľsko a Česko", "Španielsko a Rakúsko", "Nemecko a Francúzsko", "Litva a Lotyšsko"], correct: 1 },
+          { fact: "Do Rumunska sú lieky povolené len v originálnom balení s dokladom.", q: "Aké sú podmienky na posielanie liekov do Rumunska?", options: ["Len na predpis", "Originálne balenie + doklad", "Do 1 kg bez obmedzení", "Zakázané"], correct: 1 },
+          { fact: "Tabakové výrobky a vape sú zakázané do všetkých krajín EÚ.", q: "Je povolené posielať vape zariadenia do EÚ?", options: ["Povolené do 2 kartónov", "Zakázané do všetkých krajín EÚ", "Iba do Česka", "Iba s clom"], correct: 1 }
+        ],
+        tariffs: [
+          { fact: "Doručenie z Česka na Ukrajinu stojí od 100 CZK.", q: "Aková je minimálna cena doručenia z Česka na Ukrajinu?", options: ["50 CZK", "100 CZK", "150 CZK", "200 CZK"], correct: 1 },
+          { fact: "Tarifa za dokumenty do Poľska je 300 UAH.", q: "Koľko stojí odoslanie obálky s dokumentmi do Poľska?", options: ["200 UAH", "300 UAH", "450 UAH", "500 UAH"], correct: 1 },
+          { fact: "Príplatok za vyzdvihnutie kuriérom v Nemecku je 3 EUR.", q: "Aký je príplatok za vyzdvihnutie kuriérom v Nemecku?", options: ["1 EUR", "3 EUR", "5 EUR", "10 EUR"], correct: 1 },
+          { fact: "Zásielka do 2 kg do Talianska stojí 500 UAH.", q: "Cena za odoslanie zásielky do 2 kg do Talianska?", options: ["350 UAH", "500 UAH", "650 UAH", "800 UAH"], correct: 1 }
+        ],
+        terms: [
+          { fact: "Doba doručenia z Ukrajiny do Litvy je približne 7 dní.", q: "Aková je odhadovaná doba doručenia z Ukrajiny do Litvy?", options: ["3 dni", "5 dní", "7 dní", "10 dní"], correct: 2 },
+          { fact: "Doručenie medzi pobočkami v Česku trvá 1-2 dni.", q: "Koľko dní trvá doručenie po Česku?", options: ["1-2 dni", "3-4 dni", "5 dní", "Týždeň"], correct: 0 },
+          { fact: "Expresné doručenie dokumentov do UK trvá 3 pracovné dni.", q: "Za koľko pracovných dní budú dokumenty doručené do UK?", options: ["1 deň", "3 pracovné dni", "5 pracovných dní", "10 dní"], correct: 1 },
+          { fact: "Náklad do Španielska je doručený za 8-10 dní.", q: "Ako dlho trvá doručenie nákladu do Španielska?", options: ["3-5 dní", "5-7 dní", "8-10 dní", "14 dní"], correct: 2 }
+        ]
+      },
+      hu: {
+        thanksCall: "Köszönöm a válaszokat, szép napot!",
+        thanksChat: "Köszönöm a segítséget, szép napot!",
+        restrictions: [
+          { fact: "Szalonna és friss hús küldése Lengyelországba tilos.", q: "Lehet-e friss szalonnát küldeni Lengyelországba?", options: ["Igen, 5 kg-ig", "Szigorúan tilos", "Csak vákuumcsomagolásban", "Csak nyugtával"], correct: 1 },
+          { fact: "Gyógyszerek küldése Spanyolországba és Ausztriába tilos.", q: "Mely országokba tilos bármilyen gyógyszert küldeni?", options: ["Lengyelország és Csehország", "Spanyolország és Ausztria", "Németország és Franciaország", "Litvánia és Lettország"], correct: 1 },
+          { fact: "Romániába gyógyszerek csak eredeti csomagolásban, nyugtával engedélyezettek.", q: "Mi a feltétele a gyógyszerek Romániába történő küldésének?", options: ["Csak receptre", "Eredeti csomagolás + nyugta", "1 kg-ig korlátozás nélkül", "Tilos"], correct: 1 },
+          { fact: "Dohánytermékek és vape készülékek tilosak az EU összes országába.", q: "Szabad-e vape készüléket küldeni az EU-ba?", options: ["Engedélyezett 2 kartonig", "Tilos az EU összes országába", "Csak Csehországba", "Csak vámfizetéssel"], correct: 1 }
+        ],
+        tariffs: [
+          { fact: "A szállítás Csehországból Ukrajnába 100 CZK-tól kezdődik.", q: "Mennyi a minimális szállítási díj Csehországból Ukrajnába?", options: ["50 CZK", "100 CZK", "150 CZK", "200 CZK"], correct: 1 },
+          { fact: "A dokumentumok díja Lengyelországba 300 UAH.", q: "Mennyibe kerül egy dokumentumokat tartalmazó boríték küldése Lengyelországba?", options: ["200 UAH", "300 UAH", "450 UAH", "500 UAH"], correct: 1 },
+          { fact: "A futár felvételi díja Németországban 3 EUR.", q: "Mennyi a futáros felvételi felár Németországban?", options: ["1 EUR", "3 EUR", "5 EUR", "10 EUR"], correct: 1 },
+          { fact: "Egy 2 kg-os csomag Olaszországba 500 UAH-ba kerül.", q: "Mennyibe kerül egy 2 kg-os csomag feladása Olaszországba?", options: ["350 UAH", "500 UAH", "650 UAH", "800 UAH"], correct: 1 }
+        ],
+        terms: [
+          { fact: "A szállítási idő Ukrajnából Litvániába körülbelül 7 nap.", q: "Mennyi a becsült szállítási idő Ukrajnából Litvániába?", options: ["3 nap", "5 nap", "7 nap", "10 nap"], correct: 2 },
+          { fact: "A fiókok közötti belföldi szállítás Csehországban 1-2 napot vesz igénybe.", q: "Hány napig tart a szállítás Csehországon belül?", options: ["1-2 nap", "3-4 nap", "5 nap", "Egy hét"], correct: 0 },
+          { fact: "Az expressz dokumentumszállítás az Egyesült Királyságba 3 munkanap.", q: "Hány munkanap alatt kézbesítik a dokumentumokat az Egyesült Királyságba?", options: ["1 nap", "3 munkanap", "5 munkanap", "10 nap"], correct: 1 },
+          { fact: "A Spanyolországba tartó teheráru 8-10 nap alatt érkezik meg.", q: "Mennyi ideig tart a teheráru szállítása Spanyolországba?", options: ["3-5 nap", "5-7 nap", "8-10 nap", "14 nap"], correct: 2 }
+        ]
+      },
+      it: {
+        thanksCall: "Grazie per le risposte, buona giornata!",
+        thanksChat: "Grazie per l'aiuto, buona giornata!",
+        restrictions: [
+          { fact: "È vietato spedire lardo e carne fresca in Polonia.", q: "È possibile spedire lardo fresco in Polonia?", options: ["Sì, fino a 5 kg", "Tassativamente vietato", "Solo sottovuoto", "Solo con scontrino"], correct: 1 },
+          { fact: "I medicinali sono vietati per la spedizione in Spagna e Austria.", q: "In quali paesi è vietato spedire qualsiasi medicinale?", options: ["Polonia e Cechia", "Spagna e Austria", "Germania e Francia", "Lituania e Lettonia"], correct: 1 },
+          { fact: "In Romania i medicinali sono ammessi solo nella confezione originale con scontrino.", q: "Qual è la condizione per spedire medicinali in Romania?", options: ["Solo con ricetta", "Confezione originale + scontrino", "Fino a 1 kg senza limiti", "Vietato"], correct: 1 },
+          { fact: "I prodotti da tabacco e vape sono vietati in tutti i paesi UE.", q: "È consentito spedire vape o sigarette elettroniche nell'UE?", options: ["Consentito fino a 2 stecche", "Vietato in tutti i paesi UE", "Solo in Cechia", "Solo con dazio doganale"], correct: 1 }
+        ],
+        tariffs: [
+          { fact: "La consegna dalla Cechia all'Ucraina parte da 100 CZK.", q: "Qual è il costo minimo di spedizione dalla Cechia all'Ucraina?", options: ["50 CZK", "100 CZK", "150 CZK", "200 CZK"], correct: 1 },
+          { fact: "La tariffa documenti per la Polonia è di 300 UAH.", q: "Quanto costa spedire una busta con documenti in Polonia?", options: ["200 UAH", "300 UAH", "450 UAH", "500 UAH"], correct: 1 },
+          { fact: "Il supplemento per il ritiro del corriere in Germania è di 3 EUR.", q: "Qual è il costo aggiuntivo per il ritiro del corriere in Germania?", options: ["1 EUR", "3 EUR", "5 EUR", "10 EUR"], correct: 1 },
+          { fact: "Un pacco fino a 2 kg per l'Italia costa 500 UAH.", q: "Costo di spedizione di un pacco fino a 2 kg in Italia?", options: ["350 UAH", "500 UAH", "650 UAH", "800 UAH"], correct: 1 }
+        ],
+        terms: [
+          { fact: "Il tempo di consegna dall'Ucraina alla Lituania è di circa 7 giorni.", q: "Qual è il tempo di consegna stimato dall'Ucraina alla Lituania?", options: ["3 giorni", "5 giorni", "7 giorni", "10 giorni"], correct: 2 },
+          { fact: "La consegna tra le filiali in Cechia impiega 1-2 giorni.", q: "Quanti giorni impiega la consegna all'interno della Cechia?", options: ["1-2 giorni", "3-4 giorni", "5 giorni", "Una settimana"], correct: 0 },
+          { fact: "La consegna espressa di documenti nel Regno Unito richiede 3 giorni lavorativi.", q: "In quanti giorni lavorativi vengono consegnati i documenti nel Regno Unito?", options: ["1 giorno", "3 giorni lavorativi", "5 giorni lavorativi", "10 giorni"], correct: 1 },
+          { fact: "I merci verso la Spagna vengono consegnati in 8-10 giorni.", q: "Quanto tempo impiega la spedizione merci verso la Spagna?", options: ["3-5 giorni", "5-7 giorni", "8-10 giorni", "14 giorni"], correct: 2 }
+        ]
+      },
+      es: {
+        thanksCall: "¡Gracias por sus respuestas, que tenga un buen día!",
+        thanksChat: "¡Gracias por su ayuda, que tenga un buen día!",
+        restrictions: [
+          { fact: "Está prohibido enviar manteca de cerdo y carne fresca a Polonia.", q: "¿Se puede enviar manteca de cerdo fresca a Polonia?", options: ["Sí, hasta 5 kg", "Terminantemente prohibido", "Solo al vacío", "Solo con recibo"], correct: 1 },
+          { fact: "Los medicamentos están prohibidos para envíos a España y Austria.", q: "¿A qué países está prohibido enviar cualquier medicamento?", options: ["Polonia y Chequia", "España y Austria", "Alemania y Francia", "Lituania y Letonia"], correct: 1 },
+          { fact: "A Rumanía los medicamentos solo se permiten en su embalaje original con recibo.", q: "¿Cuál es la condición para enviar medicamentos a Rumanía?", options: ["Solo con receta", "Embalaje original + recibo", "Hasta 1 kg sin límite", "Prohibido"], correct: 1 },
+          { fact: "Los productos de tabaco y vapes están prohibidos a todos los países de la UE.", q: "¿Está permitido enviar vapes a la UE?", options: ["Permitido hasta 2 cartones", "Prohibido a todos los países de la UE", "Solo a Chequia", "Solo con arancel aduanero"], correct: 1 }
+        ],
+        tariffs: [
+          { fact: "El envío desde Chequia a Ucrania cuesta desde 100 CZK.", q: "¿Cuál es el coste mínimo de envío desde Chequia a Ucrania?", options: ["50 CZK", "100 CZK", "150 CZK", "200 CZK"], correct: 1 },
+          { fact: "La tarifa de documentos a Polonia es de 300 UAH.", q: "¿Cuánto cuesta enviar un sobre con documentos a Polonia?", options: ["200 UAH", "300 UAH", "450 UAH", "500 UAH"], correct: 1 },
+          { fact: "El recargo por recogida de mensajero en Alemania es de 3 EUR.", q: "¿Cuál es el recargo por recogida de mensajero en Alemania?", options: ["1 EUR", "3 EUR", "5 EUR", "10 EUR"], correct: 1 },
+          { fact: "Un paquete de hasta 2 kg a Italia cuesta 500 UAH.", q: "¿Coste de envío de un paquete de hasta 2 kg a Italia?", options: ["350 UAH", "500 UAH", "650 UAH", "800 UAH"], correct: 1 }
+        ],
+        terms: [
+          { fact: "El tiempo de entrega de Ucrania a Lituania es de aproximadamente 7 días.", q: "¿Cuál es el tiempo estimado de entrega de Ucrania a Lituania?", options: ["3 días", "5 días", "7 días", "10 días"], correct: 2 },
+          { fact: "La entrega entre sucursales en Chequia tarda 1-2 días.", q: "¿Cuántos días tarda la entrega en Chequia?", options: ["1-2 días", "3-4 días", "5 días", "Una semana"], correct: 0 },
+          { fact: "La entrega exprés de documentos al Reino Unido tarda 3 días laborables.", q: "¿En cuántos días laborables se entregan los documentos al Reino Unido?", options: ["1 día", "3 días laborables", "5 días laborables", "10 días"], correct: 1 },
+          { fact: "La carga a España se entrega en 8-10 días.", q: "¿Cuánto tiempo tarda la entrega de carga a España?", options: ["3-5 días", "5-7 días", "8-10 días", "14 días"], correct: 2 }
+        ]
+      },
+      fr: {
+        thanksCall: "Merci pour vos réponses, bonne journée !",
+        thanksChat: "Merci pour votre aide, bonne journée !",
+        restrictions: [
+          { fact: "Il est interdit d'envoyer du lard et de la viande fraîche en Pologne.", q: "Peut-on envoyer du lard frais en Pologne ?", options: ["Oui, jusqu'à 5 kg", "Strictement interdit", "Seulement sous vide", "Seulement avec reçu"], correct: 1 },
+          { fact: "Les médicaments sont interdits d'envoi vers l'Espagne et l'Autriche.", q: "Vers quels pays est-il interdit d'envoyer des médicaments ?", options: ["Pologne & Tchéquie", "Espagne & Autriche", "Allemagne & France", "Lituanie & Lettonie"], correct: 1 },
+          { fact: "Vers la Roumanie, les médicaments ne sont autorisés que dans l'emballage d'origine avec reçu.", q: "Quelle est la condition pour envoyer des médicaments en Roumanie ?", options: ["Sur ordonnance seulement", "Emballage d'origine + reçu", "Jusqu'à 1 kg sans limite", "Interdit"], correct: 1 },
+          { fact: "Les produits du tabac et les vapes sont interdits vers tous les pays de l'UE.", q: "Est-il autorisé d'envoyer des vapes dans l'UE ?", options: ["Autorisé jusqu'à 2 cartouches", "Interdit vers tous les pays de l'UE", "Seulement en Tchéquie", "Seulement avec taxe douanière"], correct: 1 }
+        ],
+        tariffs: [
+          { fact: "La livraison de Tchéquie en Ukraine coûte à partir de 100 CZK.", q: "Quel est le coût minimum de livraison de Tchéquie en Ukraine ?", options: ["50 CZK", "100 CZK", "150 CZK", "200 CZK"], correct: 1 },
+          { fact: "Le tarif documents vers la Pologne est de 300 UAH.", q: "Combien coûte l'envoi d'une enveloppe de documents vers la Pologne ?", options: ["200 UAH", "300 UAH", "450 UAH", "500 UAH"], correct: 1 },
+          { fact: "Le supplément pour enlèvement par coursier en Allemagne est de 3 EUR.", q: "Quel est le coût du supplément enlèvement en Allemagne ?", options: ["1 EUR", "3 EUR", "5 EUR", "10 EUR"], correct: 1 },
+          { fact: "Un colis jusqu'à 2 kg vers l'Italie coûte 500 UAH.", q: "Coût d'envoi d'un colis jusqu'à 2 kg vers l'Italie ?", options: ["350 UAH", "500 UAH", "650 UAH", "800 UAH"], correct: 1 }
+        ],
+        terms: [
+          { fact: "Le délai de livraison de l'Ukraine vers la Lituanie est d'environ 7 jours.", q: "Quel est le délai de livraison estimé de l'Ukraine vers la Lituanie ?", options: ["3 jours", "5 jours", "7 jours", "10 jours"], correct: 2 },
+          { fact: "La livraison entre agences en Tchéquie prend 1 à 2 jours.", q: "Combien de jours prend la livraison en Tchéquie ?", options: ["1-2 jours", "3-4 jours", "5 jours", "Une semaine"], correct: 0 },
+          { fact: "La livraison express de documents au Royaume-Uni prend 3 jours ouvrés.", q: "En combien de jours ouvrés les documents sont-ils livrés au Royaume-Uni ?", options: ["1 jour", "3 jours ouvrés", "5 jours ouvrés", "10 jours"], correct: 1 },
+          { fact: "Le fret vers l'Espagne est livré en 8 à 10 jours.", q: "Combien de temps prend la livraison de fret vers l'Espagne ?", options: ["3-5 jours", "5-7 jours", "8-10 jours", "14 jours"], correct: 2 }
+        ]
+      },
+      nl: {
+        thanksCall: "Bedankt voor de antwoorden, fijne dag!",
+        thanksChat: "Bedankt voor de hulp, fijne dag!",
+        restrictions: [
+          { fact: "Het is verboden spek en vers vlees naar Polen te sturen.", q: "Mag je vers spek naar Polen sturen?", options: ["Ja, tot 5 kg", "Strenge verboden", "Alleen vacuüm", "Alleen met bon"], correct: 1 },
+          { fact: "Geneesmiddelen zijn verboden voor verzending naar Spanje en Oostenrijk.", q: "Naar welke landen is het verboden medicijnen te sturen?", options: ["Polen & Tsjechië", "Spanje & Oostenrijk", "Duitsland & Frankrijk", "Litouwen & Letland"], correct: 1 },
+          { fact: "Naar Roemenië zijn medicijnen alleen toegestaan in originele verpakking met bon.", q: "Wat is de voorwaarde voor het sturen van medicijnen naar Roemenië?", options: ["Alleen op recept", "Originele verpakking + bon", "Tot 1 kg zonder limiet", "Verboden"], correct: 1 },
+          { fact: "Tabaksproducten en vapes zijn verboden naar alle EU-landen.", q: "Is het toegestaan vapes naar de EU te sturen?", options: ["Toegestaan tot 2 sloffen", "Verboden naar alle EU-landen", "Alleen naar Tsjechië", "Alleen met douanetaks"], correct: 1 }
+        ],
+        tariffs: [
+          { fact: "Levering van Tsjechië naar Oekraïne begint vanaf 100 CZK.", q: "Wat zijn de minimale verzendkosten van Tsjechië naar Oekraïne?", options: ["50 CZK", "100 CZK", "150 CZK", "200 CZK"], correct: 1 },
+          { fact: "Documenttarief naar Polen is 300 UAH.", q: "Hoeveel kost het versturen van een envelop met documenten naar Polen?", options: ["200 UAH", "300 UAH", "450 UAH", "500 UAH"], correct: 1 },
+          { fact: "Koerier ophaaltoeslag in Duitsland is 3 EUR.", q: "Wat is de toeslag voor koerier ophalen in Duitsland?", options: ["1 EUR", "3 EUR", "5 EUR", "10 EUR"], correct: 1 },
+          { fact: "Een pakket tot 2 kg naar Italië kost 500 UAH.", q: "Kosten voor het versturen van een pakket tot 2 kg naar Italië?", options: ["350 UAH", "500 UAH", "650 UAH", "800 UAH"], correct: 1 }
+        ],
+        terms: [
+          { fact: "De levertijd van Oekraïne naar Litouwen is ongeveer 7 dagen.", q: "Wat is de geschatte levertijd van Oekraïne naar Litouwen?", options: ["3 dagen", "5 dagen", "7 dagen", "10 dagen"], correct: 2 },
+          { fact: "Binnenlandse levering tussen filialen in Tsjechië duurt 1-2 dagen.", q: "Hoeveel dagen duurt de levering binnen Tsjechië?", options: ["1-2 dagen", "3-4 dagen", "5 dagen", "Een week"], correct: 0 },
+          { fact: "Spoedbezorging van documenten naar het VK duurt 3 werkdagen.", q: "In hoeveel werkdagen worden documenten in het VK geleverd?", options: ["1 dag", "3 werkdagen", "5 werkdagen", "10 dagen"], correct: 1 },
+          { fact: "Vracht naar Spanje wordt in 8-10 dagen geleverd.", q: "Hoe lang duurt vrachtvervoer naar Spanje?", options: ["3-5 dagen", "5-7 dagen", "8-10 dagen", "14 dagen"], correct: 2 }
+        ]
+      }
     };
 
+    // Аліаси мов для країн
+    localizedBanks.at = localizedBanks.de;
+    localizedBanks.md = localizedBanks.ro;
+
+    let activeBank = localizedBanks.ua;
     let selRestr = [], selTariff = [], selTerm = [];
     let userAnswers = {};
-    let candidateName = "", selectedLang = "";
+    let candidateName = "", selectedLangCode = "ua";
     
     let countCalls = 0, countChats = 0, countEmails = 0;
     let memInterval, callInterval, breakInterval;
@@ -242,11 +554,13 @@
       if (!f || !l) return alert("Введіть ім'я та прізвище!");
 
       candidateName = `${f} ${l}`;
-      selectedLang = document.getElementById('country-lang').value;
+      selectedLangCode = document.getElementById('country-lang').value;
 
-      selRestr = [...bank.restrictions].sort(() => 0.5 - Math.random());
-      selTariff = [...bank.tariffs].sort(() => 0.5 - Math.random());
-      selTerm = [...bank.terms].sort(() => 0.5 - Math.random());
+      activeBank = localizedBanks[selectedLangCode] || localizedBanks.gb;
+
+      selRestr = [...activeBank.restrictions].sort(() => 0.5 - Math.random());
+      selTariff = [...activeBank.tariffs].sort(() => 0.5 - Math.random());
+      selTerm = [...activeBank.terms].sort(() => 0.5 - Math.random());
 
       document.getElementById('facts-restr').innerHTML = selRestr.map(f => `<div class="fact-item">${f.fact}</div>`).join('');
       document.getElementById('facts-tariff').innerHTML = selTariff.map(f => `<div class="fact-item">${f.fact}</div>`).join('');
@@ -338,8 +652,7 @@
       if (stepIdx < 2) {
         renderCallStep(callIdx, stepIdx + 1);
       } else {
-        // Фінальна фраза клієнта у дзвінку
-        callHistoryState.push({ sender: 'client', text: 'Дякую за відповіді, на все добре!' });
+        callHistoryState.push({ sender: 'client', text: activeBank.thanksCall });
         
         const histDiv = document.getElementById('call-history');
         histDiv.innerHTML = callHistoryState.map(h => `
@@ -422,8 +735,7 @@
 
     function renderChatStep(chatIdx, stepIdx) {
       if (stepIdx >= 3) {
-        // Фінальна фраза клієнта в чаті
-        chatHistories[chatIdx].push({ sender: 'client', text: 'Дякую за допомогу, гарного дня!' });
+        chatHistories[chatIdx].push({ sender: 'client', text: activeBank.thanksChat });
 
         const histDiv = document.getElementById(`chat-hist-${chatIdx}`);
         histDiv.innerHTML = chatHistories[chatIdx].map(h => `
@@ -536,10 +848,9 @@
       document.getElementById('screen-workspace').classList.add('hidden');
       document.getElementById('screen-result').classList.remove('hidden');
 
-      document.getElementById('res-candidate').innerText = `Оператор: ${candidateName} | Країна: ${selectedLang}`;
+      document.getElementById('res-candidate').innerText = `Оператор: ${candidateName} | Мова: ${selectedLangCode.toUpperCase()}`;
       document.getElementById('res-score').innerText = `${finalScore} / 100`;
 
-      // Зірочки замість слів
       function getStars(score) {
         if (score <= 20) return "★☆☆☆☆";
         if (score <= 40) return "★★☆☆☆";
