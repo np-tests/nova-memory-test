@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nova Post — Advanced CRM Stress Test</title>
+  <title>Nova Post — Interactive CRM Simulator</title>
   <style>
     :root {
       --np-red: #EC1C24;
@@ -37,27 +37,31 @@
     .form-group label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 4px; }
     .form-group input, .form-group select { width: 100%; padding: 10px; border: 2px solid var(--np-border); border-radius: 6px; font-size: 14px; }
 
-    /* Факти за категоріями */
-    .category-title { text-align: left; font-weight: 800; font-size: 14px; color: var(--np-red); margin: 12px 0 6px 0; border-bottom: 1px solid var(--np-border); padding-bottom: 4px; }
-    .facts-list { text-align: left; display: grid; gap: 6px; margin-bottom: 10px; }
-    .fact-item { background: var(--np-gray); padding: 8px 12px; border-radius: 6px; border-left: 3px solid var(--np-red); font-size: 13px; }
+    /* Екран фактів у 3 колонки */
+    .facts-3col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin: 16px 0; text-align: left; }
+    .col-card { background: #FAFARA; border: 1px solid var(--np-border); border-radius: 8px; padding: 14px; }
+    .category-title { font-weight: 800; font-size: 13px; color: var(--np-red); margin-bottom: 10px; border-bottom: 2px solid var(--np-border); padding-bottom: 4px; text-transform: uppercase; }
+    .fact-item { background: white; padding: 8px 10px; border-radius: 6px; border-left: 3px solid var(--np-red); font-size: 12px; margin-bottom: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
 
     /* CRM Grid */
-    .workspace-grid { display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 16px; align-items: start; margin-top: 10px; }
+    .workspace-grid { display: grid; grid-template-columns: 1.1fr 1.2fr 1fr; gap: 16px; align-items: start; margin-top: 10px; }
     .column-header { font-weight: 800; font-size: 14px; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 2px solid var(--np-border); }
 
     .task-card { background: white; border-radius: 10px; padding: 14px; margin-bottom: 14px; border: 1px solid var(--np-border); box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
     .task-card.done { opacity: 0.5; pointer-events: none; background: #F0FDF4; border-color: var(--np-green); }
-    .task-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+    .task-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
     .timer-tag { background: #FFF5F5; color: var(--np-red); font-weight: 800; font-size: 11px; padding: 3px 6px; border-radius: 4px; border: 1px solid #FECDD3; }
 
-    .step-badge { background: #E0F2FE; color: #0369A1; font-weight: 700; font-size: 11px; padding: 2px 6px; border-radius: 4px; margin-bottom: 6px; display: inline-block; }
-    .task-q { font-size: 13px; margin-bottom: 10px; font-weight: 600; text-align: left; }
+    /* Чат-бабли (Клієнт / Агент) */
+    .chat-history { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; max-height: 220px; overflow-y: auto; padding: 4px; }
+    .bubble { max-width: 85%; padding: 8px 12px; border-radius: 12px; font-size: 12px; line-height: 1.4; word-wrap: break-word; }
+    .bubble-client { background: #E2E8F0; color: #1E293B; align-self: flex-start; border-bottom-left-radius: 2px; }
+    .bubble-agent { background: var(--np-red); color: white; align-self: flex-end; border-bottom-right-radius: 2px; }
+
     .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
     .opt-btn { background: var(--np-gray); border: 1px solid var(--np-border); padding: 8px; border-radius: 6px; font-size: 12px; cursor: pointer; text-align: left; }
     .opt-btn:hover { border-color: var(--np-red); background: #FFF5F5; }
 
-    /* Дзвінки */
     .call-box { background: white; border-radius: 10px; border: 2px solid var(--np-red); padding: 16px; text-align: center; }
     .break-state { background: #F4F4F5; border: 2px dashed #CBD5E1; padding: 24px; border-radius: 10px; text-align: center; }
 
@@ -69,8 +73,8 @@
   <div class="top-bar">
     <div class="logo">Nova Post <span style="font-size: 12px; color: #888;">| Multilingual CRM</span></div>
     <div class="counter-badge">
-      Опрацьовано: <span id="cnt-total">0</span>/15 
-      (Дзвінки: <span id="cnt-calls">0</span>/2 | Чати: <span id="cnt-chats">0</span>/2 | Листи: <span id="cnt-emails">0</span>/3)
+      Опрацьовано: <span id="cnt-total">0</span>/12 
+      (Дзвінки: <span id="cnt-calls">0</span>/2 | Чати: <span id="cnt-chats">0</span>/2 | Листи: <span id="cnt-emails">0</span>/2)
     </div>
   </div>
 
@@ -115,21 +119,27 @@
       <button class="btn" onclick="startMemorize()">Розпочати тест</button>
     </div>
 
-    <!-- ЕКРАН 2: Пам'ятка за категоріями (2 хвилини / 120 сек) -->
-    <div id="screen-memorize" class="card hidden" style="max-width: 800px;">
-      <h2>База знань (Запам’ятайте 15 фактів)</h2>
+    <!-- ЕКРАН 2: Пам'ятка у 3 колонки (12 фактів / 120 сек) -->
+    <div id="screen-memorize" class="card hidden" style="max-width: 1000px;">
+      <h2>База знань (Запам’ятайте 12 фактів)</h2>
       <p style="color: #666; font-size: 13px; margin: 4px 0 12px 0;">
         Час на вивчення: <b id="mem-timer" style="color: var(--np-red); font-size: 18px;">120</b> сек.
       </p>
 
-      <div class="category-title">🚫 Категорія: Обмеження та заборони</div>
-      <div class="facts-list" id="facts-restr"></div>
-
-      <div class="category-title">💰 Категорія: Тарифи та вартість</div>
-      <div class="facts-list" id="facts-tariff"></div>
-
-      <div class="category-title">⏱ Категорія: Терміни доставки</div>
-      <div class="facts-list" id="facts-term"></div>
+      <div class="facts-3col">
+        <div class="col-card">
+          <div class="category-title">🚫 Обмеження</div>
+          <div id="facts-restr"></div>
+        </div>
+        <div class="col-card">
+          <div class="category-title">💰 Тарифи</div>
+          <div id="facts-tariff"></div>
+        </div>
+        <div class="col-card">
+          <div class="category-title">⏱ Терміни</div>
+          <div id="facts-term"></div>
+        </div>
+      </div>
 
       <button class="btn" onclick="startWorkspace()">Я готовий(а) до зміни</button>
     </div>
@@ -138,22 +148,22 @@
     <div id="screen-workspace" class="hidden">
       <div class="workspace-grid">
         
-        <!-- ЛІВА КОЛОНКА: ЧАТИ (2 шт по 3 кроки) -->
+        <!-- ЛІВА КОЛОНКА: ЧАТИ (2) -->
         <div>
           <div class="column-header">💬 Онлайн-чати (2)</div>
           <div id="chats-container"></div>
         </div>
 
-        <!-- ЦЕНТР: ДЗВІНКИ (2 шт по 3 кроки) -->
+        <!-- ЦЕНТР: ДЗВІНКИ (2) -->
         <div>
           <div class="column-header">📞 Вхідна лінія</div>
           
           <div id="call-active-box" class="call-box">
-            <div style="font-size: 32px;">📞</div>
+            <div style="font-size: 28px;">📞</div>
             <div style="font-weight: 800; color: var(--np-red);" id="call-title">Дзвінок #1</div>
-            <span class="step-badge" id="call-step-badge">Репліка 1 з 3</span>
-            <div style="margin: 6px 0;" class="timer-tag">Час: <span id="call-timer">45</span>s</div>
-            <div class="task-q" id="call-q-text">Завантаження...</div>
+            <div style="margin: 6px 0;" class="timer-tag">Час відповіді: <span id="call-timer">45</span>s</div>
+            
+            <div class="chat-history" id="call-history"></div>
             <div class="options-grid" id="call-options"></div>
           </div>
 
@@ -170,9 +180,9 @@
           </div>
         </div>
 
-        <!-- ПРАВА КОЛОНКА: ЛИСТИ (3 односкладних) -->
+        <!-- ПРАВА КОЛОНКА: ЛИСТИ (2) -->
         <div>
-          <div class="column-header">✉️ Email-звернення (3)</div>
+          <div class="column-header">✉️ Email-звернення (2)</div>
           <div id="emails-container"></div>
         </div>
 
@@ -195,60 +205,34 @@
   </div>
 
   <script>
-    // БАНК ФАКТІВ (по 12 на категорію)
     const bank = {
       restrictions: [
-        { fact: "Заборонено відправляти сало та свіже м'ясо до Польщі.", q: "Чи можна відправити свіже сало до Польщі?", options: ["Так, до 5 кг", "Категорично заборонено", "Тільки у вакуумі", "Тільки за наявності чека"], correct: 1 },
+        { fact: "Заборонено відправляти сало та свіже м'ясо до Польщі.", q: "Чи можна відправити свіже сало до Польщі?", options: ["Так, до 5 кг", "Категорично заборонено", "Тільки у вакуумі", "Тільки з чеком"], correct: 1 },
         { fact: "Ліки заборонені для відправки в Іспанію та Австрію.", q: "У які країни заборонено відправляти будь-які ліки?", options: ["Польща та Чехія", "Іспанія та Австрія", "Німеччина та Франція", "Литва та Латвія"], correct: 1 },
-        { fact: "До Румунії ліки дозволені тільки в заводській упаковці з чеком.", q: "Яка умова відправки ліків до Румунії?", options: ["Тільки з рецептом", "Заводська упаковка + чек", "До 1 кг без обмежень", "Заборонено повністю"], correct: 1 },
-        { fact: "Тютюнові вироби та вейпи заборонені для відправки в усі країни ЄС.", q: "Чи дозволено пересилати стики або вейпи в ЄС?", options: ["Дозволено до 2 блоків", "Заборонено в усі країни ЄС", "Дозволено тільки в Чехію", "Тільки з митним збором"], correct: 1 },
-        { fact: "Алкоголь міцністю понад 24% заборонений до міжнародного відправлення.", q: "Яке обмеження на міцність алкоголю при відправці?", options: ["Понад 12% заборонено", "Понад 24% заборонено", "Понад 40% заборонено", "Будь-який алкоголь дозволено"], correct: 1 },
-        { fact: "Заборонено відправляти духи та аерозолі авіашляхом.", q: "Чи можна відправити духи або дезодорант-аерозоль?", options: ["Так, без обмежень", "Заборонено (вогненебезпечно)", "Тільки до 50 мл", "Тільки в пластику"], correct: 1 },
-        { fact: "Комбуча та продукти, що потребують температурного режиму, не приймаються.", q: "Чи приймаються до відправки швидкопсувні продукти?", options: ["Приймаються у термобоксі", "Ні, заборонено", "Тільки по Україні", "Тільки взимку"], correct: 1 },
-        { fact: "До Великої Британії заборонено відправляти предмети мистецтва без дозволу.", q: "Яка умова відправки картин/мистецтва до Британії?", options: ["Потрібен офіційний дозвіл", "Без обмежень до £100", "Тільки кур'єром", "Заборонено повністю"], correct: 0 },
-        { fact: "Ювелірні вироби з дорогоцінних металів заборонені до міжнародного пересилання.", q: "Чи можна відправити золоту прикрасу в Німеччину?", options: ["Так, із страховкою", "Заборонено пересилати", "Тільки до 50 грам", "Тільки нові з біркою"], correct: 1 },
-        { fact: "Корм для тварин дозволений лише у заводській закритій упаковці до 10 кг.", q: "Як можна відправити корм для тварин за кордон?", options: ["У будь-якому пакеті", "Заводська упаковка до 10 кг", "Тільки сухий корм до 2 кг", "Заборонено"], correct: 1 },
-        { fact: "Акумулятори та павербанки понад 100Wh заборонені для транспортування.", q: "Яка гранична ємність павербанка для відправки?", options: ["До 50Wh", "До 100Wh", "До 200Wh", "Без обмежень"], correct: 1 },
-        { fact: "Нові речі з етикетками для Молдови вимагають наявності товарного чека.", q: "Що потрібно для відправки нового одягу з етикеткою до Молдови?", options: ["Тільки паспорт", "Товарний чек", "Сертифікат якості", "Нічого не потрібно"], correct: 1 }
+        { fact: "До Румунії ліки дозволені тільки в заводській упаковці з чеком.", q: "Яка умова відправки ліків до Румунії?", options: ["Тільки з рецептом", "Заводська упаковка + чек", "До 1 кг без обмежень", "Заборонено"], correct: 1 },
+        { fact: "Тютюнові вироби та вейпи заборонені для відправки в усі країни ЄС.", q: "Чи дозволено пересилати стики або вейпи в ЄС?", options: ["Дозволено до 2 блоків", "Заборонено в усі країни ЄС", "Тільки в Чехію", "Тільки з митом"], correct: 1 }
       ],
       tariffs: [
         { fact: "Доставка з Чехії в Україну коштує від 100 крон.", q: "Яка мінімальна вартість доставки з Чехії в Україну?", options: ["50 крон", "100 крон", "150 крон", "200 крон"], correct: 1 },
         { fact: "Тариф на документи до Польщі становить 300 грн.", q: "Скільки коштує відправка конверта з документами до Польщі?", options: ["200 грн", "300 грн", "450 грн", "500 грн"], correct: 1 },
         { fact: "Доплата за адресний забір у Німеччині становить 3 євро.", q: "Який розмір доплати за забір кур'єром у Німеччині?", options: ["1 євро", "3 євро", "5 євро", "10 євро"], correct: 1 },
-        { fact: "Посилка до 2 кг в Італію коштує 500 грн.", q: "Вартість відправки посилки до 2 кг в Італію?", options: ["350 грн", "500 грн", "650 грн", "800 грн"], correct: 1 },
-        { fact: "Переадресація посилки в межах Литви коштує 2 євро.", q: "Скільки коштує переадресація посилки по Литві?", options: ["Безкоштовно", "2 євро", "5 євро", "10 євро"], correct: 1 },
-        { fact: "Коробка 10 кг у Франції коштує 4 євро.", q: "Ціна фірмової коробки Nova Post на 10 кг у Франції?", options: ["2 євро", "4 євро", "6 євро", "8 євро"], correct: 1 },
-        { fact: "SMS-інформування в Угорщині коштує 50 форинтів.", q: "Вартість послуги SMS-повідомлення в Угорщині?", options: ["Безкоштовно", "50 форинтів", "100 форинтів", "200 форинтів"], correct: 1 },
-        { fact: "Доставка вантажу понад 30 кг у Словаччину розраховується по 35 грн/кг.", q: "Який тариф за кожен кг вантажу понад 30 кг у Словаччину?", options: ["20 грн/кг", "35 грн/кг", "50 грн/кг", "70 грн/кг"], correct: 1 },
-        { fact: "Кур'єрська доставка в Молдові коштує 40 лей.", q: "Скільки коштує доставка кур'єром до дверей у Молдові?", options: ["20 лей", "40 лей", "60 лей", "100 лей"], correct: 1 },
-        { fact: "Пакування великогабаритних речей у Латвії становить 6 євро.", q: "Вартість пакування великогабаритного вантажу в Латвії?", options: ["3 євро", "6 євро", "9 євро", "12 євро"], correct: 1 },
-        { fact: "Повернення посилки з Естонії коштує 50% від вартості тарифу.", q: "Скільки коштує повернення неукомплектованого вантажу з Естонії?", options: ["Безкоштовно", "50% від тарифу", "100% тарифу", "200% тарифу"], correct: 1 },
-        { fact: "Оціночна вартість понад 150 євро обкладається митним збором 10%.", q: "Яка ставка мита за оголошену вартість понад 150 євро?", options: ["5%", "10%", "15%", "20%"], correct: 1 }
+        { fact: "Посилка до 2 кг в Італію коштує 500 грн.", q: "Вартість відправки посилки до 2 кг в Італію?", options: ["350 грн", "500 грн", "650 грн", "800 грн"], correct: 1 }
       ],
       terms: [
         { fact: "Термін доставки з України в Литву становить орієнтовно 7 днів.", q: "Який орієнтовний термін доставки з України в Литву?", options: ["3 дні", "5 днів", "7 днів", "10 днів"], correct: 2 },
         { fact: "Доставка між відділеннями в межах Чехії займе 1-2 дні.", q: "Скільки днів триває доставка по Чехії?", options: ["1-2 дні", "3-4 дні", "5 днів", "Тиждень"], correct: 0 },
         { fact: "Експрес-доставка документів до Британії займає 3 робочі дні.", q: "За скільки робочих днів доставлять документи в Британію?", options: ["1 день", "3 робочі дні", "5 робочих днів", "10 днів"], correct: 1 },
-        { fact: "Вантажі до Іспанії доставляються за 8-10 днів.", q: "Скільки днів іде вантажна посилка до Іспанії?", options: ["3-5 днів", "5-7 днів", "8-10 днів", "14 днів"], correct: 2 },
-        { fact: "Термін зберігання посилки у поштоматі Румунії — 3 дні.", q: "Скільки днів зберігається посилка в поштоматі Румунії?", options: ["1 день", "3 дні", "5 днів", "7 днів"], correct: 1 },
-        { fact: "Зберігання на складі в Австрії безкоштовне перші 5 днів.", q: "Скільки днів безкоштовного зберігання надається в Австрії?", options: ["2 дні", "5 днів", "7 днів", "10 днів"], correct: 1 },
-        { fact: "Обробка митного затримання в Польщі триває до 48 годин.", q: "Скільки часу займає процедура митного огляду в Польщі?", options: ["12 годин", "24 години", "До 48 годин", "5 днів"], correct: 2 },
-        { fact: "Доставка з Нідерландів в Україну займає від 6 робочих днів.", q: "Який термін доставки з Нідерландів в Україну?", options: ["2 дні", "4 дні", "Від 6 робочих днів", "12 днів"], correct: 2 },
-        { fact: "Кур'єрський забір в Італії виконується протягом 24 годин після заявки.", q: "Протягом якого часу кур'єр в Італії приїде за посилкою?", options: ["2 годин", "12 годин", "Протягом 24 годин", "3 дні"], correct: 2 },
-        { fact: "Митне оформлення спецвантажів у Німеччині займає 2 дні.", q: "Скільки робочих днів оформлюється спецвантаж на митниці Німеччини?", options: ["1 день", "2 дні", "4 дні", "7 днів"], correct: 1 },
-        { fact: "Доставка до поштомату Молдови триває 2-3 дні.", q: "Який термін доставки посилки в поштомат Молдови?", options: ["1 день", "2-3 дні", "5 днів", "7 днів"], correct: 1 },
-        { fact: "Переадресація посилки у Франції займає 1 додатковий день.", q: "Скільки додаткового часу додає переадресація у Франції?", options: ["2 години", "1 додатковий день", "3 дні", "Тиждень"], correct: 1 }
+        { fact: "Вантажі до Іспанії доставляються за 8-10 днів.", q: "Скільки днів іде вантажна посилка до Іспанії?", options: ["3-5 днів", "5-7 днів", "8-10 днів", "14 днів"], correct: 2 }
       ]
     };
 
-    // Глобальний стан
     let selRestr = [], selTariff = [], selTerm = [];
     let userAnswers = {};
     let candidateName = "", selectedLang = "";
     
     let countCalls = 0, countChats = 0, countEmails = 0;
     let memInterval, callInterval, breakInterval;
-    let currentCallIdx = 0;
+    let chatIntervals = [], emailIntervals = [];
 
     function startMemorize() {
       const f = document.getElementById('fname').value.trim();
@@ -258,10 +242,10 @@
       candidateName = `${f} ${l}`;
       selectedLang = document.getElementById('country-lang').value;
 
-      // Вибираємо рандомно по 5 фактів з кожної категорії (всього 15)
-      selRestr = [...bank.restrictions].sort(() => 0.5 - Math.random()).slice(0, 5);
-      selTariff = [...bank.tariffs].sort(() => 0.5 - Math.random()).slice(0, 5);
-      selTerm = [...bank.terms].sort(() => 0.5 - Math.random()).slice(0, 5);
+      // Обираємо всі 4 факти кожної категорії (всього 12 фактів)
+      selRestr = [...bank.restrictions].sort(() => 0.5 - Math.random());
+      selTariff = [...bank.tariffs].sort(() => 0.5 - Math.random());
+      selTerm = [...bank.terms].sort(() => 0.5 - Math.random());
 
       document.getElementById('facts-restr').innerHTML = selRestr.map(f => `<div class="fact-item">${f.fact}</div>`).join('');
       document.getElementById('facts-tariff').innerHTML = selTariff.map(f => `<div class="fact-item">${f.fact}</div>`).join('');
@@ -270,7 +254,6 @@
       document.getElementById('screen-auth').classList.add('hidden');
       document.getElementById('screen-memorize').classList.remove('hidden');
 
-      // Таймер на 2 хвилини (120 сек)
       let t = 120;
       document.getElementById('mem-timer').innerText = t;
       memInterval = setInterval(() => {
@@ -291,18 +274,17 @@
     }
 
     /* --- 1. ДЗВІНКИ (2 дзвінки по 3 репліки) --- */
+    let callHistoryState = [];
+    let currentCallIdx = 0, currentCallStep = 0;
+
     function setupCalls() { renderCallStep(0, 0); }
 
-    // DTO для кроків дзвінка
     function getCallQuestion(callIdx, stepIdx) {
-      // Call 0: Restr[0], Tariff[0], Term[0]
-      // Call 1: Restr[1], Tariff[1], Term[1]
-      if (stepIdx === 0) return { item: selRestr[callIdx], type: "Клієнт запитує про обмеження:" };
-      if (stepIdx === 1) return { item: selTariff[callIdx], type: "Клієнт уточнює вартість:" };
-      if (stepIdx === 2) return { item: selTerm[callIdx], type: "Клієнт питає про терміни:" };
+      if (stepIdx === 0) return { item: selRestr[callIdx], text: selRestr[callIdx].q };
+      if (stepIdx === 1) return { item: selTariff[callIdx], text: selTariff[callIdx].q };
+      if (stepIdx === 2) return { item: selTerm[callIdx], text: selTerm[callIdx].q };
     }
 
-    let currentCallStep = 0;
     function renderCallStep(callIdx, stepIdx) {
       if (callIdx >= 2) {
         document.getElementById('call-active-box').classList.add('hidden');
@@ -313,16 +295,26 @@
 
       currentCallIdx = callIdx;
       currentCallStep = stepIdx;
+      
+      if (stepIdx === 0) callHistoryState = []; // Очищуємо історію для нового дзвінка
+
       const qData = getCallQuestion(callIdx, stepIdx);
+      callHistoryState.push({ sender: 'client', text: qData.text });
 
       document.getElementById('call-title').innerText = `Дзвінок #${callIdx + 1}`;
-      document.getElementById('call-step-badge').innerText = `Репліка ${stepIdx + 1} з 3`;
-      document.getElementById('call-q-text').innerText = `${qData.type} "${qData.item.q}"`;
-
-      const globalAnsKey = `call_${callIdx}_${stepIdx}`;
       
+      // Рендеримо історію баблів
+      const histDiv = document.getElementById('call-history');
+      histDiv.innerHTML = callHistoryState.map(h => `
+        <div class="bubble ${h.sender === 'client' ? 'bubble-client' : 'bubble-agent'}">
+          <b>${h.sender === 'client' ? 'Клієнт:' : 'Агент:'}</b> ${h.text}
+        </div>
+      `).join('');
+      histDiv.scrollTop = histDiv.scrollHeight;
+
+      const key = `call_${callIdx}_${stepIdx}`;
       document.getElementById('call-options').innerHTML = qData.item.options.map((opt, oIdx) => `
-        <button class="opt-btn" onclick="answerCallStep(${callIdx}, ${stepIdx}, ${oIdx}, '${globalAnsKey}', ${qData.item.correct})">${opt}</button>
+        <button class="opt-btn" onclick="answerCallStep(${callIdx}, ${stepIdx}, ${oIdx}, '${key}', ${qData.item.correct}, '${opt.replace(/'/g, "\\'")}')">${opt}</button>
       `).join('');
 
       document.getElementById('call-active-box').classList.remove('hidden');
@@ -334,19 +326,18 @@
       callInterval = setInterval(() => {
         left--;
         document.getElementById('call-timer').innerText = left;
-        if (left <= 0) answerCallStep(callIdx, stepIdx, -1, globalAnsKey, qData.item.correct);
+        if (left <= 0) answerCallStep(callIdx, stepIdx, -1, key, qData.item.correct, "Пропущено");
       }, 1000);
     }
 
-    function answerCallStep(callIdx, stepIdx, userOpt, key, correctOpt) {
+    function answerCallStep(callIdx, stepIdx, userOpt, key, correctOpt, optText) {
       clearInterval(callInterval);
       userAnswers[key] = (userOpt === correctOpt);
+      callHistoryState.push({ sender: 'agent', text: optText });
 
       if (stepIdx < 2) {
-        // Наступна репліка того ж дзвінка
         renderCallStep(callIdx, stepIdx + 1);
       } else {
-        // Дзвінок повністю завершено!
         countCalls++;
         updateCounters();
 
@@ -369,21 +360,20 @@
       renderCallStep(currentCallIdx + 1, 0);
     }
 
-    /* --- 2. ЧАТИ (2 чати по 3 кроки) --- */
+    /* --- 2. ЧАТИ (2 чати по 3 кроки з баблами та 300с таймером) --- */
+    let chatHistories = [[], []];
+
     function setupChats() {
       const container = document.getElementById('chats-container');
-      // Chat 0: Restr[2], Tariff[2], Term[2]
-      // Chat 1: Restr[3], Tariff[3], Term[3]
-      
       let html = '';
       for (let c = 0; c < 2; c++) {
         html += `
           <div class="task-card" id="chat-card-${c}">
             <div class="task-header">
               <span style="font-weight:700; font-size:13px;">Чат #${c + 1}</span>
-              <span class="step-badge" id="chat-badge-${c}">Повідомлення 1 з 3</span>
+              <span class="timer-tag">⏱ <span id="chat-timer-${c}">300</span>s</span>
             </div>
-            <div class="task-q" id="chat-q-${c}">...</div>
+            <div class="chat-history" id="chat-hist-${c}"></div>
             <div class="options-grid" id="chat-opts-${c}"></div>
           </div>
         `;
@@ -392,18 +382,31 @@
 
       renderChatStep(0, 0);
       renderChatStep(1, 0);
+
+      // Запуск таймерів на 300 сек (5 хв)
+      for (let c = 0; c < 2; c++) {
+        let left = 300;
+        const timer = setInterval(() => {
+          left--;
+          const el = document.getElementById(`chat-timer-${c}`);
+          if (el) el.innerText = left;
+          if (left <= 0) {
+            clearInterval(timer);
+            document.getElementById(`chat-card-${c}`).classList.add('done');
+          }
+        }, 1000);
+        chatIntervals.push(timer);
+      }
     }
 
     function getChatQuestion(chatIdx, stepIdx) {
       const offset = chatIdx + 2; // Restr[2], Restr[3]
-      if (stepIdx === 0) return { item: selRestr[offset], label: "1/3 Обмеження:" };
-      if (stepIdx === 1) return { item: selTariff[offset], label: "2/3 Тариф:" };
-      if (stepIdx === 2) return { item: selTerm[offset], label: "3/3 Термін:" };
+      if (stepIdx === 0) return { item: selRestr[offset], text: selRestr[offset].q };
+      if (stepIdx === 1) return { item: selTariff[offset], text: selTariff[offset].q };
+      if (stepIdx === 2) return { item: selTerm[offset], text: selTerm[offset].q };
     }
 
-    let chatSteps = [0, 0];
     function renderChatStep(chatIdx, stepIdx) {
-      chatSteps[chatIdx] = stepIdx;
       if (stepIdx >= 3) {
         document.getElementById(`chat-card-${chatIdx}`).classList.add('done');
         countChats++;
@@ -412,34 +415,42 @@
       }
 
       const qData = getChatQuestion(chatIdx, stepIdx);
-      document.getElementById(`chat-badge-${chatIdx}`).innerText = `Крок ${stepIdx + 1} з 3`;
-      document.getElementById(`chat-q-${chatIdx}`).innerText = `${qData.label} ${qData.item.q}`;
+      chatHistories[chatIdx].push({ sender: 'client', text: qData.text });
+
+      const histDiv = document.getElementById(`chat-hist-${chatIdx}`);
+      histDiv.innerHTML = chatHistories[chatIdx].map(h => `
+        <div class="bubble ${h.sender === 'client' ? 'bubble-client' : 'bubble-agent'}">
+          <b>${h.sender === 'client' ? 'Клієнт:' : 'Агент:'}</b> ${h.text}
+        </div>
+      `).join('');
+      histDiv.scrollTop = histDiv.scrollHeight;
 
       const key = `chat_${chatIdx}_${stepIdx}`;
       document.getElementById(`chat-opts-${chatIdx}`).innerHTML = qData.item.options.map((opt, oIdx) => `
-        <button class="opt-btn" onclick="answerChatStep(${chatIdx}, ${stepIdx}, ${oIdx}, '${key}', ${qData.item.correct})">${opt}</button>
+        <button class="opt-btn" onclick="answerChatStep(${chatIdx}, ${stepIdx}, ${oIdx}, '${key}', ${qData.item.correct}, '${opt.replace(/'/g, "\\'")}')">${opt}</button>
       `).join('');
     }
 
-    function answerChatStep(chatIdx, stepIdx, userOpt, key, correctOpt) {
+    function answerChatStep(chatIdx, stepIdx, userOpt, key, correctOpt, optText) {
       userAnswers[key] = (userOpt === correctOpt);
+      chatHistories[chatIdx].push({ sender: 'agent', text: optText });
       renderChatStep(chatIdx, stepIdx + 1);
     }
 
-    /* --- 3. ЛИСТИ (3 односкладних) --- */
+    /* --- 3. ЛИСТИ (2 листа з таймерами 420 сек) --- */
     function setupEmails() {
       const container = document.getElementById('emails-container');
-      // Email 0: Restr[4], Email 1: Tariff[4], Email 2: Term[4]
+      // Email 0: Tariff[3], Email 1: Term[3]
       const emailItems = [
-        { item: selRestr[4], cat: "Обмеження" },
-        { item: selTariff[4], cat: "Тариф" },
-        { item: selTerm[4], cat: "Термін" }
+        { item: selTariff[3], cat: "Тариф" },
+        { item: selTerm[3], cat: "Термін" }
       ];
 
       container.innerHTML = emailItems.map((e, idx) => `
         <div class="task-card" id="email-card-${idx}">
           <div class="task-header">
             <span style="font-weight:700; font-size:13px;">Лист #${idx + 1} (${e.cat})</span>
+            <span class="timer-tag">⏱ <span id="email-timer-${idx}">420</span>s</span>
           </div>
           <div class="task-q">${e.item.q}</div>
           <div class="options-grid">
@@ -449,6 +460,21 @@
           </div>
         </div>
       `).join('');
+
+      // Таймери 420 сек (7 хв)
+      emailItems.forEach((_, idx) => {
+        let left = 420;
+        const timer = setInterval(() => {
+          left--;
+          const el = document.getElementById(`email-timer-${idx}`);
+          if (el) el.innerText = left;
+          if (left <= 0) {
+            clearInterval(timer);
+            document.getElementById(`email-card-${idx}`).classList.add('done');
+          }
+        }, 1000);
+        emailIntervals.push(timer);
+      });
     }
 
     function answerEmail(emailIdx, userOpt, correctOpt) {
@@ -469,9 +495,10 @@
     function finishWorkspace() {
       clearInterval(callInterval);
       clearInterval(breakInterval);
+      chatIntervals.forEach(clearInterval);
+      emailIntervals.forEach(clearInterval);
 
-      // Рахуємо бали з 15 питань
-      let totalQuestions = 15;
+      let totalQuestions = 12; // 2 calls (6) + 2 chats (4) + 2 emails (2) = 12
       let correctCount = 0;
 
       for (let k in userAnswers) {
