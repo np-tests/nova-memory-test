@@ -201,7 +201,6 @@
   </div>
 
   <script>
-    // МОВНІ БАНКИ
     const localizedBanks = {
       ua: {
         thanksCall: "Дякую за відповіді, на все добре!",
@@ -535,7 +534,6 @@
       }
     };
 
-    // Аліаси мов для країн
     localizedBanks.at = localizedBanks.de;
     localizedBanks.md = localizedBanks.ro;
 
@@ -669,16 +667,23 @@
 
         setTimeout(() => {
           document.getElementById('call-active-box').classList.add('hidden');
-          document.getElementById('call-break-box').classList.remove('hidden');
+          
+          if (callIdx + 1 >= 2) {
+            // Якщо це був останній дзвінок — одразу показуємо статус виконання без перерви
+            document.getElementById('call-finished-box').classList.remove('hidden');
+          } else {
+            // Якщо є наступні дзвінки — показуємо перерву
+            document.getElementById('call-break-box').classList.remove('hidden');
 
-          let bLeft = 45;
-          document.getElementById('break-timer').innerText = bLeft;
-          clearInterval(breakInterval);
-          breakInterval = setInterval(() => {
-            bLeft--;
+            let bLeft = 45;
             document.getElementById('break-timer').innerText = bLeft;
-            if (bLeft <= 0) skipBreak();
-          }, 1000);
+            clearInterval(breakInterval);
+            breakInterval = setInterval(() => {
+              bLeft--;
+              document.getElementById('break-timer').innerText = bLeft;
+              if (bLeft <= 0) skipBreak();
+            }, 1000);
+          }
         }, 1200);
       }
     }
