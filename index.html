@@ -72,8 +72,8 @@
   <div class="top-bar">
     <div class="logo">Nova Post <span style="font-size: 12px; color: #888;">| Multilingual CRM</span></div>
     <div class="counter-badge">
-      Опрацьовано: <span id="cnt-total">0</span>/12 
-      (Дзвінки: <span id="cnt-calls">0</span>/2 | Чати: <span id="cnt-chats">0</span>/2 | Листи: <span id="cnt-emails">0</span>/2)
+      Опрацьовано: <span id="cnt-total">0</span>/7 
+      (Дзвінки: <span id="cnt-calls">0</span>/2 | Чати: <span id="cnt-chats">0</span>/2 | Листи: <span id="cnt-emails">0</span>/3)
     </div>
   </div>
 
@@ -178,7 +178,7 @@
         </div>
 
         <div>
-          <div class="column-header">✉️ Email-звернення (2)</div>
+          <div class="column-header">✉️ Email-звернення (3)</div>
           <div id="emails-container"></div>
         </div>
 
@@ -669,10 +669,8 @@
           document.getElementById('call-active-box').classList.add('hidden');
           
           if (callIdx + 1 >= 2) {
-            // Якщо це був останній дзвінок — одразу показуємо статус виконання без перерви
             document.getElementById('call-finished-box').classList.remove('hidden');
           } else {
-            // Якщо є наступні дзвінки — показуємо перерву
             document.getElementById('call-break-box').classList.remove('hidden');
 
             let bLeft = 45;
@@ -781,10 +779,11 @@
       renderChatStep(chatIdx, stepIdx + 1);
     }
 
-    /* --- 3. ЛИСТИ --- */
+    /* --- 3. ЛИСТИ (3 листи) --- */
     function setupEmails() {
       const container = document.getElementById('emails-container');
       const emailItems = [
+        { item: selRestr[3], cat: "Обмеження" },
         { item: selTariff[3], cat: "Тариф" },
         { item: selTerm[3], cat: "Термін" }
       ];
@@ -841,7 +840,7 @@
       chatIntervals.forEach(clearInterval);
       emailIntervals.forEach(clearInterval);
 
-      let totalQuestions = 12;
+      let totalQuestions = 15; // 2 дзвінки (6) + 2 чати (6) + 3 листи (3) = 15
       let correctCount = 0;
 
       for (let k in userAnswers) {
