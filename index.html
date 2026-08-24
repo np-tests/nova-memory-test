@@ -48,11 +48,11 @@
     .column-header { font-weight: 800; font-size: 14px; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 2px solid var(--np-border); }
 
     .task-card { background: white; border-radius: 10px; padding: 14px; margin-bottom: 14px; border: 1px solid var(--np-border); box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
-    .task-card.done { opacity: 0.5; pointer-events: none; background: #F0FDF4; border-color: var(--np-green); }
+    .task-card.done { opacity: 0.6; pointer-events: none; background: #F0FDF4; border-color: var(--np-green); }
     .task-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
     .timer-tag { background: #FFF5F5; color: var(--np-red); font-weight: 800; font-size: 11px; padding: 3px 6px; border-radius: 4px; border: 1px solid #FECDD3; }
 
-    /* Чат-бабли (Клієнт / Агент) */
+    /* Чат-бабли */
     .chat-history { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; max-height: 220px; overflow-y: auto; padding: 4px; }
     .bubble { max-width: 85%; padding: 8px 12px; border-radius: 12px; font-size: 12px; line-height: 1.4; word-wrap: break-word; }
     .bubble-client { background: #E2E8F0; color: #1E293B; align-self: flex-start; border-bottom-left-radius: 2px; }
@@ -64,6 +64,8 @@
 
     .call-box { background: white; border-radius: 10px; border: 2px solid var(--np-red); padding: 16px; text-align: center; }
     .break-state { background: #F4F4F5; border: 2px dashed #CBD5E1; padding: 24px; border-radius: 10px; text-align: center; }
+
+    .done-badge { grid-column: 1 / -1; text-align: center; color: var(--np-green); font-weight: 800; font-size: 13px; padding: 8px; background: #F0FDF4; border-radius: 6px; border: 1px solid var(--np-green); }
 
     .hidden { display: none !important; }
   </style>
@@ -80,7 +82,7 @@
 
   <div class="screen">
 
-    <!-- ЕКРАН 1: Авторизація та вибір мови -->
+    <!-- ЕКРАН 1: Авторизація -->
     <div id="screen-auth" class="card">
       <h2 style="margin-bottom: 6px;">Реєстрація оператора</h2>
       <p style="color: #666; font-size: 13px; margin-bottom: 16px;">Оберіть мову обслуговування та введіть дані</p>
@@ -119,7 +121,7 @@
       <button class="btn" onclick="startMemorize()">Розпочати тест</button>
     </div>
 
-    <!-- ЕКРАН 2: Пам'ятка у 3 колонки (12 фактів / 120 сек) -->
+    <!-- ЕКРАН 2: Пам'ятка у 3 колонки -->
     <div id="screen-memorize" class="card hidden" style="max-width: 1000px;">
       <h2>База знань (Запам’ятайте 12 фактів)</h2>
       <p style="color: #666; font-size: 13px; margin: 4px 0 12px 0;">
@@ -148,13 +150,13 @@
     <div id="screen-workspace" class="hidden">
       <div class="workspace-grid">
         
-        <!-- ЛІВА КОЛОНКА: ЧАТИ (2) -->
+        <!-- ЛІВА КОЛОНКА: ЧАТИ -->
         <div>
           <div class="column-header">💬 Онлайн-чати (2)</div>
           <div id="chats-container"></div>
         </div>
 
-        <!-- ЦЕНТР: ДЗВІНКИ (2) -->
+        <!-- ЦЕНТР: ДЗВІНКИ -->
         <div>
           <div class="column-header">📞 Вхідна лінія</div>
           
@@ -180,7 +182,7 @@
           </div>
         </div>
 
-        <!-- ПРАВА КОЛОНКА: ЛИСТИ (2) -->
+        <!-- ПРАВА КОЛОНКА: ЛИСТИ -->
         <div>
           <div class="column-header">✉️ Email-звернення (2)</div>
           <div id="emails-container"></div>
@@ -191,15 +193,15 @@
       <button class="btn" onclick="finishWorkspace()" style="margin-top: 16px;">Завершити зміну та підрахувати бали</button>
     </div>
 
-    <!-- ЕКРАН 4: Результати -->
+    <!-- ЕКРАН 4: Результати (Зірочки) -->
     <div id="screen-result" class="card hidden">
       <h2>Підсумки тестування</h2>
       <p id="res-candidate" style="color: #666; margin-top: 4px; font-size: 14px;"></p>
       
-      <div style="font-size: 52px; font-weight: 900; color: var(--np-red); margin: 16px 0;" id="res-score">0 / 100</div>
-      <p id="res-comment" style="font-weight: 700; font-size: 15px;"></p>
+      <div style="font-size: 48px; font-weight: 900; color: var(--np-red); margin: 16px 0 4px 0;" id="res-score">0 / 100</div>
+      <div id="res-stars" style="font-size: 42px; color: #F59E0B; margin-bottom: 12px; letter-spacing: 4px;">★★★★★</div>
       
-      <button class="btn" onclick="location.reload()" style="margin-top: 20px;">Пройти знову</button>
+      <button class="btn" onclick="location.reload()" style="margin-top: 10px;">Пройти знову</button>
     </div>
 
   </div>
@@ -208,7 +210,7 @@
     const bank = {
       restrictions: [
         { fact: "Заборонено відправляти сало та свіже м'ясо до Польщі.", q: "Чи можна відправити свіже сало до Польщі?", options: ["Так, до 5 кг", "Категорично заборонено", "Тільки у вакуумі", "Тільки з чеком"], correct: 1 },
-        { fact: "Ліки заборонені для відправки в Іспанію та Австрію.", q: "У які країни заборонено відправляти будь-які ліки?", options: ["Польща та Чехія", "Іспанія та Австрія", "Німеччина та Франція", "Литва та Латвія"], correct: 1 },
+        { fact: "Ліки заборонені для відправки в Іспанію та Австрій.", q: "У які країни заборонено відправляти будь-які ліки?", options: ["Польща та Чехія", "Іспанія та Австрія", "Німеччина та Франція", "Литва та Латвія"], correct: 1 },
         { fact: "До Румунії ліки дозволені тільки в заводській упаковці з чеком.", q: "Яка умова відправки ліків до Румунії?", options: ["Тільки з рецептом", "Заводська упаковка + чек", "До 1 кг без обмежень", "Заборонено"], correct: 1 },
         { fact: "Тютюнові вироби та вейпи заборонені для відправки в усі країни ЄС.", q: "Чи дозволено пересилати стики або вейпи в ЄС?", options: ["Дозволено до 2 блоків", "Заборонено в усі країни ЄС", "Тільки в Чехію", "Тільки з митом"], correct: 1 }
       ],
@@ -242,7 +244,6 @@
       candidateName = `${f} ${l}`;
       selectedLang = document.getElementById('country-lang').value;
 
-      // Обираємо всі 4 факти кожної категорії (всього 12 фактів)
       selRestr = [...bank.restrictions].sort(() => 0.5 - Math.random());
       selTariff = [...bank.tariffs].sort(() => 0.5 - Math.random());
       selTerm = [...bank.terms].sort(() => 0.5 - Math.random());
@@ -273,7 +274,7 @@
       setupEmails();
     }
 
-    /* --- 1. ДЗВІНКИ (2 дзвінки по 3 репліки) --- */
+    /* --- 1. ДЗВІНКИ --- */
     let callHistoryState = [];
     let currentCallIdx = 0, currentCallStep = 0;
 
@@ -296,14 +297,13 @@
       currentCallIdx = callIdx;
       currentCallStep = stepIdx;
       
-      if (stepIdx === 0) callHistoryState = []; // Очищуємо історію для нового дзвінка
+      if (stepIdx === 0) callHistoryState = [];
 
       const qData = getCallQuestion(callIdx, stepIdx);
       callHistoryState.push({ sender: 'client', text: qData.text });
 
       document.getElementById('call-title').innerText = `Дзвінок #${callIdx + 1}`;
       
-      // Рендеримо історію баблів
       const histDiv = document.getElementById('call-history');
       histDiv.innerHTML = callHistoryState.map(h => `
         <div class="bubble ${h.sender === 'client' ? 'bubble-client' : 'bubble-agent'}">
@@ -338,20 +338,35 @@
       if (stepIdx < 2) {
         renderCallStep(callIdx, stepIdx + 1);
       } else {
+        // Фінальна фраза клієнта у дзвінку
+        callHistoryState.push({ sender: 'client', text: 'Дякую за відповіді, на все добре!' });
+        
+        const histDiv = document.getElementById('call-history');
+        histDiv.innerHTML = callHistoryState.map(h => `
+          <div class="bubble ${h.sender === 'client' ? 'bubble-client' : 'bubble-agent'}">
+            <b>${h.sender === 'client' ? 'Клієнт:' : 'Агент:'}</b> ${h.text}
+          </div>
+        `).join('');
+        histDiv.scrollTop = histDiv.scrollHeight;
+
+        document.getElementById('call-options').innerHTML = `<div class="done-badge">✅ Дзвінок завершено</div>`;
+
         countCalls++;
         updateCounters();
 
-        document.getElementById('call-active-box').classList.add('hidden');
-        document.getElementById('call-break-box').classList.remove('hidden');
+        setTimeout(() => {
+          document.getElementById('call-active-box').classList.add('hidden');
+          document.getElementById('call-break-box').classList.remove('hidden');
 
-        let bLeft = 45;
-        document.getElementById('break-timer').innerText = bLeft;
-        clearInterval(breakInterval);
-        breakInterval = setInterval(() => {
-          bLeft--;
+          let bLeft = 45;
           document.getElementById('break-timer').innerText = bLeft;
-          if (bLeft <= 0) skipBreak();
-        }, 1000);
+          clearInterval(breakInterval);
+          breakInterval = setInterval(() => {
+            bLeft--;
+            document.getElementById('break-timer').innerText = bLeft;
+            if (bLeft <= 0) skipBreak();
+          }, 1000);
+        }, 1200);
       }
     }
 
@@ -360,7 +375,7 @@
       renderCallStep(currentCallIdx + 1, 0);
     }
 
-    /* --- 2. ЧАТИ (2 чати по 3 кроки з баблами та 300с таймером) --- */
+    /* --- 2. ЧАТИ --- */
     let chatHistories = [[], []];
 
     function setupChats() {
@@ -383,7 +398,6 @@
       renderChatStep(0, 0);
       renderChatStep(1, 0);
 
-      // Запуск таймерів на 300 сек (5 хв)
       for (let c = 0; c < 2; c++) {
         let left = 300;
         const timer = setInterval(() => {
@@ -400,7 +414,7 @@
     }
 
     function getChatQuestion(chatIdx, stepIdx) {
-      const offset = chatIdx + 2; // Restr[2], Restr[3]
+      const offset = chatIdx + 2;
       if (stepIdx === 0) return { item: selRestr[offset], text: selRestr[offset].q };
       if (stepIdx === 1) return { item: selTariff[offset], text: selTariff[offset].q };
       if (stepIdx === 2) return { item: selTerm[offset], text: selTerm[offset].q };
@@ -408,7 +422,20 @@
 
     function renderChatStep(chatIdx, stepIdx) {
       if (stepIdx >= 3) {
+        // Фінальна фраза клієнта в чаті
+        chatHistories[chatIdx].push({ sender: 'client', text: 'Дякую за допомогу, гарного дня!' });
+
+        const histDiv = document.getElementById(`chat-hist-${chatIdx}`);
+        histDiv.innerHTML = chatHistories[chatIdx].map(h => `
+          <div class="bubble ${h.sender === 'client' ? 'bubble-client' : 'bubble-agent'}">
+            <b>${h.sender === 'client' ? 'Клієнт:' : 'Агент:'}</b> ${h.text}
+          </div>
+        `).join('');
+        histDiv.scrollTop = histDiv.scrollHeight;
+
+        document.getElementById(`chat-opts-${chatIdx}`).innerHTML = `<div class="done-badge">✅ Чат завершено</div>`;
         document.getElementById(`chat-card-${chatIdx}`).classList.add('done');
+        
         countChats++;
         updateCounters();
         return;
@@ -437,10 +464,9 @@
       renderChatStep(chatIdx, stepIdx + 1);
     }
 
-    /* --- 3. ЛИСТИ (2 листа з таймерами 420 сек) --- */
+    /* --- 3. ЛИСТИ --- */
     function setupEmails() {
       const container = document.getElementById('emails-container');
-      // Email 0: Tariff[3], Email 1: Term[3]
       const emailItems = [
         { item: selTariff[3], cat: "Тариф" },
         { item: selTerm[3], cat: "Термін" }
@@ -453,7 +479,7 @@
             <span class="timer-tag">⏱ <span id="email-timer-${idx}">420</span>s</span>
           </div>
           <div class="task-q">${e.item.q}</div>
-          <div class="options-grid">
+          <div class="options-grid" id="email-opts-${idx}">
             ${e.item.options.map((opt, oIdx) => `
               <button class="opt-btn" onclick="answerEmail(${idx}, ${oIdx}, ${e.item.correct})">${opt}</button>
             `).join('')}
@@ -461,7 +487,6 @@
         </div>
       `).join('');
 
-      // Таймери 420 сек (7 хв)
       emailItems.forEach((_, idx) => {
         let left = 420;
         const timer = setInterval(() => {
@@ -479,6 +504,7 @@
 
     function answerEmail(emailIdx, userOpt, correctOpt) {
       userAnswers[`email_${emailIdx}`] = (userOpt === correctOpt);
+      document.getElementById(`email-opts-${emailIdx}`).innerHTML = `<div class="done-badge">✅ Лист опрацьовано</div>`;
       document.getElementById(`email-card-${emailIdx}`).classList.add('done');
       countEmails++;
       updateCounters();
@@ -498,7 +524,7 @@
       chatIntervals.forEach(clearInterval);
       emailIntervals.forEach(clearInterval);
 
-      let totalQuestions = 12; // 2 calls (6) + 2 chats (4) + 2 emails (2) = 12
+      let totalQuestions = 12;
       let correctCount = 0;
 
       for (let k in userAnswers) {
@@ -513,17 +539,16 @@
       document.getElementById('res-candidate').innerText = `Оператор: ${candidateName} | Країна: ${selectedLang}`;
       document.getElementById('res-score').innerText = `${finalScore} / 100`;
 
-      const comm = document.getElementById('res-comment');
-      if (finalScore >= 80) {
-        comm.innerText = "Відмінно! Високий рівень пам'яті та стресостійкості.";
-        comm.style.color = "var(--np-green)";
-      } else if (finalScore >= 50) {
-        comm.innerText = "Задовільно. Потребує додаткової практики з базою знань.";
-        comm.style.color = "orange";
-      } else {
-        comm.innerText = "Низький бал. Рекомендується повторне вивчення та тест.";
-        comm.style.color = "var(--np-red)";
+      // Зірочки замість слів
+      function getStars(score) {
+        if (score <= 20) return "★☆☆☆☆";
+        if (score <= 40) return "★★☆☆☆";
+        if (score <= 60) return "★★★☆☆";
+        if (score <= 80) return "★★★★☆";
+        return "★★★★★";
       }
+
+      document.getElementById('res-stars').innerText = getStars(finalScore);
     }
   </script>
 </body>
