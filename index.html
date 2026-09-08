@@ -100,9 +100,24 @@
         <label>Країна та мова обслуговування</label>
         <select id="country-lang">
           <option value="ua" selected>🇺🇦 Україна (Українська)</option>
-          <option value="en">🇬🇧 Велика Британія (Англійська)</option>
-          <!-- РЕШТА КРАЇН ДОДАСТИСЯ ПІЗНІШЕ -->
-        </select>
+          <option value="en">🇬🇧 Велика Британія (Англійська)</option><select id="country-lang">
+  <option value="ua" selected>🇺🇦 Україна (Українська)</option>
+  <option value="en">🇬🇧 Велика Британія (Англійська)</option>
+  <option value="de">🇩🇪 Німеччина (Німецька)</option>
+  <option value="pl">🇵🇱 Польща (Польська)</option>
+  <option value="lv">🇱🇻 Латвія (Латиська)</option>
+  <option value="lt">🇱🇹 Литва (Литовська)</option>
+  <option value="et">🇪🇪 Естонія (Естонська)</option>
+  <option value="nl">🇳🇱 Нідерланди (Англійська)</option>
+  <option value="ro">🇷🇴 Румунія (Румунська)</option>
+  <option value="cz">🇨🇿 Чехія (Чеська)</option>
+  <option value="sk">🇸🇰 Словаччина (Словацька)</option>
+  <option value="at">🇦🇹 Австрія (Німецька)</option>
+  <option value="hu">🇭🇺 Угорщина (Угорська)</option>
+  <option value="fr">🇫🇷 Франція (Французька)</option>
+  <option value="es">🇪🇸 Іспанія (Іспанська)</option>
+  <option value="it">🇮🇹 Італія (Італійська)</option>
+          </select>
       </div>
 
       <button class="btn" onclick="startMemorize()">Розпочати тест</button>
@@ -279,9 +294,548 @@
         ]
       }
       
-      /* ========================================================= */
-      /* СЮДИ БУДЕ ВСТАВЛЕНО БАНК ПИТАНЬ ІНШИХ МОВ (PL, DE, CZ...) */
-      /* ========================================================= */
+pl: {
+        thanksCall: "Dziękuję za pomoc, do widzenia!", 
+        thanksChat: "Dziękuję za informacje, miłego dnia!",
+        tariffTable: `
+          <table class="tariff-table">
+            <tr><th>Usługa</th><th>Koszt</th></tr>
+            <tr><td>Wysyłka dokumentów</td><td>15 USD</td></tr>
+            <tr><td>Paczka 10 kg</td><td>35 USD</td></tr>
+            <tr><td>Paczka 30 kg</td><td>80 USD</td></tr>
+            <tr><td>Odbiór przez kuriera</td><td>5 USD</td></tr>
+          </table>
+        `,
+        restrictions: [
+          { fact: "Wysyłanie słoniny i świeżego mięsa do Polski jest zabronione.", q: "Czy mogę wysłać świeżą słoninę do Polski?", options: ["Tak, do 5 kg", "Kategorycznie zabronione", "Tylko próżniowo", "Tylko z paragonem"], correct: 1 },
+          { fact: "Wysyłka leków jest zabroniona do Hiszpanii i Austrii.", q: "Do jakich krajów nie wolno wysyłać żadnych leków?", options: ["Polska i Czechy", "Hiszpania i Austria", "Niemcy i Francja", "Litwa i Łotwa"], correct: 1 },
+          { fact: "Do Rumunii leki dozwolone są tylko w oryginalnym opakowaniu z paragonem.", q: "Jaki jest warunek wysyłki leków do Rumunii?", options: ["Tylko na receptę", "Oryginalne opakowanie + paragon", "Do 1 kg bez ograniczeń", "Zabronione"], correct: 1 },
+          { fact: "Wyroby tytoniowe i e-papierosy są zabronione do wszystkich krajów UE.", q: "Czy można wysyłać wkłady tytoniowe lub e-papierosy do UE?", options: ["Dozwolone do 2 sztang", "Zabronione do wszystkich krajów UE", "Tylko do Czech", "Tylko z cłem"], correct: 1 },
+          { fact: "W paczce można wysłać maksymalnie 2 powerbanki (do 100Wh).", q: "Ile powerbanków mogę włożyć do paczki?", options: ["Dowolną ilość", "Nie więcej niż 2 sztuki", "Tylko 1 sztukę", "Powerbanki są zabronione"], correct: 1 },
+          { fact: "Przesyłanie jakichkolwiek napojów alkoholowych za granicę jest zabronione.", q: "Czy mogę wysłać butelkę wina krewnym?", options: ["Tak, do 1 litra", "Tak, jeśli zawartość alkoholu do 15%", "Nie, całkowity zakaz", "Tylko w plastikowej butelce"], correct: 2 },
+          { fact: "Perfumy na bazie alkoholu nie mogą być wysyłane drogą lotniczą.", q: "Jaka zasada dotyczy wysyłki perfum?", options: ["Dozwolone bez ograniczeń", "Zabronione drogą lotniczą", "Tylko we flakonach do 50 ml", "Tylko z certyfikatem"], correct: 1 },
+          { fact: "Nasiona roślin i żywe sadzonki są zabronione do wysyłki.", q: "Czy nasiona kwiatów zostaną przyjęte do wysyłki?", options: ["Tak, w oryginalnym opakowaniu", "Nie, to jest zabronione", "Tak, do 5 opakowań", "Tylko nasiona warzyw"], correct: 1 },
+          { fact: "Przesyłanie gotówki w przesyłkach międzynarodowych jest zabronione.", q: "Czy mogę włożyć banknot 100 euro do dokumentów?", options: ["Dozwolone do 500 euro", "Tak, trzeba zadeklarować", "Wysyłka gotówki jest zabroniona", "Dozwolone są tylko monety"], correct: 2 }
+        ],
+        tariffs: [
+          { q: "Ile będzie kosztować wysłanie koperty z dokumentami?", options: ["5 USD", "10 USD", "15 USD", "35 USD"], correct: 2 },
+          { q: "Jaki jest koszt wysyłki standardowej paczki o wadze 10 kg?", options: ["15 USD", "35 USD", "50 USD", "80 USD"], correct: 1 },
+          { q: "Ile będzie mnie kosztować dostawa ładunku o wadze 30 kg?", options: ["35 USD", "60 USD", "80 USD", "100 USD"], correct: 2 },
+          { q: "Ile trzeba dopłacić za odbiór paczki przez kuriera?", options: ["Za darmo", "5 USD", "10 USD", "15 USD"], correct: 1 }
+        ],
+        terms: [
+          { fact: "Czas dostawy z Ukrainy na Litwę wynosi około 7 dni.", q: "Jaki jest szacowany czas dostawy z Ukrainy na Litwę?", options: ["3 dni", "5 dni", "7 dni", "10 dni"], correct: 2 },
+          { fact: "Dostawa między oddziałami w Czechach trwa 1-2 dni.", q: "Ile dni trwa dostawa lokalna w Czechach?", options: ["1-2 dni", "3-4 dni", "5 dni", "Tydzień"], correct: 0 },
+          { fact: "Ekspresowa dostawa dokumentów do Wielkiej Brytanii zajmuje 3 dni robocze.", q: "W ile dni roboczych dokumenty dotrą do Wielkiej Brytanii?", options: ["1 dzień", "3 dni robocze", "5 dni roboczych", "10 dni"], correct: 1 },
+          { fact: "Ładunki do Hiszpanii są dostarczane w ciągu 8-10 dni.", q: "Ile dni idzie przesyłka gabarytowa do Hiszpanii?", options: ["3-5 dni", "5-7 dni", "8-10 dni", "14 dni"], correct: 2 },
+          { fact: "Minimalny czas dostawy z Ukrainy do Polski wynosi od 3 dni roboczych.", q: "Jaki jest minimalny czas dostawy do Polski?", options: ["1 dzień", "Od 3 dni roboczych", "Od 7 dni roboczych", "Dwa tygodnie"], correct: 1 },
+          { fact: "Szacowany czas dostawy do Niemiec wynosi 5-7 dni.", q: "Ile średnio jedzie paczka do Niemiec?", options: ["2-3 dni", "5-7 dni", "10-12 dni", "Do 14 dni"], correct: 1 },
+          { fact: "Czas przechowywania paczki w paczkomacie InPost w Polsce wynosi 48 godzin.", q: "Ile czasu paczka czeka w paczkomacie w Polsce?", options: ["24 godziny", "48 godzin", "3 dni", "5 dni"], correct: 1 },
+          { fact: "W oddziale w Niemczech paczka jest przechowywana przez 7 dni za darmo.", q: "Ile dni paczka leży za darmo w oddziale w Niemczech?", options: ["3 dni", "5 dni", "7 dni", "14 dni"], correct: 2 },
+          { fact: "Dostawa kurierska za granicą realizowana jest w godzinach od 8:00 do 18:00.", q: "W jakich godzinach kurier dostarcza paczki za granicą?", options: ["Od 9:00 do 21:00", "Od 8:00 do 18:00", "Całodobowo", "Tylko w weekendy"], correct: 1 }
+        ],
+        customs: [
+          { fact: "Paczki o wartości do 45 euro nie podlegają opodatkowaniu.", q: "Prezent do Niemiec za 30 euro. Ile za odprawę?", options: ["Tylko VAT (20%)", "Tylko cło (10%)", "Brak podatków", "VAT + cło"], correct: 2 },
+          { fact: "Dla paczek od 45 do 150 euro płaci się tylko VAT (~20%).", q: "Paczka do Polski, 100 euro. Jakie będą opłaty?", options: ["Brak podatków", "Tylko VAT (~20%)", "Tylko cło (10%)", "Zarówno VAT, jak i cło"], correct: 1 },
+          { fact: "Jeśli wartość przekracza 150 euro, płaci się VAT (~20%) i cło (10%).", q: "Sprzęt do Włoch, 250 euro. Co z podatkami?", options: ["Tylko VAT", "Tylko cło", "Płaci się VAT i cło", "Stała opłata 50 euro"], correct: 2 }
+        ]
+      },
+      de: {
+        thanksCall: "Vielen Dank für Ihre Hilfe, auf Wiedersehen!", 
+        thanksChat: "Danke für die Informationen, einen schönen Tag noch!",
+        tariffTable: `<table class="tariff-table"><tr><th>Service</th><th>Kosten</th></tr><tr><td>Dokumentenversand</td><td>15 USD</td></tr><tr><td>10 kg Paket</td><td>35 USD</td></tr><tr><td>30 kg Fracht</td><td>80 USD</td></tr><tr><td>Abholung durch Kurier</td><td>5 USD</td></tr></table>`,
+        restrictions: [
+          { fact: "Es ist verboten, Speck und frisches Fleisch nach Polen zu senden.", q: "Kann ich frischen Speck nach Polen schicken?", options: ["Ja, bis 5 kg", "Strengstens verboten", "Nur vakuumverpackt", "Nur mit Kassenbon"], correct: 1 },
+          { fact: "Der Versand von Medikamenten nach Spanien und Österreich ist verboten.", q: "In welche Länder dürfen keine Medikamente geschickt werden?", options: ["Polen und Tschechien", "Spanien und Österreich", "Deutschland und Frankreich", "Litauen und Lettland"], correct: 1 },
+          { fact: "Nach Rumänien sind Medikamente nur in der Originalverpackung mit Kassenbon erlaubt.", q: "Was ist die Bedingung für den Medikamentenversand nach Rumänien?", options: ["Nur mit Rezept", "Originalverpackung + Kassenbon", "Bis 1 kg ohne Limit", "Verboten"], correct: 1 },
+          { fact: "Tabakwaren und Vapes sind in alle EU-Länder verboten.", q: "Dürfen Vapes in die EU geschickt werden?", options: ["Bis zu 2 Stangen erlaubt", "In alle EU-Länder verboten", "Nur nach Tschechien", "Nur mit Zollgebühren"], correct: 1 },
+          { fact: "Es dürfen maximal 2 Powerbanks (bis 100Wh) im Paket verschickt werden.", q: "Wie viele Powerbanks darf ich ins Paket legen?", options: ["Beliebig viele", "Nicht mehr als 2", "Nur 1", "Verboten"], correct: 1 },
+          { fact: "Der Versand von alkoholischen Getränken ins Ausland ist streng verboten.", q: "Kann ich eine Flasche Wein schicken?", options: ["Ja, bis 1 Liter", "Ja, wenn Alkoholgehalt bis 15%", "Nein, komplett verboten", "Nur in Plastikflaschen"], correct: 2 },
+          { fact: "Parfüms auf Alkoholbasis dürfen nicht auf dem Luftweg verschickt werden.", q: "Welche Regel gilt für den Versand von Parfüms?", options: ["Ohne Einschränkungen erlaubt", "Verbot für den Lufttransport", "Nur in Flakons bis 50 ml", "Nur mit Zertifikat"], correct: 1 },
+          { fact: "Pflanzensamen und lebende Setzlinge sind für den Versand verboten.", q: "Werden Blumensamen zum Versand angenommen?", options: ["Ja, in der Originalverpackung", "Nein, das ist verboten", "Ja, bis zu 5 Packungen", "Nur Gemüsesamen"], correct: 1 },
+          { fact: "Der Versand von Bargeld in internationalen Paketen ist verboten.", q: "Kann ich einen 100-Euro-Schein zu den Dokumenten legen?", options: ["Erlaubt bis 500 Euro", "Ja, muss deklariert werden", "Bargeldversand ist verboten", "Nur Münzen sind erlaubt"], correct: 2 }
+        ],
+        tariffs: [
+          { q: "Wie viel kostet der Versand eines Dokumentenumschlags?", options: ["5 USD", "10 USD", "15 USD", "35 USD"], correct: 2 },
+          { q: "Was kostet der Versand eines Standardpakets mit 10 kg?", options: ["15 USD", "35 USD", "50 USD", "80 USD"], correct: 1 },
+          { q: "Wie viel kostet die Lieferung einer 30 kg Fracht?", options: ["35 USD", "60 USD", "80 USD", "100 USD"], correct: 2 },
+          { q: "Wie viel kostet die Abholung durch einen Kurier?", options: ["Kostenlos", "5 USD", "10 USD", "15 USD"], correct: 1 }
+        ],
+        terms: [
+          { fact: "Die Lieferzeit von der Ukraine nach Litauen beträgt ca. 7 Tage.", q: "Wie lange ist die geschätzte Lieferzeit nach Litauen?", options: ["3 Tage", "5 Tage", "7 Tage", "10 Tage"], correct: 2 },
+          { fact: "Die Lieferung zwischen Filialen in Tschechien dauert 1-2 Tage.", q: "Wie viele Tage dauert eine lokale Lieferung in Tschechien?", options: ["1-2 Tage", "3-4 Tage", "5 Tage", "Eine Woche"], correct: 0 },
+          { fact: "Der Express-Dokumentenversand nach Großbritannien dauert 3 Werktage.", q: "In wie vielen Werktagen werden Dokumente nach GB geliefert?", options: ["1 Tag", "3 Werktage", "5 Werktage", "10 Tage"], correct: 1 },
+          { fact: "Fracht nach Spanien wird in 8-10 Tagen geliefert.", q: "Wie viele Tage ist ein Frachtpaket nach Spanien unterwegs?", options: ["3-5 Tage", "5-7 Tage", "8-10 Tage", "14 Tage"], correct: 2 },
+          { fact: "Die minimale Lieferzeit von der Ukraine nach Polen beträgt ab 3 Werktagen.", q: "Was ist die minimale Lieferzeit nach Polen?", options: ["1 Tag", "Ab 3 Werktagen", "Ab 7 Werktagen", "Zwei Wochen"], correct: 1 },
+          { fact: "Die geschätzte Lieferzeit nach Deutschland beträgt 5-7 Tage.", q: "Wie lange ist ein Paket nach Deutschland unterwegs?", options: ["2-3 Tage", "5-7 Tage", "10-12 Tage", "Bis zu 14 Tage"], correct: 1 },
+          { fact: "Die Aufbewahrungszeit im InPost-Paketautomat in Polen beträgt 48 Stunden.", q: "Wie lange wartet ein Paket in einem Paketautomaten in Polen?", options: ["24 Stunden", "48 Stunden", "3 Tage", "5 Tage"], correct: 1 },
+          { fact: "In einer Filiale in Deutschland wird das Paket 7 Tage kostenlos aufbewahrt.", q: "Wie viele Tage liegt das Paket kostenlos in einer Filiale in DE?", options: ["3 Tage", "5 Tage", "7 Tage", "14 Tage"], correct: 2 },
+          { fact: "Die Kurierzustellung im Ausland erfolgt von 8:00 bis 18:00 Uhr.", q: "Um welche Uhrzeit stellen Kuriere Pakete im Ausland zu?", options: ["Von 9:00 bis 21:00", "Von 8:00 bis 18:00", "Rund um die Uhr", "Nur am Wochenende"], correct: 1 }
+        ],
+        customs: [
+          { fact: "Pakete im Wert von bis zu 45 Euro werden nicht besteuert.", q: "Geschenk nach Deutschland (30 Euro). Zollgebühr?", options: ["Nur MwSt. (20%)", "Nur Zoll (10%)", "Keine Steuern", "MwSt. + Zoll"], correct: 2 },
+          { fact: "Für Pakete von 45 bis 150 Euro wird nur die Mehrwertsteuer (~20%) gezahlt.", q: "Paket nach Polen, 100 Euro. Welche Gebühren fallen an?", options: ["Keine Steuern", "Nur MwSt. (~20%)", "Nur Zoll (10%)", "MwSt. und Zoll"], correct: 1 },
+          { fact: "Bei einem Wert von über 150 Euro werden MwSt. (~20%) und Zoll (10%) fällig.", q: "Technik nach Italien, 250 Euro. Was ist mit den Steuern?", options: ["Nur MwSt.", "Nur Zoll", "MwSt. und Zoll", "Feste Gebühr"], correct: 2 }
+        ]
+      },
+      at: { 
+        // Австрія (Німецька) - ідентично до DE
+        thanksCall: "Vielen Dank für Ihre Hilfe, auf Wiedersehen!", 
+        thanksChat: "Danke für die Informationen, einen schönen Tag noch!",
+        tariffTable: `<table class="tariff-table"><tr><th>Service</th><th>Kosten</th></tr><tr><td>Dokumentenversand</td><td>15 USD</td></tr><tr><td>10 kg Paket</td><td>35 USD</td></tr><tr><td>30 kg Fracht</td><td>80 USD</td></tr><tr><td>Abholung durch Kurier</td><td>5 USD</td></tr></table>`,
+        restrictions: [
+          { fact: "Es ist verboten, Speck und frisches Fleisch nach Polen zu senden.", q: "Kann ich frischen Speck nach Polen schicken?", options: ["Ja, bis 5 kg", "Strengstens verboten", "Nur vakuumverpackt", "Nur mit Kassenbon"], correct: 1 },
+          { fact: "Der Versand von Medikamenten nach Spanien und Österreich ist verboten.", q: "In welche Länder dürfen keine Medikamente geschickt werden?", options: ["Polen und Tschechien", "Spanien und Österreich", "Deutschland und Frankreich", "Litauen und Lettland"], correct: 1 },
+          { fact: "Nach Rumänien sind Medikamente nur in der Originalverpackung mit Kassenbon erlaubt.", q: "Was ist die Bedingung für den Medikamentenversand nach Rumänien?", options: ["Nur mit Rezept", "Originalverpackung + Kassenbon", "Bis 1 kg ohne Limit", "Verboten"], correct: 1 },
+          { fact: "Tabakwaren und Vapes sind in alle EU-Länder verboten.", q: "Dürfen Vapes in die EU geschickt werden?", options: ["Bis zu 2 Stangen erlaubt", "In alle EU-Länder verboten", "Nur nach Tschechien", "Nur mit Zollgebühren"], correct: 1 },
+          { fact: "Es dürfen maximal 2 Powerbanks (bis 100Wh) im Paket verschickt werden.", q: "Wie viele Powerbanks darf ich ins Paket legen?", options: ["Beliebig viele", "Nicht mehr als 2", "Nur 1", "Verboten"], correct: 1 },
+          { fact: "Der Versand von alkoholischen Getränken ins Ausland ist streng verboten.", q: "Kann ich eine Flasche Wein schicken?", options: ["Ja, bis 1 Liter", "Ja, wenn Alkoholgehalt bis 15%", "Nein, komplett verboten", "Nur in Plastikflaschen"], correct: 2 },
+          { fact: "Parfüms auf Alkoholbasis dürfen nicht auf dem Luftweg verschickt werden.", q: "Welche Regel gilt für den Versand von Parfüms?", options: ["Ohne Einschränkungen erlaubt", "Verbot für den Lufttransport", "Nur in Flakons bis 50 ml", "Nur mit Zertifikat"], correct: 1 },
+          { fact: "Pflanzensamen und lebende Setzlinge sind für den Versand verboten.", q: "Werden Blumensamen zum Versand angenommen?", options: ["Ja, in der Originalverpackung", "Nein, das ist verboten", "Ja, bis zu 5 Packungen", "Nur Gemüsesamen"], correct: 1 },
+          { fact: "Der Versand von Bargeld in internationalen Paketen ist verboten.", q: "Kann ich einen 100-Euro-Schein zu den Dokumenten legen?", options: ["Erlaubt bis 500 Euro", "Ja, muss deklariert werden", "Bargeldversand ist verboten", "Nur Münzen sind erlaubt"], correct: 2 }
+        ],
+        tariffs: [
+          { q: "Wie viel kostet der Versand eines Dokumentenumschlags?", options: ["5 USD", "10 USD", "15 USD", "35 USD"], correct: 2 },
+          { q: "Was kostet der Versand eines Standardpakets mit 10 kg?", options: ["15 USD", "35 USD", "50 USD", "80 USD"], correct: 1 },
+          { q: "Wie viel kostet die Lieferung einer 30 kg Fracht?", options: ["35 USD", "60 USD", "80 USD", "100 USD"], correct: 2 },
+          { q: "Wie viel kostet die Abholung durch einen Kurier?", options: ["Kostenlos", "5 USD", "10 USD", "15 USD"], correct: 1 }
+        ],
+        terms: [
+          { fact: "Die Lieferzeit von der Ukraine nach Litauen beträgt ca. 7 Tage.", q: "Wie lange ist die geschätzte Lieferzeit nach Litauen?", options: ["3 Tage", "5 Tage", "7 Tage", "10 Tage"], correct: 2 },
+          { fact: "Die Lieferung zwischen Filialen in Tschechien dauert 1-2 Tage.", q: "Wie viele Tage dauert eine lokale Lieferung in Tschechien?", options: ["1-2 Tage", "3-4 Tage", "5 Tage", "Eine Woche"], correct: 0 },
+          { fact: "Der Express-Dokumentenversand nach Großbritannien dauert 3 Werktage.", q: "In wie vielen Werktagen werden Dokumente nach GB geliefert?", options: ["1 Tag", "3 Werktage", "5 Werktage", "10 Tage"], correct: 1 },
+          { fact: "Fracht nach Spanien wird in 8-10 Tagen geliefert.", q: "Wie viele Tage ist ein Frachtpaket nach Spanien unterwegs?", options: ["3-5 Tage", "5-7 Tage", "8-10 Tage", "14 Tage"], correct: 2 },
+          { fact: "Die minimale Lieferzeit von der Ukraine nach Polen beträgt ab 3 Werktagen.", q: "Was ist die minimale Lieferzeit nach Polen?", options: ["1 Tag", "Ab 3 Werktagen", "Ab 7 Werktagen", "Zwei Wochen"], correct: 1 },
+          { fact: "Die geschätzte Lieferzeit nach Deutschland beträgt 5-7 Tage.", q: "Wie lange ist ein Paket nach Deutschland unterwegs?", options: ["2-3 Tage", "5-7 Tage", "10-12 Tage", "Bis zu 14 Tage"], correct: 1 },
+          { fact: "Die Aufbewahrungszeit im InPost-Paketautomat in Polen beträgt 48 Stunden.", q: "Wie lange wartet ein Paket in einem Paketautomaten in Polen?", options: ["24 Stunden", "48 Stunden", "3 Tage", "5 Tage"], correct: 1 },
+          { fact: "In einer Filiale in Deutschland wird das Paket 7 Tage kostenlos aufbewahrt.", q: "Wie viele Tage liegt das Paket kostenlos in einer Filiale in DE?", options: ["3 Tage", "5 Tage", "7 Tage", "14 Tage"], correct: 2 },
+          { fact: "Die Kurierzustellung im Ausland erfolgt von 8:00 bis 18:00 Uhr.", q: "Um welche Uhrzeit stellen Kuriere Pakete im Ausland zu?", options: ["Von 9:00 bis 21:00", "Von 8:00 bis 18:00", "Rund um die Uhr", "Nur am Wochenende"], correct: 1 }
+        ],
+        customs: [
+          { fact: "Pakete im Wert von bis zu 45 Euro werden nicht besteuert.", q: "Geschenk nach Deutschland (30 Euro). Zollgebühr?", options: ["Nur MwSt. (20%)", "Nur Zoll (10%)", "Keine Steuern", "MwSt. + Zoll"], correct: 2 },
+          { fact: "Für Pakete von 45 bis 150 Euro wird nur die Mehrwertsteuer (~20%) gezahlt.", q: "Paket nach Polen, 100 Euro. Welche Gebühren fallen an?", options: ["Keine Steuern", "Nur MwSt. (~20%)", "Nur Zoll (10%)", "MwSt. und Zoll"], correct: 1 },
+          { fact: "Bei einem Wert von über 150 Euro werden MwSt. (~20%) und Zoll (10%) fällig.", q: "Technik nach Italien, 250 Euro. Was ist mit den Steuern?", options: ["Nur MwSt.", "Nur Zoll", "MwSt. und Zoll", "Feste Gebühr"], correct: 2 }
+        ]
+      },
+      cz: {
+        thanksCall: "Děkuji za pomoc, na shledanou!", 
+        thanksChat: "Děkuji za informace, hezký den!",
+        tariffTable: `<table class="tariff-table"><tr><th>Služba</th><th>Cena</th></tr><tr><td>Odeslání dokumentů</td><td>15 USD</td></tr><tr><td>Zásilka 10 kg</td><td>35 USD</td></tr><tr><td>Zásilka 30 kg</td><td>80 USD</td></tr><tr><td>Vyzvednutí kurýrem</td><td>5 USD</td></tr></table>`,
+        restrictions: [
+          { fact: "Je zakázáno posílat sádlo a čerstvé maso do Polska.", q: "Mohu poslat čerstvé sádlo do Polska?", options: ["Ano, do 5 kg", "Přísně zakázáno", "Pouze ve vakuu", "Pouze s účtenkou"], correct: 1 },
+          { fact: "Léky je zakázáno posílat do Španělska a Rakouska.", q: "Do kterých zemí je zakázáno posílat jakékoliv léky?", options: ["Polsko a Česko", "Španělsko a Rakousko", "Německo a Francie", "Litva a Lotyšsko"], correct: 1 },
+          { fact: "Do Rumunska jsou léky povoleny pouze v originálním balení s účtenkou.", q: "Jaká je podmínka pro zaslání léků do Rumunska?", options: ["Pouze na předpis", "Originální balení + účtenka", "Do 1 kg bez omezení", "Zakázáno"], correct: 1 },
+          { fact: "Tabákové výrobky a elektronické cigarety jsou zakázány do všech zemí EU.", q: "Je povoleno posílat e-cigarety do EU?", options: ["Povoleno do 2 kartonů", "Zakázáno do všech zemí EU", "Pouze do Česka", "Pouze s clem"], correct: 1 },
+          { fact: "V zásilce lze odeslat maximálně 2 powerbanky (do 100Wh).", q: "Kolik powerbank mohu vložit do zásilky?", options: ["Libovolné množství", "Ne více než 2", "Pouze 1", "Zakázáno"], correct: 1 },
+          { fact: "Posílání jakýchkoliv alkoholických nápojů do zahraničí je zakázáno.", q: "Mohu poslat láhev vína?", options: ["Ano, do 1 litru", "Ano, do 15% alk.", "Ne, zcela zakázáno", "Pouze v plastu"], correct: 2 },
+          { fact: "Parfémy na bázi alkoholu se nesmí posílat letecky.", q: "Jaké pravidlo platí pro posílání parfémů?", options: ["Povoleno bez omezení", "Zakázáno letecky", "Pouze flakony do 50 ml", "Pouze s certifikátem"], correct: 1 },
+          { fact: "Semena rostlin a živé sazenice je zakázáno posílat.", q: "Přijmou k odeslání semena květin?", options: ["Ano, v originálním balení", "Ne, je to zakázáno", "Ano, do 5 balení", "Pouze semena zeleniny"], correct: 1 },
+          { fact: "Zasílání hotovosti v mezinárodních zásilkách je zakázáno.", q: "Mohu do dokumentů vložit bankovku 100 eur?", options: ["Povoleno do 500 eur", "Ano, je třeba to deklarovat", "Posílat hotovost je zakázáno", "Povoleny pouze mince"], correct: 2 }
+        ],
+        tariffs: [
+          { q: "Kolik bude stát odeslání obálky s dokumenty?", options: ["5 USD", "10 USD", "15 USD", "35 USD"], correct: 2 },
+          { q: "Jaká je cena za standardní zásilku 10 kg?", options: ["15 USD", "35 USD", "50 USD", "80 USD"], correct: 1 },
+          { q: "Kolik stojí doručení nákladu 30 kg?", options: ["35 USD", "60 USD", "80 USD", "100 USD"], correct: 2 },
+          { q: "Kolik si musím připlatit za vyzvednutí kurýrem?", options: ["Zdarma", "5 USD", "10 USD", "15 USD"], correct: 1 }
+        ],
+        terms: [
+          { fact: "Doba dodání z Ukrajiny do Litvy je přibližně 7 dní.", q: "Jaká je odhadovaná doba dodání na Litvu?", options: ["3 dny", "5 dní", "7 dní", "10 dní"], correct: 2 },
+          { fact: "Doručení mezi pobočkami v Česku trvá 1-2 dny.", q: "Kolik dní trvá lokální doručení po Česku?", options: ["1-2 dny", "3-4 dny", "5 dní", "Týden"], correct: 0 },
+          { fact: "Expresní doručení dokumentů do Británie trvá 3 pracovní dny.", q: "Za kolik dní budou dokumenty v Británii?", options: ["1 den", "3 prac. dny", "5 prac. dní", "10 dní"], correct: 1 },
+          { fact: "Náklad do Španělska je doručen za 8-10 dní.", q: "Kolik dní cestuje nákladní zásilka do Španělska?", options: ["3-5 dní", "5-7 dní", "8-10 dní", "14 dní"], correct: 2 },
+          { fact: "Minimální doba dodání z Ukrajiny do Polska je od 3 pracovních dní.", q: "Jaká je minimální doba dodání do Polska?", options: ["1 den", "Od 3 prac. dní", "Od 7 prac. dní", "Dva týdny"], correct: 1 },
+          { fact: "Odhadovaná doba dodání do Německa je 5-7 dní.", q: "Jak dlouho průměrně cestuje zásilka do Německa?", options: ["2-3 dny", "5-7 dní", "10-12 dní", "Až 14 dní"], correct: 1 },
+          { fact: "Doba uložení zásilky v polském InPost boxu je 48 hodin.", q: "Jak dlouho zásilka čeká v boxu v Polsku?", options: ["24 hodin", "48 hodin", "3 dny", "5 dní"], correct: 1 },
+          { fact: "Na pobočce v Německu je zásilka uložena zdarma 7 dní.", q: "Kolik dní leží zásilka zdarma na pobočce v Německu?", options: ["3 dny", "5 dní", "7 dní", "14 dní"], correct: 2 },
+          { fact: "Kurýrní doručení v zahraničí probíhá od 8:00 do 18:00.", q: "V jaký čas kurýr doručuje zásilky v zahraničí?", options: ["Od 9:00 do 21:00", "Od 8:00 do 18:00", "Nonstop", "Pouze o víkendu"], correct: 1 }
+        ],
+        customs: [
+          { fact: "Zásilky v hodnotě do 45 eur nepodléhají daním.", q: "Dárek do Německa za 30 eur. Kolik stojí proclení?", options: ["Pouze DPH", "Pouze clo", "Daně se neplatí", "DPH + clo"], correct: 2 },
+          { fact: "Pro zásilky od 45 do 150 eur se platí pouze DPH (~20%).", q: "Zásilka do Polska, 100 eur. Jaké budou poplatky?", options: ["Daně se neplatí", "Pouze DPH (~20%)", "Pouze clo", "DPH i clo"], correct: 1 },
+          { fact: "Při hodnotě nad 150 eur se platí DPH (~20%) a clo (10%).", q: "Elektronika do Itálie, 250 eur. Co daně?", options: ["Pouze DPH", "Pouze clo", "Platí se DPH a clo", "Fixní poplatek"], correct: 2 }
+        ]
+      },
+      sk: {
+        thanksCall: "Ďakujem za pomoc, dovidenia!", 
+        thanksChat: "Ďakujem za informácie, pekný deň!",
+        tariffTable: `<table class="tariff-table"><tr><th>Služba</th><th>Cena</th></tr><tr><td>Odoslanie dokumentov</td><td>15 USD</td></tr><tr><td>Zásielka 10 kg</td><td>35 USD</td></tr><tr><td>Zásielka 30 kg</td><td>80 USD</td></tr><tr><td>Vyzdvihnutie kuriérom</td><td>5 USD</td></tr></table>`,
+        restrictions: [
+          { fact: "Je zakázané posielať masť a čerstvé mäso do Poľska.", q: "Môžem poslať čerstvú masť do Poľska?", options: ["Áno, do 5 kg", "Prísne zakázané", "Iba vo vákuu", "Iba s bločkom"], correct: 1 },
+          { fact: "Lieky je zakázané posielať do Španielska a Rakúska.", q: "Do ktorých krajín je zakázané posielať lieky?", options: ["Poľsko a Česko", "Španielsko a Rakúsko", "Nemecko a Francúzsko", "Litva a Lotyšsko"], correct: 1 },
+          { fact: "Do Rumunska sú lieky povolené len v originálnom balení s bločkom.", q: "Aká je podmienka pre zaslanie liekov do Rumunska?", options: ["Iba na predpis", "Originálne balenie + bloček", "Do 1 kg bez obmedzení", "Zakázané"], correct: 1 },
+          { fact: "Tabakové výrobky a elektronické cigarety sú zakázané do všetkých krajín EÚ.", q: "Je povolené posielať e-cigarety do EÚ?", options: ["Povolené do 2 kartónov", "Zakázané do celej EÚ", "Iba do Česka", "Iba s clom"], correct: 1 },
+          { fact: "V zásielke možno odoslať maximálne 2 powerbanky (do 100Wh).", q: "Koľko powerbánk môžem vložiť do zásielky?", options: ["Ľubovoľné množstvo", "Nie viac ako 2", "Iba 1", "Zakázané"], correct: 1 },
+          { fact: "Posielanie akýchkoľvek alkoholických nápojov do zahraničia je zakázané.", q: "Môžem poslať fľašu vína?", options: ["Áno, do 1 litra", "Áno, do 15% alk.", "Nie, úplne zakázané", "Iba v plaste"], correct: 2 },
+          { fact: "Parfumy na báze alkoholu sa nesmú posielať letecky.", q: "Aké pravidlo platí pre posielanie parfumov?", options: ["Povolené bez obmedzení", "Zakázané letecky", "Iba flakóny do 50 ml", "Iba s certifikátom"], correct: 1 },
+          { fact: "Semená rastlín a živé sadenice je zakázané posielať.", q: "Prijmú na odoslanie semená kvetín?", options: ["Áno, v originálnom balení", "Nie, je to zakázané", "Áno, do 5 balení", "Iba semená zeleniny"], correct: 1 },
+          { fact: "Zasielanie hotovosti v medzinárodných zásielkach je zakázané.", q: "Môžem do dokumentov vložiť bankovku 100 eur?", options: ["Povolené do 500 eur", "Áno, treba deklarovať", "Posielať hotovosť je zakázané", "Povolené iba mince"], correct: 2 }
+        ],
+        tariffs: [
+          { q: "Koľko bude stáť odoslanie obálky s dokumentmi?", options: ["5 USD", "10 USD", "15 USD", "35 USD"], correct: 2 },
+          { q: "Aká je cena za štandardnú zásielku 10 kg?", options: ["15 USD", "35 USD", "50 USD", "80 USD"], correct: 1 },
+          { q: "Koľko stojí doručenie nákladu 30 kg?", options: ["35 USD", "60 USD", "80 USD", "100 USD"], correct: 2 },
+          { q: "Koľko si musím priplatiť za vyzdvihnutie kuriérom?", options: ["Zadarmo", "5 USD", "10 USD", "15 USD"], correct: 1 }
+        ],
+        terms: [
+          { fact: "Doba dodania z Ukrajiny do Litvy je približne 7 dní.", q: "Aká je odhadovaná doba dodania do Litvy?", options: ["3 dni", "5 dní", "7 dní", "10 dní"], correct: 2 },
+          { fact: "Doručenie medzi pobočkami v Česku trvá 1-2 dni.", q: "Koľko dní trvá lokálne doručenie po Česku?", options: ["1-2 dni", "3-4 dni", "5 dní", "Týždeň"], correct: 0 },
+          { fact: "Expresné doručenie dokumentov do Británie trvá 3 pracovné dni.", q: "Za koľko dní budú dokumenty v Británii?", options: ["1 deň", "3 prac. dni", "5 prac. dní", "10 dní"], correct: 1 },
+          { fact: "Náklad do Španielska je doručený za 8-10 dní.", q: "Koľko dní cestuje nákladná zásielka do Španielska?", options: ["3-5 dní", "5-7 dní", "8-10 dní", "14 dní"], correct: 2 },
+          { fact: "Minimálna doba dodania do Poľska je od 3 pracovných dní.", q: "Aká je minimálna doba dodania do Poľska?", options: ["1 deň", "Od 3 prac. dní", "Od 7 prac. dní", "Dva týždne"], correct: 1 },
+          { fact: "Odhadovaná doba dodania do Nemecka je 5-7 dní.", q: "Ako dlho priemerne cestuje zásielka do Nemecka?", options: ["2-3 dni", "5-7 dní", "10-12 dní", "Až 14 dní"], correct: 1 },
+          { fact: "Doba uloženia zásielky v poľskom InPost boxe je 48 hodín.", q: "Ako dlho zásielka čaká v boxe v Poľsku?", options: ["24 hodín", "48 hodín", "3 dni", "5 dní"], correct: 1 },
+          { fact: "Na pobočke v Nemecku je zásielka uložená zadarmo 7 dní.", q: "Koľko dní leží zásielka zadarmo na pobočke v Nemecku?", options: ["3 dni", "5 dní", "7 dni", "14 dní"], correct: 2 },
+          { fact: "Kuriérske doručenie v zahraničí prebieha od 8:00 do 18:00.", q: "V aký čas kuriér doručuje zásielky v zahraničí?", options: ["Od 9:00 do 21:00", "Od 8:00 do 18:00", "Nonstop", "Iba cez víkend"], correct: 1 }
+        ],
+        customs: [
+          { fact: "Zásielky v hodnote do 45 eur nepodliehajú daniam.", q: "Darček do Nemecka za 30 eur. Koľko stojí preclenie?", options: ["Iba DPH", "Iba clo", "Dane sa neplatia", "DPH + clo"], correct: 2 },
+          { fact: "Pre zásielky od 45 do 150 eur sa platí iba DPH (~20%).", q: "Zásielka do Poľska, 100 eur. Aké budú poplatky?", options: ["Dane sa neplatia", "Iba DPH (~20%)", "Iba clo", "DPH aj clo"], correct: 1 },
+          { fact: "Pri hodnote nad 150 eur sa platí DPH (~20%) a clo (10%).", q: "Elektronika do Talianska, 250 eur. Čo dane?", options: ["Iba DPH", "Iba clo", "Platí sa DPH a clo", "Fixný poplatok"], correct: 2 }
+        ]
+      },
+      fr: {
+        thanksCall: "Merci pour votre aide, au revoir !", 
+        thanksChat: "Merci pour les informations, bonne journée !",
+        tariffTable: `<table class="tariff-table"><tr><th>Service</th><th>Coût</th></tr><tr><td>Envoi de documents</td><td>15 USD</td></tr><tr><td>Colis de 10 kg</td><td>35 USD</td></tr><tr><td>Colis de 30 kg</td><td>80 USD</td></tr><tr><td>Collecte par coursier</td><td>5 USD</td></tr></table>`,
+        restrictions: [
+          { fact: "Il est interdit d'envoyer du saindoux et de la viande fraîche en Pologne.", q: "Puis-je envoyer du saindoux frais en Pologne ?", options: ["Oui, jusqu'à 5 kg", "Strictement interdit", "Sous vide", "Avec un reçu"], correct: 1 },
+          { fact: "Les médicaments sont interdits vers l'Espagne et l'Autriche.", q: "Vers quels pays est-il interdit d'envoyer des médicaments ?", options: ["Pologne et Tchéquie", "Espagne et Autriche", "Allemagne et France", "Lituanie et Lettonie"], correct: 1 },
+          { fact: "Vers la Roumanie, les médicaments ne sont autorisés que dans l'emballage d'origine.", q: "Condition pour envoyer des médicaments en Roumanie ?", options: ["Sur ordonnance", "Emballage d'origine + reçu", "Jusqu'à 1 kg", "Interdit"], correct: 1 },
+          { fact: "Les e-cigarettes sont interdites vers tous les pays de l'UE.", q: "Est-il permis d'envoyer des e-cigarettes vers l'UE ?", options: ["Jusqu'à 2 cartouches", "Interdit dans toute l'UE", "Uniquement vers Tchéquie", "Avec frais de douane"], correct: 1 },
+          { fact: "Un maximum de 2 batteries externes (jusqu'à 100Wh) est autorisé.", q: "Combien de batteries externes puis-je mettre ?", options: ["N'importe quel nombre", "Pas plus de 2", "1 seule", "Interdit"], correct: 1 },
+          { fact: "L'expédition de toute boisson alcoolisée à l'étranger est interdite.", q: "Puis-je envoyer une bouteille de vin ?", options: ["Oui, jusqu'à 1 litre", "Oui, moins de 15%", "Totalement interdit", "En bouteille plastique"], correct: 2 },
+          { fact: "Les parfums à base d'alcool ne peuvent pas être envoyés par voie aérienne.", q: "Règle pour l'envoi de parfums ?", options: ["Autorisé sans restriction", "Interdit par voie aérienne", "Flacons de 50 ml", "Avec certificat"], correct: 1 },
+          { fact: "Les graines de plantes et les semis vivants sont interdits.", q: "Les graines de fleurs sont-elles acceptées ?", options: ["Oui, emballage d'origine", "Non, c'est interdit", "Jusqu'à 5 paquets", "Graines de légumes"], correct: 1 },
+          { fact: "L'envoi d'espèces dans les colis internationaux est interdit.", q: "Puis-je mettre un billet de 100 euros ?", options: ["Jusqu'à 500 euros", "Oui, à déclarer", "Interdit", "Seules les pièces"], correct: 2 }
+        ],
+        tariffs: [
+          { q: "Combien coûtera l'envoi d'une enveloppe de documents ?", options: ["5 USD", "10 USD", "15 USD", "35 USD"], correct: 2 },
+          { q: "Quel est le coût pour un colis standard de 10 kg ?", options: ["15 USD", "35 USD", "50 USD", "80 USD"], correct: 1 },
+          { q: "Combien coûtera la livraison d'une cargaison de 30 kg ?", options: ["35 USD", "60 USD", "80 USD", "100 USD"], correct: 2 },
+          { q: "Quel est le supplément pour la collecte par coursier ?", options: ["Gratuit", "5 USD", "10 USD", "15 USD"], correct: 1 }
+        ],
+        terms: [
+          { fact: "Le délai vers la Lituanie est d'environ 7 jours.", q: "Quel est le délai estimé vers la Lituanie ?", options: ["3 jours", "5 jours", "7 jours", "10 jours"], correct: 2 },
+          { fact: "La livraison entre les succursales en Tchéquie prend 1-2 jours.", q: "Combien de jours prend la livraison locale en Tchéquie ?", options: ["1-2 jours", "3-4 jours", "5 jours", "1 semaine"], correct: 0 },
+          { fact: "La livraison express de documents vers le Royaume-Uni prend 3 jours ouvrables.", q: "En combien de jours les documents arrivent-ils au Royaume-Uni ?", options: ["1 jour", "3 jours ouvrables", "5 jours", "10 jours"], correct: 1 },
+          { fact: "Les cargaisons vers l'Espagne sont livrées en 8-10 jours.", q: "Combien de temps prend un colis lourd vers l'Espagne ?", options: ["3-5 jours", "5-7 jours", "8-10 jours", "14 jours"], correct: 2 },
+          { fact: "Le délai minimum vers la Pologne est à partir de 3 jours ouvrables.", q: "Quel est le délai minimum vers la Pologne ?", options: ["1 jour", "Dès 3 jours ouvrés", "Dès 7 jours ouvrés", "Deux semaines"], correct: 1 },
+          { fact: "Le délai estimé vers l'Allemagne est de 5-7 jours.", q: "Combien de temps prend un colis vers l'Allemagne ?", options: ["2-3 jours", "5-7 jours", "10-12 jours", "Jusqu'à 14 jours"], correct: 1 },
+          { fact: "Le stockage dans les consignes InPost en Pologne est de 48 heures.", q: "Combien de temps un colis attend-il en consigne en Pologne ?", options: ["24 heures", "48 heures", "3 jours", "5 jours"], correct: 1 },
+          { fact: "En Allemagne, un colis est stocké gratuitement pendant 7 jours.", q: "Combien de jours le colis reste gratuit en succursale en Allemagne ?", options: ["3 jours", "5 jours", "7 jours", "14 jours"], correct: 2 },
+          { fact: "La livraison par coursier s'effectue de 8h00 à 18h00.", q: "À quelle heure le coursier livre-t-il à l'étranger ?", options: ["De 9h à 21h", "De 8h à 18h", "24/7", "Le week-end"], correct: 1 }
+        ],
+        customs: [
+          { fact: "Les colis jusqu'à 45 euros ne sont pas taxés.", q: "Cadeau de 30 euros vers l'Allemagne. Frais de douane ?", options: ["TVA uniquement", "Droits uniquement", "Aucune taxe", "TVA + Droits"], correct: 2 },
+          { fact: "De 45 à 150 euros, seule la TVA (~20%) est payée.", q: "Colis vers la Pologne, 100 euros. Taxes ?", options: ["Aucune taxe", "TVA uniquement", "Droits uniquement", "TVA et Droits"], correct: 1 },
+          { fact: "Au-delà de 150 euros, on paie TVA (~20%) et douane (10%).", q: "Électronique vers l'Italie, 250 euros. Taxes ?", options: ["TVA uniquement", "Droits uniquement", "TVA et Droits", "Frais fixes"], correct: 2 }
+        ]
+      },
+      es: {
+        thanksCall: "¡Gracias por su ayuda, adiós!", 
+        thanksChat: "¡Gracias por la información, que tenga un buen día!",
+        tariffTable: `<table class="tariff-table"><tr><th>Servicio</th><th>Costo</th></tr><tr><td>Envío de documentos</td><td>15 USD</td></tr><tr><td>Paquete de 10 kg</td><td>35 USD</td></tr><tr><td>Carga de 30 kg</td><td>80 USD</td></tr><tr><td>Recogida por mensajero</td><td>5 USD</td></tr></table>`,
+        restrictions: [
+          { fact: "Está prohibido enviar manteca y carne fresca a Polonia.", q: "¿Puedo enviar manteca fresca a Polonia?", options: ["Sí, hasta 5 kg", "Estrictamente prohibido", "Solo al vacío", "Con recibo"], correct: 1 },
+          { fact: "Los medicamentos están prohibidos a España y Austria.", q: "¿A qué países está prohibido enviar medicamentos?", options: ["Polonia y Chequia", "España y Austria", "Alemania y Francia", "Lituania y Letonia"], correct: 1 },
+          { fact: "A Rumanía, los medicamentos solo se permiten en envase original.", q: "¿Condición para enviar medicamentos a Rumanía?", options: ["Con receta", "Envase original + recibo", "Hasta 1 kg", "Prohibido"], correct: 1 },
+          { fact: "Los vapeadores están prohibidos en toda la UE.", q: "¿Se permite enviar vapeadores a la UE?", options: ["Hasta 2 cartones", "Prohibido en la UE", "Solo a Chequia", "Con aduanas"], correct: 1 },
+          { fact: "Se permiten hasta 2 baterías externas por paquete.", q: "¿Cuántas baterías externas puedo enviar?", options: ["Cualquier cantidad", "No más de 2", "Solo 1", "Prohibidas"], correct: 1 },
+          { fact: "El envío de bebidas alcohólicas está prohibido.", q: "¿Puedo enviar una botella de vino?", options: ["Hasta 1 litro", "Menos de 15%", "Totalmente prohibido", "En plástico"], correct: 2 },
+          { fact: "Los perfumes a base de alcohol no se envían por vía aérea.", q: "¿Regla para envío de perfumes?", options: ["Sin restricciones", "Prohibido vía aérea", "Frascos de 50 ml", "Con certificado"], correct: 1 },
+          { fact: "Semillas y plantones vivos están prohibidos.", q: "¿Se aceptan semillas de flores?", options: ["Sí, empaque original", "No, prohibido", "Hasta 5 paquetes", "Solo verduras"], correct: 1 },
+          { fact: "El envío de efectivo está prohibido.", q: "¿Puedo poner un billete de 100 euros?", options: ["Hasta 500 euros", "Sí, a declarar", "Prohibido", "Solo monedas"], correct: 2 }
+        ],
+        tariffs: [
+          { q: "¿Cuánto costará enviar documentos?", options: ["5 USD", "10 USD", "15 USD", "35 USD"], correct: 2 },
+          { q: "¿Costo de un paquete estándar de 10 kg?", options: ["15 USD", "35 USD", "50 USD", "80 USD"], correct: 1 },
+          { q: "¿Cuánto costará el envío de carga de 30 kg?", options: ["35 USD", "60 USD", "80 USD", "100 USD"], correct: 2 },
+          { q: "¿Cuánto se paga extra por recogida de mensajero?", options: ["Gratis", "5 USD", "10 USD", "15 USD"], correct: 1 }
+        ],
+        terms: [
+          { fact: "El tiempo a Lituania es de aprox. 7 días.", q: "¿Tiempo estimado a Lituania?", options: ["3 días", "5 días", "7 días", "10 días"], correct: 2 },
+          { fact: "La entrega local en Chequia demora de 1 a 2 días.", q: "¿Cuántos días toma la entrega local en Chequia?", options: ["1-2 días", "3-4 días", "5 días", "1 semana"], correct: 0 },
+          { fact: "Documentos al Reino Unido tardan 3 días hábiles.", q: "¿En cuántos días se entregan documentos en Reino Unido?", options: ["1 día", "3 días hábiles", "5 días hábiles", "10 días"], correct: 1 },
+          { fact: "La carga a España se entrega en 8-10 días.", q: "¿Cuántos días tarda un paquete grande a España?", options: ["3-5 días", "5-7 días", "8-10 días", "14 días"], correct: 2 },
+          { fact: "Plazo mínimo a Polonia: desde 3 días hábiles.", q: "¿Tiempo mínimo de entrega a Polonia?", options: ["1 día", "Desde 3 días", "Desde 7 días", "Dos semanas"], correct: 1 },
+          { fact: "Tiempo estimado a Alemania: 5-7 días.", q: "¿Cuánto tarda un paquete a Alemania?", options: ["2-3 días", "5-7 días", "10-12 días", "Hasta 14 días"], correct: 1 },
+          { fact: "El almacenamiento en InPost Polonia es de 48 horas.", q: "¿Cuánto espera un paquete en un casillero en Polonia?", options: ["24 horas", "48 horas", "3 días", "5 días"], correct: 1 },
+          { fact: "En Alemania, el paquete se almacena gratis 7 días.", q: "¿Cuántos días es gratis en una sucursal en Alemania?", options: ["3 días", "5 días", "7 días", "14 días"], correct: 2 },
+          { fact: "La entrega por mensajería es de 8:00 a 18:00.", q: "¿A qué hora entrega el mensajero en el extranjero?", options: ["De 9:00 a 21:00", "De 8:00 a 18:00", "24 horas", "Solo fines de semana"], correct: 1 }
+        ],
+        customs: [
+          { fact: "Paquetes hasta 45 euros no pagan impuestos.", q: "Regalo a Alemania (30 euros). ¿Aduana?", options: ["Solo IVA", "Solo arancel", "Sin impuestos", "IVA + Arancel"], correct: 2 },
+          { fact: "Para paquetes de 45 a 150 euros, solo se paga IVA.", q: "Paquete a Polonia, 100 euros. ¿Tarifas?", options: ["Sin impuestos", "Solo IVA", "Solo aranceles", "IVA y aranceles"], correct: 1 },
+          { fact: "Si supera los 150 euros, se paga IVA y arancel.", q: "Electrónica a Italia, 250 euros. ¿Impuestos?", options: ["Solo IVA", "Solo arancel", "IVA y aranceles", "Tarifa fija"], correct: 2 }
+        ]
+      },
+      it: {
+        thanksCall: "Grazie per l'aiuto, arrivederci!", 
+        thanksChat: "Grazie per le informazioni, buona giornata!",
+        tariffTable: `<table class="tariff-table"><tr><th>Servizio</th><th>Costo</th></tr><tr><td>Invio documenti</td><td>15 USD</td></tr><tr><td>Pacco da 10 kg</td><td>35 USD</td></tr><tr><td>Carico da 30 kg</td><td>80 USD</td></tr><tr><td>Ritiro corriere</td><td>5 USD</td></tr></table>`,
+        restrictions: [
+          { fact: "È vietato inviare lardo e carne fresca in Polonia.", q: "Posso inviare lardo fresco in Polonia?", options: ["Sì, fino a 5 kg", "Assolutamente vietato", "Solo sottovuoto", "Solo con scontrino"], correct: 1 },
+          { fact: "L'invio di medicinali è vietato in Spagna e Austria.", q: "In quali paesi è vietato inviare medicinali?", options: ["Polonia e Cechia", "Spagna e Austria", "Germania e Francia", "Lituania e Lettonia"], correct: 1 },
+          { fact: "In Romania, i farmaci sono ammessi solo con confezione originale.", q: "Condizione per inviare medicinali in Romania?", options: ["Solo con ricetta", "Confezione originale + scontrino", "Fino a 1 kg", "Vietato"], correct: 1 },
+          { fact: "Le sigarette elettroniche sono vietate in tutta l'UE.", q: "È consentito inviare sigarette elettroniche nell'UE?", options: ["Fino a 2 stecche", "Vietato nell'UE", "Solo in Cechia", "Solo con dogana"], correct: 1 },
+          { fact: "È consentito un massimo di 2 powerbank per pacco.", q: "Quanti powerbank posso inviare?", options: ["Qualsiasi quantità", "Non più di 2", "Solo 1", "Vietati"], correct: 1 },
+          { fact: "La spedizione di bevande alcoliche all'estero è vietata.", q: "Posso inviare una bottiglia di vino?", options: ["Fino a 1 litro", "Sotto il 15%", "Totalmente vietato", "Solo in plastica"], correct: 2 },
+          { fact: "I profumi a base di alcol non si spediscono via aerea.", q: "Regola per la spedizione di profumi?", options: ["Senza limiti", "Vietato via aerea", "Solo 50 ml", "Con certificato"], correct: 1 },
+          { fact: "I semi e le piantine vive sono vietati.", q: "I semi di fiori sono accettati?", options: ["Sì, confezione originale", "No, è vietato", "Fino a 5 pacchetti", "Solo ortaggi"], correct: 1 },
+          { fact: "L'invio di contanti nei pacchi è vietato.", q: "Posso mettere una banconota da 100 euro?", options: ["Fino a 500 euro", "Sì, va dichiarato", "Vietato", "Solo monete"], correct: 2 }
+        ],
+        tariffs: [
+          { q: "Quanto costerà inviare documenti?", options: ["5 USD", "10 USD", "15 USD", "35 USD"], correct: 2 },
+          { q: "Costo per un pacco standard da 10 kg?", options: ["15 USD", "35 USD", "50 USD", "80 USD"], correct: 1 },
+          { q: "Quanto costerà la consegna di 30 kg?", options: ["35 USD", "60 USD", "80 USD", "100 USD"], correct: 2 },
+          { q: "Quanto si paga in più per ritiro corriere?", options: ["Gratis", "5 USD", "10 USD", "15 USD"], correct: 1 }
+        ],
+        terms: [
+          { fact: "Il tempo di consegna in Lituania è di circa 7 giorni.", q: "Tempo di consegna stimato per la Lituania?", options: ["3 giorni", "5 giorni", "7 giorni", "10 giorni"], correct: 2 },
+          { fact: "La consegna tra le filiali in Cechia richiede 1-2 giorni.", q: "Quanti giorni richiede la consegna locale in Cechia?", options: ["1-2 giorni", "3-4 giorni", "5 giorni", "1 settimana"], correct: 0 },
+          { fact: "I documenti nel Regno Unito richiedono 3 giorni lavorativi.", q: "In quanti giorni i documenti arrivano nel Regno Unito?", options: ["1 giorno", "3 giorni", "5 giorni", "10 giorni"], correct: 1 },
+          { fact: "Il carico per la Spagna viene consegnato in 8-10 giorni.", q: "Quanti giorni ci vogliono per la Spagna?", options: ["3-5 giorni", "5-7 giorni", "8-10 giorni", "14 giorni"], correct: 2 },
+          { fact: "Tempo minimo per la Polonia: 3 giorni lavorativi.", q: "Qual è il tempo minimo per la Polonia?", options: ["1 giorno", "Da 3 giorni", "Da 7 giorni", "Due settimane"], correct: 1 },
+          { fact: "Tempo stimato in Germania: 5-7 giorni.", q: "Quanto tempo impiega un pacco in Germania?", options: ["2-3 giorni", "5-7 giorni", "10-12 giorni", "Fino a 14 giorni"], correct: 1 },
+          { fact: "La giacenza in un locker InPost in Polonia è di 48 ore.", q: "Per quanto tempo un pacco aspetta in un locker in Polonia?", options: ["24 ore", "48 ore", "3 giorni", "5 giorni"], correct: 1 },
+          { fact: "In Germania, il pacco è conservato gratis per 7 giorni.", q: "Quanti giorni un pacco rimane gratis in Germania?", options: ["3 giorni", "5 giorni", "7 giorni", "14 giorni"], correct: 2 },
+          { fact: "La consegna corriere si effettua dalle 8:00 alle 18:00.", q: "A che ora consegna il corriere all'estero?", options: ["9:00 - 21:00", "8:00 - 18:00", "H24", "Solo weekend"], correct: 1 }
+        ],
+        customs: [
+          { fact: "I pacchi fino a 45 euro non sono tassati.", q: "Regalo in Germania di 30 euro. Sdoganamento?", options: ["Solo IVA", "Solo dazio", "Nessuna tassa", "IVA + Dazio"], correct: 2 },
+          { fact: "Per pacchi da 45 a 150 euro, si paga solo l'IVA.", q: "Pacco in Polonia, 100 euro. Tariffe?", options: ["Nessuna tassa", "Solo IVA", "Solo dazio", "IVA e dazio"], correct: 1 },
+          { fact: "Se supera i 150 euro, si pagano IVA e dazi.", q: "Elettronica in Italia, 250 euro. Tasse?", options: ["Solo IVA", "Solo dazio", "IVA e dazio", "Tariffa fissa"], correct: 2 }
+        ]
+      },
+      nl: {
+        // Нідерланди (Англійська) - копія EN
+        thanksCall: "Thank you, have a great day!", 
+        thanksChat: "Thank you for your help, have a nice day!",
+        tariffTable: `<table class="tariff-table"><tr><th>Service</th><th>Cost</th></tr><tr><td>Document delivery</td><td>15 USD</td></tr><tr><td>10 kg parcel</td><td>35 USD</td></tr><tr><td>30 kg parcel</td><td>80 USD</td></tr><tr><td>Courier pickup</td><td>5 USD</td></tr></table>`,
+        restrictions: [
+          { fact: "It is prohibited to send lard and fresh meat to Poland.", q: "Can I send fresh lard to Poland?", options: ["Yes, up to 5 kg", "Strictly prohibited", "Only vacuum sealed", "Only with a receipt"], correct: 1 },
+          { fact: "Medicines are prohibited for shipment to Spain and Austria.", q: "To which countries is it forbidden to send any medicine?", options: ["Poland & Czechia", "Spain & Austria", "Germany & France", "Lithuania & Latvia"], correct: 1 },
+          { fact: "To Romania, medicines are allowed only in original packaging with a receipt.", q: "What is the condition for sending medicine to Romania?", options: ["Prescription only", "Original packaging + receipt", "Up to 1 kg no limit", "Prohibited"], correct: 1 },
+          { fact: "Tobacco products and vapes are prohibited to all EU countries.", q: "Are tobacco sticks or vapes allowed to be sent to the EU?", options: ["Allowed up to 2 blocks", "Prohibited to all EU countries", "Only to Czechia", "Allowed with customs tax"], correct: 1 },
+          { fact: "A maximum of 2 powerbanks (up to 100Wh) are allowed per parcel.", q: "How many powerbanks can I put in a parcel?", options: ["Any amount", "No more than 2", "Only 1", "Powerbanks are prohibited"], correct: 1 },
+          { fact: "Shipping alcoholic beverages abroad is strictly prohibited.", q: "Can I send a bottle of wine to my relatives?", options: ["Yes, up to 1 liter", "Yes, if under 15% ABV", "No, completely prohibited", "Only in plastic bottles"], correct: 2 },
+          { fact: "Alcohol-based perfumes cannot be sent by air.", q: "What is the rule for sending perfumes?", options: ["Allowed without limits", "Prohibited by air transport", "Only in 50ml bottles", "Only with a certificate"], correct: 1 },
+          { fact: "Plant seeds and live seedlings are prohibited.", q: "Will flower seeds be accepted for shipping?", options: ["Yes, in original packaging", "No, it is prohibited", "Yes, up to 5 packs", "Only vegetable seeds"], correct: 1 },
+          { fact: "Sending cash in international parcels is prohibited.", q: "Can I put a 100 EUR banknote with the documents?", options: ["Allowed up to 500 EUR", "Yes, must be declared", "Cash is prohibited", "Only coins are allowed"], correct: 2 }
+        ],
+        tariffs: [
+          { q: "How much will it cost to send a document envelope?", options: ["5 USD", "10 USD", "15 USD", "35 USD"], correct: 2 },
+          { q: "What is the cost for a standard 10 kg parcel?", options: ["15 USD", "35 USD", "50 USD", "80 USD"], correct: 1 },
+          { q: "How much for a 30 kg cargo delivery?", options: ["35 USD", "60 USD", "80 USD", "100 USD"], correct: 2 },
+          { q: "How much extra to have a courier pick up the parcel?", options: ["Free", "5 USD", "10 USD", "15 USD"], correct: 1 }
+        ],
+        terms: [
+          { fact: "Delivery time from Ukraine to Lithuania takes approx 7 days.", q: "What is the estimated delivery time to Lithuania?", options: ["3 days", "5 days", "7 days", "10 days"], correct: 2 },
+          { fact: "Domestic delivery between branches in Czechia takes 1-2 days.", q: "How many days does local delivery in Czechia take?", options: ["1-2 days", "3-4 days", "5 days", "1 week"], correct: 0 },
+          { fact: "Express document delivery to the UK takes 3 business days.", q: "In how many business days are documents delivered to the UK?", options: ["1 day", "3 business days", "5 business days", "10 days"], correct: 1 },
+          { fact: "Cargo to Spain is delivered in 8-10 days.", q: "How long does cargo delivery to Spain take?", options: ["3-5 days", "5-7 days", "8-10 days", "14 days"], correct: 2 },
+          { fact: "Minimum delivery time from Ukraine to Poland is from 3 days.", q: "What is the minimum delivery time to Poland?", options: ["1 day", "From 3 business days", "From 7 business days", "Two weeks"], correct: 1 },
+          { fact: "Estimated delivery time to Germany is 5-7 days.", q: "How long does a parcel to Germany take on average?", options: ["2-3 days", "5-7 days", "10-12 days", "Up to 14 days"], correct: 1 },
+          { fact: "InPost locker storage time in Poland is 48 hours.", q: "How long does a parcel wait in a Polish locker?", options: ["24 hours", "48 hours", "3 days", "5 days"], correct: 1 },
+          { fact: "Parcels are stored free for 7 days in a German branch.", q: "How many days is a parcel stored for free in Germany?", options: ["3 days", "5 days", "7 days", "14 days"], correct: 2 },
+          { fact: "Courier delivery abroad takes place from 8:00 to 18:00.", q: "What time do couriers deliver parcels abroad?", options: ["9:00 to 21:00", "8:00 to 18:00", "24/7", "Only on weekends"], correct: 1 }
+        ],
+        customs: [
+          { fact: "Parcels up to 45 EUR are not taxed.", q: "Gift to Germany, 30 EUR. Customs?", options: ["Only VAT", "Only duty", "No taxes", "VAT + duty"], correct: 2 },
+          { fact: "For parcels 45-150 EUR, only VAT is paid (~20%).", q: "Parcel to Poland, 100 EUR. What fees apply?", options: ["No taxes", "Only VAT (~20%)", "Only duty", "VAT and duty"], correct: 1 },
+          { fact: "Over 150 EUR, the recipient pays both VAT and duty.", q: "Electronics to Italy, 250 EUR. Taxes?", options: ["Only VAT", "Only duty", "VAT and duty", "Fixed fee"], correct: 2 }
+        ]
+      },
+      ro: {
+        thanksCall: "Mulțumesc pentru ajutor, la revedere!", 
+        thanksChat: "Mulțumesc pentru informații, o zi bună!",
+        tariffTable: `<table class="tariff-table"><tr><th>Serviciu</th><th>Cost</th></tr><tr><td>Trimitere documente</td><td>15 USD</td></tr><tr><td>Colet de 10 kg</td><td>35 USD</td></tr><tr><td>Marfă de 30 kg</td><td>80 USD</td></tr><tr><td>Preluare curier</td><td>5 USD</td></tr></table>`,
+        restrictions: [
+          { fact: "Este interzisă trimiterea de untură și carne proaspătă în Polonia.", q: "Pot trimite untură în Polonia?", options: ["Da, până la 5 kg", "Strict interzis", "Doar vidat", "Doar cu bon"], correct: 1 },
+          { fact: "Medicamentele sunt interzise spre Spania și Austria.", q: "În ce țări sunt interzise medicamentele?", options: ["Polonia și Cehia", "Spania și Austria", "Germania și Franța", "Lituania și Letonia"], correct: 1 },
+          { fact: "În România, medicamentele sunt permise doar în ambalaj original.", q: "Condiția pentru medicamente în România?", options: ["Doar cu rețetă", "Ambalaj original + bon", "Până la 1 kg", "Interzis"], correct: 1 },
+          { fact: "Țigările electronice sunt interzise în toate țările UE.", q: "Pot trimite țigări electronice în UE?", options: ["Până la 2 cartușe", "Interzis în toată UE", "Doar în Cehia", "Doar cu vamă"], correct: 1 },
+          { fact: "Maximum 2 baterii externe sunt permise pe colet.", q: "Câte baterii externe pot trimite?", options: ["Oricâte", "Nu mai mult de 2", "Doar 1", "Interzis"], correct: 1 },
+          { fact: "Trimiterea alcoolului în străinătate este interzisă.", q: "Pot trimite o sticlă de vin?", options: ["Până la 1 litru", "Sub 15%", "Total interzis", "Doar în plastic"], correct: 2 },
+          { fact: "Parfumurile pe bază de alcool nu se trimit pe cale aeriană.", q: "Regula pentru parfumuri?", options: ["Fără restricții", "Interzis aerian", "Doar 50 ml", "Cu certificat"], correct: 1 },
+          { fact: "Semințele și răsadurile sunt interzise.", q: "Pot trimite semințe de flori?", options: ["În ambalaj original", "Este interzis", "Până la 5 plicuri", "Doar legume"], correct: 1 },
+          { fact: "Trimiterea de numerar este interzisă.", q: "Pot pune 100 euro în documente?", options: ["Până la 500 euro", "Se declară", "Banii cash sunt interziși", "Doar monede"], correct: 2 }
+        ],
+        tariffs: [
+          { q: "Cât costă trimiterea documentelor?", options: ["5 USD", "10 USD", "15 USD", "35 USD"], correct: 2 },
+          { q: "Cât costă un colet standard de 10 kg?", options: ["15 USD", "35 USD", "50 USD", "80 USD"], correct: 1 },
+          { q: "Cât costă o livrare de marfă de 30 kg?", options: ["35 USD", "60 USD", "80 USD", "100 USD"], correct: 2 },
+          { q: "Cât se plătește extra pentru preluarea de curier?", options: ["Gratuit", "5 USD", "10 USD", "15 USD"], correct: 1 }
+        ],
+        terms: [
+          { fact: "Timpul de livrare în Lituania este de aproximativ 7 zile.", q: "Timp estimat pentru Lituania?", options: ["3 zile", "5 zile", "7 zile", "10 zile"], correct: 2 },
+          { fact: "Livrarea locală în Cehia durează 1-2 zile.", q: "Câte zile durează livrarea în Cehia?", options: ["1-2 zile", "3-4 zile", "5 zile", "1 săptămână"], correct: 0 },
+          { fact: "Documentele în Marea Britanie ajung în 3 zile lucrătoare.", q: "În câte zile ajung documentele în UK?", options: ["1 zi", "3 zile lucrătoare", "5 zile", "10 zile"], correct: 1 },
+          { fact: "Marfa spre Spania ajunge în 8-10 zile.", q: "În cât timp ajunge un colet mare în Spania?", options: ["3-5 zile", "5-7 zile", "8-10 zile", "14 zile"], correct: 2 },
+          { fact: "Timpul minim spre Polonia este de 3 zile lucrătoare.", q: "Timp minim spre Polonia?", options: ["1 zi", "De la 3 zile", "De la 7 zile", "Două săptămâni"], correct: 1 },
+          { fact: "Timpul spre Germania este de 5-7 zile.", q: "Cât durează un colet spre Germania?", options: ["2-3 zile", "5-7 zile", "10-12 zile", "Până la 14 zile"], correct: 1 },
+          { fact: "Timpul de stocare în InPost Polonia este 48 de ore.", q: "Cât stă un colet în locker în Polonia?", options: ["24 ore", "48 ore", "3 zile", "5 zile"], correct: 1 },
+          { fact: "În Germania, coletul este stocat gratuit 7 zile.", q: "Câte zile stă gratis un colet în Germania?", options: ["3 zile", "5 zile", "7 zile", "14 zile"], correct: 2 },
+          { fact: "Livrarea de curier se face între 8:00 și 18:00.", q: "La ce oră livrează curierul?", options: ["9:00 - 21:00", "8:00 - 18:00", "Non-stop", "Doar în weekend"], correct: 1 }
+        ],
+        customs: [
+          { fact: "Coletele sub 45 euro nu sunt taxate.", q: "Cadou în Germania (30 euro). Vamă?", options: ["Doar TVA", "Doar taxă", "Fără taxe", "TVA + Taxă"], correct: 2 },
+          { fact: "Între 45 și 150 euro se plătește doar TVA.", q: "Colet în Polonia, 100 euro. Taxe?", options: ["Fără taxe", "Doar TVA", "Doar taxe vamale", "TVA și taxe"], correct: 1 },
+          { fact: "Peste 150 euro se plătește TVA și taxe vamale.", q: "Electronice în Italia, 250 euro. Taxe?", options: ["Doar TVA", "Doar taxe", "TVA și taxe", "Taxă fixă"], correct: 2 }
+        ]
+      },
+      hu: {
+        thanksCall: "Köszönöm a segítséget, viszontlátásra!", 
+        thanksChat: "Köszönöm az információt, szép napot!",
+        tariffTable: `<table class="tariff-table"><tr><th>Szolgáltatás</th><th>Ár</th></tr><tr><td>Dokumentumok küldése</td><td>15 USD</td></tr><tr><td>10 kg-os csomag</td><td>35 USD</td></tr><tr><td>30 kg-os teher</td><td>80 USD</td></tr><tr><td>Futár általi felvétel</td><td>5 USD</td></tr></table>`,
+        restrictions: [
+          { fact: "Tilos szalonnát és friss húst küldeni Lengyelországba.", q: "Küldhetek friss szalonnát Lengyelországba?", options: ["Igen, 5 kg-ig", "Szigorúan tilos", "Csak vákuumban", "Csak nyugtával"], correct: 1 },
+          { fact: "Spanyolországba és Ausztriába tilos gyógyszert küldeni.", q: "Mely országokba tilos gyógyszert küldeni?", options: ["Lengyelország és Csehország", "Spanyolország és Ausztria", "Németország és Franciaország", "Litvánia és Lettország"], correct: 1 },
+          { fact: "Romániába a gyógyszer csak eredeti csomagolásban engedélyezett.", q: "Milyen feltétellel küldhető gyógyszer Romániába?", options: ["Csak receptre", "Eredeti csomagolás + nyugta", "1 kg-ig", "Tilos"], correct: 1 },
+          { fact: "Az e-cigaretták küldése az EU összes országába tilos.", q: "Szabad e-cigarettát küldeni az EU-ba?", options: ["2 kartonig", "Az egész EU-ban tilos", "Csak Csehországba", "Csak vámmal"], correct: 1 },
+          { fact: "Csomagonként maximum 2 powerbank (100Wh) engedélyezett.", q: "Hány powerbankot tehetek a csomagba?", options: ["Bármennyit", "Legfeljebb 2-t", "Csak 1-et", "Tilos"], correct: 1 },
+          { fact: "Alkoholos italok külföldre küldése tilos.", q: "Küldhetek egy üveg bort?", options: ["Igen, 1 literig", "Igen, 15% alatt", "Teljesen tilos", "Csak műanyagban"], correct: 2 },
+          { fact: "Az alkoholos parfümöket tilos légi úton szállítani.", q: "Mi a parfümök küldésének szabálya?", options: ["Korlátozás nélkül", "Légi úton tilos", "Csak 50 ml-ig", "Csak igazolással"], correct: 1 },
+          { fact: "Növényi magvak és élő palánták küldése tilos.", q: "Virághagymákat elfogadnak?", options: ["Eredeti csomagolásban", "Nem, ez tilos", "5 csomagig", "Csak zöldségmag"], correct: 1 },
+          { fact: "Készpénz küldése nemzetközi csomagban tilos.", q: "Tehetek 100 eurót a dokumentumok közé?", options: ["500 euróig", "Igen, be kell vallani", "A készpénz tilos", "Csak érme"], correct: 2 }
+        ],
+        tariffs: [
+          { q: "Mennyibe kerül egy dokumentum küldése?", options: ["5 USD", "10 USD", "15 USD", "35 USD"], correct: 2 },
+          { q: "Mennyibe kerül egy 10 kg-os normál csomag?", options: ["15 USD", "35 USD", "50 USD", "80 USD"], correct: 1 },
+          { q: "Mennyibe kerül a 30 kg-os szállítmány?", options: ["35 USD", "60 USD", "80 USD", "100 USD"], correct: 2 },
+          { q: "Mennyi a felár a futár általi felvételért?", options: ["Ingyenes", "5 USD", "10 USD", "15 USD"], correct: 1 }
+        ],
+        terms: [
+          { fact: "A szállítási idő Litvániába körülbelül 7 nap.", q: "Mennyi a becsült szállítási idő Litvániába?", options: ["3 nap", "5 nap", "7 nap", "10 nap"], correct: 2 },
+          { fact: "Csehországon belüli szállítás 1-2 nap.", q: "Hány napig tart a belföldi szállítás Csehországban?", options: ["1-2 nap", "3-4 nap", "5 nap", "1 hét"], correct: 0 },
+          { fact: "Nagy-Britanniába a dokumentumok 3 munkanap alatt érnek oda.", q: "Hány nap alatt ér a dokumentum Nagy-Britanniába?", options: ["1 nap", "3 munkanap", "5 nap", "10 nap"], correct: 1 },
+          { fact: "A spanyolországi csomagok 8-10 nap alatt érnek oda.", q: "Hány nap alatt ér a nagy csomag Spanyolországba?", options: ["3-5 nap", "5-7 nap", "8-10 nap", "14 nap"], correct: 2 },
+          { fact: "A minimális szállítási idő Lengyelországba 3 munkanap.", q: "Mennyi a minimális szállítás Lengyelországba?", options: ["1 nap", "3 naptól", "7 naptól", "Két hét"], correct: 1 },
+          { fact: "Németországba a becsült idő 5-7 nap.", q: "Átlagosan meddig utazik egy csomag Németországba?", options: ["2-3 nap", "5-7 nap", "10-12 nap", "Akár 14 nap"], correct: 1 },
+          { fact: "A lengyel InPost automaták 48 óráig őrzik a csomagot.", q: "Mennyi ideig vár a csomag a lengyel automatában?", options: ["24 óra", "48 óra", "3 nap", "5 nap"], correct: 1 },
+          { fact: "Németországban a csomag 7 napig ingyenesen van a fiókban.", q: "Hány napig van ingyen a csomag Németországban?", options: ["3 nap", "5 nap", "7 nap", "14 nap"], correct: 2 },
+          { fact: "A futáros kiszállítás 8:00 és 18:00 között történik.", q: "Mikor szállít a futár külföldön?", options: ["9:00 - 21:00", "8:00 - 18:00", "0-24", "Csak hétvégén"], correct: 1 }
+        ],
+        customs: [
+          { fact: "A 45 euró alatti csomagok adómentesek.", q: "Ajándék Németországba 30 euróért. Mennyi a vám?", options: ["Csak ÁFA", "Csak vám", "Nincs adó", "ÁFA + vám"], correct: 2 },
+          { fact: "45-150 euró között csak az ÁFA (~20%) fizetendő.", q: "Csomag Lengyelországba, 100 euró. Adók?", options: ["Nincs adó", "Csak ÁFA", "Csak vám", "ÁFA és vám"], correct: 1 },
+          { fact: "150 euró felett ÁFA és vám is fizetendő.", q: "Elektronika Olaszországba, 250 euró. Adók?", options: ["Csak ÁFA", "Csak vám", "ÁFA és vám", "Fix díj"], correct: 2 }
+        ]
+      },
+      lv: {
+        thanksCall: "Paldies par palīdzību, uz redzēšanos!", 
+        thanksChat: "Paldies par informāciju, jauku dienu!",
+        tariffTable: `<table class="tariff-table"><tr><th>Pakalpojums</th><th>Cena</th></tr><tr><td>Dokumentu sūtīšana</td><td>15 USD</td></tr><tr><td>10 kg paka</td><td>35 USD</td></tr><tr><td>30 kg krava</td><td>80 USD</td></tr><tr><td>Kurjera izsaukšana</td><td>5 USD</td></tr></table>`,
+        restrictions: [
+          { fact: "Ir aizliegts sūtīt speķi un svaigu gaļu uz Poliju.", q: "Vai es varu nosūtīt svaigu speķi uz Poliju?", options: ["Jā, līdz 5 kg", "Stingri aizliegts", "Tikai vakuumā", "Tikai ar čeku"], correct: 1 },
+          { fact: "Zāles ir aizliegts sūtīt uz Spāniju un Austriju.", q: "Uz kurām valstīm ir aizliegts sūtīt zāles?", options: ["Poliju un Čehiju", "Spāniju un Austriju", "Vāciju un Franciju", "Lietuvu un Latviju"], correct: 1 },
+          { fact: "Uz Rumāniju zāles atļauts sūtīt tikai oriģinālajā iepakojumā ar čeku.", q: "Kāds ir nosacījums zāļu sūtīšanai uz Rumāniju?", options: ["Tikai ar recepti", "Oriģināls iepakojums + čeks", "Līdz 1 kg", "Aizliegts"], correct: 1 },
+          { fact: "Elektroniskās cigaretes ir aizliegtas uz visām ES valstīm.", q: "Vai uz ES drīkst sūtīt e-cigaretes?", options: ["Līdz 2 blokiem", "Aizliegts visā ES", "Tikai uz Čehiju", "Tikai ar muitu"], correct: 1 },
+          { fact: "Pakā drīkst sūtīt ne vairāk kā 2 powerbankas (līdz 100Wh).", q: "Cik powerbankas es varu ielikt pakā?", options: ["Jebkuru daudzumu", "Ne vairāk kā 2", "Tikai 1", "Aizliegts"], correct: 1 },
+          { fact: "Alkoholisko dzērienu sūtīšana uz ārzemēm ir aizliegta.", q: "Vai varu nosūtīt vīna pudeli?", options: ["Līdz 1 litram", "Ja alkohols līdz 15%", "Pilnīgi aizliegts", "Tikai plastmasā"], correct: 2 },
+          { fact: "Smaržas uz spirta bāzes nedrīkst sūtīt ar gaisa transportu.", q: "Kāds ir noteikums par smaržām?", options: ["Atļauts bez ierobežojumiem", "Aizliegts ar aviāciju", "Tikai 50 ml", "Tikai ar sertifikātu"], correct: 1 },
+          { fact: "Augu sēklas un dzīvi stādi ir aizliegti.", q: "Vai ziedu sēklas pieņems?", options: ["Oriģinālajā iepakojumā", "Nē, tas ir aizliegts", "Līdz 5 pakām", "Tikai dārzeņu"], correct: 1 },
+          { fact: "Skaidras naudas sūtīšana starptautiskajās pakās ir aizliegta.", q: "Vai dokumentos var ielikt 100 eiro banknoti?", options: ["Līdz 500 eiro", "Jā, jādeklarē", "Nauda ir aizliegta", "Tikai monētas"], correct: 2 }
+        ],
+        tariffs: [
+          { q: "Cik maksā dokumentu nosūtīšana?", options: ["5 USD", "10 USD", "15 USD", "35 USD"], correct: 2 },
+          { q: "Cik maksā standarta paka (10 kg)?", options: ["15 USD", "35 USD", "50 USD", "80 USD"], correct: 1 },
+          { q: "Cik maksā kravas (30 kg) piegāde?", options: ["35 USD", "60 USD", "80 USD", "100 USD"], correct: 2 },
+          { q: "Cik jāmaksā par kurjera ierašanos?", options: ["Bezmaksas", "5 USD", "10 USD", "15 USD"], correct: 1 }
+        ],
+        terms: [
+          { fact: "Piegādes laiks uz Lietuvu ir aptuveni 7 dienas.", q: "Kāds ir piegādes laiks uz Lietuvu?", options: ["3 dienas", "5 dienas", "7 dienas", "10 dienas"], correct: 2 },
+          { fact: "Piegāde starp filiālēm Čehijā aizņem 1-2 dienas.", q: "Cik ilgi notiek vietējā piegāde Čehijā?", options: ["1-2 dienas", "3-4 dienas", "5 dienas", "Nedēļu"], correct: 0 },
+          { fact: "Eksprespasta dokumenti uz Lielbritāniju tiek piegādāti 3 darba dienu laikā.", q: "Cik dienās dokumenti nonāk Lielbritānijā?", options: ["1 dienā", "3 darba dienās", "5 dienās", "10 dienās"], correct: 1 },
+          { fact: "Krava uz Spāniju tiek piegādāta 8-10 dienu laikā.", q: "Cik dienu laikā lielā paka nonāk Spānijā?", options: ["3-5 dienas", "5-7 dienas", "8-10 dienas", "14 dienas"], correct: 2 },
+          { fact: "Minimālais piegādes laiks uz Poliju ir no 3 darba dienām.", q: "Kāds ir minimālais piegādes laiks uz Poliju?", options: ["1 diena", "No 3 dienām", "No 7 dienām", "Divas nedēļas"], correct: 1 },
+          { fact: "Piegādes laiks uz Vāciju ir 5-7 dienas.", q: "Vidēji cik ilgi paka ceļo uz Vāciju?", options: ["2-3 dienas", "5-7 dienas", "10-12 dienas", "Līdz 14 dienām"], correct: 1 },
+          { fact: "Paka Polijas pakomātā (InPost) glabājas 48 stundas.", q: "Cik ilgi paka gaida pakomātā Polijā?", options: ["24 stundas", "48 stundas", "3 dienas", "5 dienas"], correct: 1 },
+          { fact: "Filiālē Vācijā paka bez maksas glabājas 7 dienas.", q: "Cik dienas paka stāv bez maksas filiālē Vācijā?", options: ["3 dienas", "5 dienas", "7 dienas", "14 dienas"], correct: 2 },
+          { fact: "Kurjera piegāde ārzemēs notiek no 8:00 līdz 18:00.", q: "Cikos kurjers piegādā paku ārzemēs?", options: ["9:00 - 21:00", "8:00 - 18:00", "24 stundas", "Tikai brīvdienās"], correct: 1 }
+        ],
+        customs: [
+          { fact: "Pakas līdz 45 eiro nav apliekamas ar nodokli.", q: "Dāvana uz Vāciju 30 eiro vērtībā. Muita?", options: ["Tikai PVN", "Tikai muita", "Bez nodokļiem", "PVN + muita"], correct: 2 },
+          { fact: "Pakām no 45 līdz 150 eiro jāmaksā tikai PVN.", q: "Paka uz Poliju, 100 eiro. Kādi nodokļi?", options: ["Bez nodokļiem", "Tikai PVN", "Tikai muita", "PVN un muita"], correct: 1 },
+          { fact: "Virs 150 eiro jāmaksā PVN un muita.", q: "Elektronika uz Itāliju, 250 eiro. Nodokļi?", options: ["Tikai PVN", "Tikai muita", "PVN un muita", "Fiksēta maksa"], correct: 2 }
+        ]
+      },
+      lt: {
+        thanksCall: "Ačiū už pagalbą, viso gero!", 
+        thanksChat: "Ačiū už informaciją, geros dienos!",
+        tariffTable: `<table class="tariff-table"><tr><th>Paslauga</th><th>Kaina</th></tr><tr><td>Dokumentų siuntimas</td><td>15 USD</td></tr><tr><td>10 kg siunta</td><td>35 USD</td></tr><tr><td>30 kg krovinys</td><td>80 USD</td></tr><tr><td>Kurjerio iškvietimas</td><td>5 USD</td></tr></table>`,
+        restrictions: [
+          { fact: "Draudžiama siųsti lašinius ir šviežią mėsą į Lenkiją.", q: "Ar galiu siųsti šviežius lašinius į Lenkiją?", options: ["Taip, iki 5 kg", "Griežtai draudžiama", "Tik vakuume", "Tik su čekiu"], correct: 1 },
+          { fact: "Vaistus draudžiama siųsti į Ispaniją ir Austriją.", q: "Į kurias šalis draudžiama siųsti vaistus?", options: ["Lenkiją ir Čekiją", "Ispaniją ir Austriją", "Vokietiją ir Prancūziją", "Latviją ir Lietuvą"], correct: 1 },
+          { fact: "Į Rumuniją vaistus galima siųsti tik originalioje pakuotėje su čekiu.", q: "Kokia sąlyga siunčiant vaistus į Rumuniją?", options: ["Tik su receptu", "Originali pakuotė + čekis", "Iki 1 kg", "Draudžiama"], correct: 1 },
+          { fact: "Elektronines cigaretes draudžiama siųsti į visas ES šalis.", q: "Ar galima į ES siųsti el. cigaretes?", options: ["Iki 2 blokų", "Draudžiama visoje ES", "Tik į Čekiją", "Tik su muitu"], correct: 1 },
+          { fact: "Siuntoje galima siųsti ne daugiau kaip 2 išorines baterijas (iki 100Wh).", q: "Kiek išorinių baterijų galiu įdėti į siuntą?", options: ["Bet kiek", "Ne daugiau kaip 2", "Tik 1", "Draudžiama"], correct: 1 },
+          { fact: "Alkoholinių gėrimų siuntimas į užsienį yra draudžiamas.", q: "Ar galiu išsiųsti vyno butelį?", options: ["Iki 1 litro", "Jei mažiau nei 15%", "Visiškai draudžiama", "Tik plastike"], correct: 2 },
+          { fact: "Alkoholinius kvepalus draudžiama siųsti oro transportu.", q: "Kokia taisyklė galioja kvepalams?", options: ["Leidžiama be apribojimų", "Draudžiama aviacija", "Tik iki 50 ml", "Tik su sertifikatu"], correct: 1 },
+          { fact: "Augalų sėklas ir gyvus sodinukus siųsti draudžiama.", q: "Ar priims gėlių sėklas?", options: ["Originalioje pakuotėje", "Ne, tai draudžiama", "Iki 5 pakelių", "Tik daržovių"], correct: 1 },
+          { fact: "Grynųjų pinigų siuntimas tarptautinėse siuntose yra draudžiamas.", q: "Ar galiu prie dokumentų pridėti 100 eurų?", options: ["Iki 500 eurų", "Taip, reikia deklaruoti", "Grynuosius draudžiama", "Tik monetas"], correct: 2 }
+        ],
+        tariffs: [
+          { q: "Kiek kainuos dokumentų siuntimas?", options: ["5 USD", "10 USD", "15 USD", "35 USD"], correct: 2 },
+          { q: "Kiek kainuoja standartinė 10 kg siunta?", options: ["15 USD", "35 USD", "50 USD", "80 USD"], correct: 1 },
+          { q: "Kiek kainuoja 30 kg krovinio pristatymas?", options: ["35 USD", "60 USD", "80 USD", "100 USD"], correct: 2 },
+          { q: "Kiek reikia primokėti už kurjerio atvykimą?", options: ["Nemokamai", "5 USD", "10 USD", "15 USD"], correct: 1 }
+        ],
+        terms: [
+          { fact: "Pristatymo laikas į Lietuvą yra apie 7 dienos.", q: "Koks numatomas pristatymo laikas į Lietuvą?", options: ["3 dienos", "5 dienas", "7 dienos", "10 dienų"], correct: 2 },
+          { fact: "Pristatymas tarp skyrių Čekijoje trunka 1-2 dienas.", q: "Kiek laiko trunka vietinis pristatymas Čekijoje?", options: ["1-2 dienas", "3-4 dienas", "5 dienas", "Savaitę"], correct: 0 },
+          { fact: "Dokumentai į Didžiąją Britaniją pristatomi per 3 darbo dienas.", q: "Per kiek dienų dokumentai pasiekia JK?", options: ["1 dieną", "3 darbo dienas", "5 dienas", "10 dienų"], correct: 1 },
+          { fact: "Kroviniai į Ispaniją pristatomi per 8-10 dienų.", q: "Per kiek dienų didelė siunta pasiekia Ispaniją?", options: ["3-5 dienas", "5-7 dienas", "8-10 dienų", "14 dienų"], correct: 2 },
+          { fact: "Minimalus pristatymo laikas į Lenkiją – nuo 3 darbo dienų.", q: "Koks minimalus pristatymo laikas į Lenkiją?", options: ["1 diena", "Nuo 3 dienų", "Nuo 7 dienų", "Dvi savaitės"], correct: 1 },
+          { fact: "Pristatymo laikas į Vokietiją – 5-7 dienos.", q: "Vidutiniškai kiek laiko siunta keliauja į Vokietiją?", options: ["2-3 dienas", "5-7 dienas", "10-12 dienų", "Iki 14 dienų"], correct: 1 },
+          { fact: "Lenkijos paštomate siunta saugoma 48 valandas.", q: "Kiek laiko siunta laukia paštomate Lenkijoje?", options: ["24 valandas", "48 valandas", "3 dienas", "5 dienas"], correct: 1 },
+          { fact: "Skyriuje Vokietijoje siunta nemokamai saugoma 7 dienas.", q: "Kiek dienų siunta nemokamai guli skyriuje Vokietijoje?", options: ["3 dienas", "5 dienas", "7 dienas", "14 dienų"], correct: 2 },
+          { fact: "Kurjeris užsienyje pristato nuo 8:00 iki 18:00.", q: "Kuriuo laiku kurjeris pristato siuntas užsienyje?", options: ["9:00 - 21:00", "8:00 - 18:00", "Visą parą", "Tik savaitgaliais"], correct: 1 }
+        ],
+        customs: [
+          { fact: "Siuntos iki 45 eurų neapmokestinamos.", q: "Dovana į Vokietiją už 30 eurų. Muitas?", options: ["Tik PVM", "Tik muitas", "Be mokesčių", "PVM + muitas"], correct: 2 },
+          { fact: "Siuntoms nuo 45 iki 150 eurų mokamas tik PVM.", q: "Siunta į Lenkiją, 100 eurų. Kokie mokesčiai?", options: ["Be mokesčių", "Tik PVM", "Tik muitas", "PVM ir muitas"], correct: 1 },
+          { fact: "Viršijus 150 eurų, mokamas PVM ir muitas.", q: "Elektronika į Italiją, 250 eurų. Mokesčiai?", options: ["Tik PVM", "Tik muitas", "PVM ir muitas", "Fiksuotas mokestis"], correct: 2 }
+        ]
+      },
+      et: {
+        thanksCall: "Aitäh abi eest, head aega!", 
+        thanksChat: "Aitäh info eest, ilusat päeva!",
+        tariffTable: `<table class="tariff-table"><tr><th>Teenus</th><th>Hind</th></tr><tr><td>Dokumentide saatmine</td><td>15 USD</td></tr><tr><td>10 kg pakk</td><td>35 USD</td></tr><tr><td>30 kg kaup</td><td>80 USD</td></tr><tr><td>Kulleri tellimine</td><td>5 USD</td></tr></table>`,
+        restrictions: [
+          { fact: "Seapekki ja värsket liha on keelatud Poola saata.", q: "Kas ma võin saata värsket seapekki Poola?", options: ["Jah, kuni 5 kg", "Rangelt keelatud", "Ainult vaakumis", "Ainult tšekiga"], correct: 1 },
+          { fact: "Ravimeid on keelatud saata Hispaaniasse ja Austriasse.", q: "Millistesse riikidesse on keelatud ravimeid saata?", options: ["Poola ja Tšehhi", "Hispaania ja Austria", "Saksamaa ja Prantsusmaa", "Leedu ja Läti"], correct: 1 },
+          { fact: "Rumeeniasse on ravimid lubatud ainult originaalpakendis koos tšekiga.", q: "Milline on tingimus ravimite saatmiseks Rumeeniasse?", options: ["Ainult retseptiga", "Originaalpakend + tšekk", "Kuni 1 kg", "Keelatud"], correct: 1 },
+          { fact: "E-sigaretid on keelatud kõikidesse EL-i riikidesse.", q: "Kas EL-i on lubatud saata e-sigarette?", options: ["Kuni 2 plokki", "Keelatud kogu EL-is", "Ainult Tšehhi", "Ainult tolliga"], correct: 1 },
+          { fact: "Pakki tohib panna maksimaalselt 2 akupanka (kuni 100Wh).", q: "Mitu akupanka võin ma pakki panna?", options: ["Ükskõik kui palju", "Mitte rohkem kui 2", "Ainult 1", "Keelatud"], correct: 1 },
+          { fact: "Alkohoolsete jookide saatmine välismaale on keelatud.", q: "Kas ma võin saata pudeli veini?", options: ["Kuni 1 liiter", "Kui on alla 15%", "Täiesti keelatud", "Ainult plastikus"], correct: 2 },
+          { fact: "Alkoholipõhiseid parfüüme ei tohi saata lennupostiga.", q: "Milline reegel kehtib parfüümidele?", options: ["Lubatud piiranguteta", "Keelatud lennupostiga", "Ainult 50 ml", "Sertifikaadiga"], correct: 1 },
+          { fact: "Taimeseemned ja elustaimed on keelatud.", q: "Kas lilleseemneid võetakse vastu?", options: ["Originaalpakendis", "Ei, see on keelatud", "Kuni 5 pakki", "Ainult köögivilja"], correct: 1 },
+          { fact: "Sularaha saatmine rahvusvahelistes pakkides on keelatud.", q: "Kas ma võin panna 100 eurot dokumentide vahele?", options: ["Kuni 500 eurot", "Jah, tuleb deklareerida", "Sularaha on keelatud", "Ainult mündid"], correct: 2 }
+        ],
+        tariffs: [
+          { q: "Kui palju maksab dokumentide saatmine?", options: ["5 USD", "10 USD", "15 USD", "35 USD"], correct: 2 },
+          { q: "Kui palju maksab standardne 10 kg pakk?", options: ["15 USD", "35 USD", "50 USD", "80 USD"], correct: 1 },
+          { q: "Kui palju maksab 30 kg kauba saatmine?", options: ["35 USD", "60 USD", "80 USD", "100 USD"], correct: 2 },
+          { q: "Kui palju maksab kulleri kutsumine lisaks?", options: ["Tasuta", "5 USD", "10 USD", "15 USD"], correct: 1 }
+        ],
+        terms: [
+          { fact: "Tarneaeg Leetu on umbes 7 päeva.", q: "Milline on eeldatav tarneaeg Leetu?", options: ["3 päeva", "5 päeva", "7 päeva", "10 päeva"], correct: 2 },
+          { fact: "Tšehhi siseriiklik tarne võtab aega 1-2 päeva.", q: "Kui kaua kestab siseriiklik tarne Tšehhis?", options: ["1-2 päeva", "3-4 päeva", "5 päeva", "Nädal"], correct: 0 },
+          { fact: "Dokumendid Suurbritanniasse jõuavad 3 tööpäevaga.", q: "Mitme päevaga jõuavad dokumendid Suurbritanniasse?", options: ["1 päev", "3 tööpäeva", "5 päeva", "10 päeva"], correct: 1 },
+          { fact: "Kaup Hispaaniasse jõuab 8-10 päevaga.", q: "Mitme päevaga jõuab suur pakk Hispaaniasse?", options: ["3-5 päeva", "5-7 päeva", "8-10 päeva", "14 päeva"], correct: 2 },
+          { fact: "Minimaalne tarneaeg Poola on alates 3 tööpäevast.", q: "Milline on minimaalne tarneaeg Poola?", options: ["1 päev", "Alates 3 päevast", "Alates 7 päevast", "Kaks nädalat"], correct: 1 },
+          { fact: "Eeldatav tarneaeg Saksamaale on 5-7 päeva.", q: "Kui kaua reisib pakk Saksamaale?", options: ["2-3 päeva", "5-7 päeva", "10-12 päeva", "Kuni 14 päeva"], correct: 1 },
+          { fact: "Pakk on Poola pakiautomaadis (InPost) 48 tundi.", q: "Kui kaua ootab pakk pakiautomaadis Poolas?", options: ["24 tundi", "48 tundi", "3 päeva", "5 päeva"], correct: 1 },
+          { fact: "Saksamaal on pakk tasuta esinduses 7 päeva.", q: "Mitu päeva on pakk tasuta esinduses Saksamaal?", options: ["3 päeva", "5 päeva", "7 päeva", "14 päeva"], correct: 2 },
+          { fact: "Kulleri tarne välismaal toimub 8:00–18:00.", q: "Mis kell toimetab kuller pakke välismaal?", options: ["9:00 - 21:00", "8:00 - 18:00", "Ööpäevaringselt", "Ainult nädalavahetusel"], correct: 1 }
+        ],
+        customs: [
+          { fact: "Kuni 45-eurosed pakid on maksuvabad.", q: "Kingitus Saksamaale (30 eurot). Toll?", options: ["Ainult käibemaks", "Ainult tollimaks", "Maksuvaba", "KM + tollimaks"], correct: 2 },
+          { fact: "Pakkidele 45-150 eurot kehtib ainult käibemaks.", q: "Pakk Poola, 100 eurot. Maksud?", options: ["Maksuvaba", "Ainult käibemaks", "Ainult tollimaks", "KM ja tollimaks"], correct: 1 },
+          { fact: "Üle 150-eurostele pakkidele kehtib KM ja tollimaks.", q: "Elektroonika Itaaliasse, 250 eurot. Maksud?", options: ["Ainult KM", "Ainult toll", "KM ja tollimaks", "Fikseeritud tasu"], correct: 2 }
+        ]
+      }
 
     };
 
