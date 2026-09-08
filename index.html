@@ -84,6 +84,7 @@
 
   <div class="screen">
 
+    <!-- ЕКРАН 1: АВТОРИЗАЦІЯ -->
     <div id="screen-auth" class="card">
       <h2 style="margin-bottom: 6px;">Реєстрація оператора</h2>
       <p style="color: #666; font-size: 13px; margin-bottom: 16px;">Оберіть мову обслуговування та введіть дані</p>
@@ -99,28 +100,55 @@
       <div class="form-group">
         <label>Країна та мова обслуговування</label>
         <select id="country-lang">
-  <option value="ua" selected>🇺🇦 Україна (Українська)</option>
-  <option value="en">🇬🇧 Велика Британія (Англійська)</option>
-  <option value="de">🇩🇪 Німеччина (Німецька)</option>
-  <option value="pl">🇵🇱 Польща (Польська)</option>
-  <option value="lv">🇱🇻 Латвія (Латиська)</option>
-  <option value="lt">🇱🇹 Литва (Литовська)</option>
-  <option value="et">🇪🇪 Естонія (Естонська)</option>
-  <option value="nl">🇳🇱 Нідерланди (Англійська)</option>
-  <option value="ro">🇷🇴 Румунія (Румунська)</option>
-  <option value="cz">🇨🇿 Чехія (Чеська)</option>
-  <option value="sk">🇸🇰 Словаччина (Словацька)</option>
-  <option value="at">🇦🇹 Австрія (Німецька)</option>
-  <option value="hu">🇭🇺 Угорщина (Угорська)</option>
-  <option value="fr">🇫🇷 Франція (Французька)</option>
-  <option value="es">🇪🇸 Іспанія (Іспанська)</option>
-  <option value="it">🇮🇹 Італія (Італійська)</option>
+          <option value="ua" selected>🇺🇦 Україна (Українська)</option>
+          <option value="en">🇬🇧 Велика Британія (Англійська)</option>
+          <option value="de">🇩🇪 Німеччина (Німецька)</option>
+          <option value="pl">🇵🇱 Польща (Польська)</option>
+          <option value="lv">🇱🇻 Латвія (Латиська)</option>
+          <option value="lt">🇱🇹 Литва (Литовська)</option>
+          <option value="et">🇪🇪 Естонія (Естонська)</option>
+          <option value="nl">🇳🇱 Нідерланди (Англійська)</option>
+          <option value="ro">🇷🇴 Румунія (Румунська)</option>
+          <option value="cz">🇨🇿 Чехія (Чеська)</option>
+          <option value="sk">🇸🇰 Словаччина (Словацька)</option>
+          <option value="at">🇦🇹 Австрія (Німецька)</option>
+          <option value="hu">🇭🇺 Угорщина (Угорська)</option>
+          <option value="fr">🇫🇷 Франція (Французька)</option>
+          <option value="es">🇪🇸 Іспанія (Іспанська)</option>
+          <option value="it">🇮🇹 Італія (Італійська)</option>
         </select>
       </div>
 
-      <button class="btn" onclick="startMemorize()">Розпочати тест</button>
+      <button class="btn" onclick="showIntro()">Далі</button>
     </div>
 
+    <!-- ЕКРАН 2: ЛЕГЕНДА / УМОВИ -->
+    <div id="screen-intro" class="card hidden" style="max-width: 800px; text-align: left;">
+      <h2 style="text-align: center; margin-bottom: 16px; color: var(--np-dark);">Ласкаво просимо до команди!</h2>
+      <p style="margin-bottom: 12px; line-height: 1.5;">
+        <b>Ваша роль:</b> Ви — спеціаліст Центру Турботи про клієнта. У цьому тестуванні вам необхідно допомагати клієнтам, обираючи правильні варіанти відповідей у трьох каналах зв'язку (Дзвінки, Чати та Листи).
+      </p>
+      
+      <p style="margin-bottom: 8px; margin-top: 20px; color: var(--np-red); font-weight: 800;">⏱ Таймінги на виконання завдань:</p>
+      <ul style="margin-left: 24px; margin-bottom: 20px; line-height: 1.6; font-size: 14.5px;">
+        <li><b>📞 Дзвінок:</b> до <b>45 секунд</b> на кожну репліку клієнта.</li>
+        <li><b>💬 Чати:</b> до <b>300 секунд (5 хвилин)</b> на повне вирішення одного чату.</li>
+        <li><b>✉️ Email-звернення:</b> до <b>420 секунд (7 хвилин)</b> на опрацювання одного листа.</li>
+      </ul>
+
+      <p style="margin-bottom: 8px; color: var(--np-red); font-weight: 800;">📚 Підготовка до зміни:</p>
+      <p style="margin-bottom: 12px; line-height: 1.5;">На наступному кроці ми надамо вам <b>120 секунд</b> на ознайомлення з Базою Знань для вибраної країни. Зверніть увагу на такі категорії:</p>
+      <ul style="margin-left: 24px; margin-bottom: 24px; line-height: 1.6; font-size: 14.5px;">
+        <li><b>🚫 Обмеження:</b> що можна пересилати, а що категорично заборонено (або які є умови).</li>
+        <li><b>💰 Тарифи:</b> вартість відправки документів, посилок та додаткових послуг (наприклад, кур'єр).</li>
+        <li><b>⏱ Терміни:</b> орієнтовний час доставки та графіки роботи відділень/кур'єрів.</li>
+        <li><b>🛂 Розмитнення:</b> ліміти на безмитне ввезення та правила нарахування ПДВ/мита.</li>
+      </ul>
+
+      <button class="btn" style="margin-top: 10px;" onclick="startLearning()">Ознайомився(лась), готовий(а) перейти до підготовки</button>
+    </div>
+
+    <!-- ЕКРАН 3: ВИВЧЕННЯ БАЗИ ЗНАНЬ -->
     <div id="screen-memorize" class="card hidden" style="max-width: 1200px;">
       <h2>База знань (Запам’ятайте інформацію)</h2>
       <p style="color: #666; font-size: 13px; margin: 4px 0 12px 0;">
@@ -146,9 +174,10 @@
         </div>
       </div>
 
-      <button class="btn" onclick="startWorkspace()">Я готовий(а) до зміни</button>
+      <button class="btn" onclick="startWorkspace()">Я готовий(а) до зміни (Почати)</button>
     </div>
 
+    <!-- ЕКРАН 4: РОБОЧИЙ ПРОСТІР (WORKSPACE) -->
     <div id="screen-workspace" class="hidden">
       <div class="workspace-grid">
         <div>
@@ -185,6 +214,7 @@
       <button class="btn" onclick="finishWorkspace()" style="margin-top: 16px;">Завершити зміну та підрахувати бали</button>
     </div>
 
+    <!-- ЕКРАН 5: РЕЗУЛЬТАТ -->
     <div id="screen-result" class="card hidden">
       <h2>Підсумки тестування</h2>
       <p id="res-candidate" style="color: #666; margin-top: 4px; font-size: 14px;"></p>
@@ -291,8 +321,7 @@
           { fact: "Over 150 EUR, the recipient pays both VAT (~20%) and duty (10%).", q: "Electronics to Italy, 250 EUR. Taxes?", options: ["Only VAT", "Only duty", "Both VAT and duty", "Fixed fee 50 EUR"], correct: 2 }
         ]
       },
-      
-pl: {
+      pl: {
         thanksCall: "Dziękuję za pomoc, do widzenia!", 
         thanksChat: "Dziękuję za informacje, miłego dnia!",
         tariffTable: `
@@ -377,7 +406,6 @@ pl: {
         ]
       },
       at: { 
-        // Австрія (Німецька) - ідентично до DE
         thanksCall: "Vielen Dank für Ihre Hilfe, auf Wiedersehen!", 
         thanksChat: "Danke für die Informationen, einen schönen Tag noch!",
         tariffTable: `<table class="tariff-table"><tr><th>Service</th><th>Kosten</th></tr><tr><td>Dokumentenversand</td><td>15 USD</td></tr><tr><td>10 kg Paket</td><td>35 USD</td></tr><tr><td>30 kg Fracht</td><td>80 USD</td></tr><tr><td>Abholung durch Kurier</td><td>5 USD</td></tr></table>`,
@@ -466,7 +494,7 @@ pl: {
           { fact: "Posielanie akýchkoľvek alkoholických nápojov do zahraničia je zakázané.", q: "Môžem poslať fľašu vína?", options: ["Áno, do 1 litra", "Áno, do 15% alk.", "Nie, úplne zakázané", "Iba v plaste"], correct: 2 },
           { fact: "Parfumy na báze alkoholu sa nesmú posielať letecky.", q: "Aké pravidlo platí pre posielanie parfumov?", options: ["Povolené bez obmedzení", "Zakázané letecky", "Iba flakóny do 50 ml", "Iba s certifikátom"], correct: 1 },
           { fact: "Semená rastlín a živé sadenice je zakázané posielať.", q: "Prijmú na odoslanie semená kvetín?", options: ["Áno, v originálnom balení", "Nie, je to zakázané", "Áno, do 5 balení", "Iba semená zeleniny"], correct: 1 },
-          { fact: "Zasielanie hotovosti v medzinárodných zásielkach je zakázané.", q: "Môžem do dokumentov vložiť bankovku 100 eur?", options: ["Povolené do 500 eur", "Áno, treba deklarovať", "Posielať hotovosť je zakázané", "Povolené iba mince"], correct: 2 }
+          { fact: "Zasielanie hotovosti v medzinárodných zásielkach je zakázané.", q: "Môžem do dokumentov vložiť bankovku 100 eur?", options: ["Povolené do 500 eur", "Áno, treba deklarovať", "Posielať hotovost je zakázané", "Povolené iba mince"], correct: 2 }
         ],
         tariffs: [
           { q: "Koľko bude stáť odoslanie obálky s dokumentmi?", options: ["5 USD", "10 USD", "15 USD", "35 USD"], correct: 2 },
@@ -482,7 +510,7 @@ pl: {
           { fact: "Minimálna doba dodania do Poľska je od 3 pracovných dní.", q: "Aká je minimálna doba dodania do Poľska?", options: ["1 deň", "Od 3 prac. dní", "Od 7 prac. dní", "Dva týždne"], correct: 1 },
           { fact: "Odhadovaná doba dodania do Nemecka je 5-7 dní.", q: "Ako dlho priemerne cestuje zásielka do Nemecka?", options: ["2-3 dni", "5-7 dní", "10-12 dní", "Až 14 dní"], correct: 1 },
           { fact: "Doba uloženia zásielky v poľskom InPost boxe je 48 hodín.", q: "Ako dlho zásielka čaká v boxe v Poľsku?", options: ["24 hodín", "48 hodín", "3 dni", "5 dní"], correct: 1 },
-          { fact: "Na pobočke v Nemecku je zásielka uložená zadarmo 7 dní.", q: "Koľko dní leží zásielka zadarmo na pobočke v Nemecku?", options: ["3 dni", "5 dní", "7 dni", "14 dní"], correct: 2 },
+          { fact: "Na pobočke v Nemecku je zásielka uložená zadarmo 7 dní.", q: "Koľko dní leží zásielka zadarmo na pobočke v Nemecku?", options: ["3 dni", "5 dní", "7 dní", "14 dní"], correct: 2 },
           { fact: "Kuriérske doručenie v zahraničí prebieha od 8:00 do 18:00.", q: "V aký čas kuriér doručuje zásielky v zahraničí?", options: ["Od 9:00 do 21:00", "Od 8:00 do 18:00", "Nonstop", "Iba cez víkend"], correct: 1 }
         ],
         customs: [
@@ -834,7 +862,6 @@ pl: {
           { fact: "Üle 150-eurostele pakkidele kehtib KM ja tollimaks.", q: "Elektroonika Itaaliasse, 250 eurot. Maksud?", options: ["Ainult KM", "Ainult toll", "KM ja tollimaks", "Fikseeritud tasu"], correct: 2 }
         ]
       }
-
     };
 
     let activeBank = localizedBanks.ua;
@@ -846,15 +873,22 @@ pl: {
     let memInterval, callInterval, breakInterval;
     let chatIntervals = [], emailIntervals = [];
 
-    function startMemorize() {
+    // ФУНКЦІЯ 1: Показує екран-легенду (інтро)
+    function showIntro() {
       const f = document.getElementById('fname').value.trim();
       const l = document.getElementById('lname').value.trim();
-      if (!f || !l) return alert("Введіть ім'я та прізвище!");
+      if (!f || !l) return alert("Будь ласка, введіть ім'я та прізвище!");
 
       candidateName = `${f} ${l}`;
       selectedLangCode = document.getElementById('country-lang').value;
       activeBank = localizedBanks[selectedLangCode] || localizedBanks.en;
 
+      document.getElementById('screen-auth').classList.add('hidden');
+      document.getElementById('screen-intro').classList.remove('hidden');
+    }
+
+    // ФУНКЦІЯ 2: Генерує факти та запускає таймер вивчення
+    function startLearning() {
       // Беремо 4 випадкові обмеження та 4 випадкові терміни
       selRestr = [...activeBank.restrictions].sort(() => 0.5 - Math.random()).slice(0, 4);
       selTerm = [...activeBank.terms].sort(() => 0.5 - Math.random()).slice(0, 4);
@@ -873,7 +907,7 @@ pl: {
       // Рендеримо таблицю тарифів
       document.getElementById('facts-tariff').innerHTML = activeBank.tariffTable;
 
-      document.getElementById('screen-auth').classList.add('hidden');
+      document.getElementById('screen-intro').classList.add('hidden');
       document.getElementById('screen-memorize').classList.remove('hidden');
 
       let t = 120;
