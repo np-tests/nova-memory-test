@@ -70,6 +70,21 @@
     .done-badge { grid-column: 1 / -1; text-align: center; color: var(--np-green); font-weight: 800; font-size: 13px; padding: 8px; background: #F0FDF4; border-radius: 6px; border: 1px solid var(--np-green); }
 
     .hidden { display: none !important; }
+    /* Стилі для кругових діаграм результатів */
+    .stats-container { display: flex; justify-content: center; gap: 30px; margin: 20px 0; }
+    .stat-box { display: flex; flex-direction: column; align-items: center; }
+    .circle-wrap {
+      width: 70px; height: 70px; border-radius: 50%;
+      background: #E4E4E7;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 8px;
+    }
+    .circle-inner {
+      width: 56px; height: 56px; border-radius: 50%; background: white;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 900; font-size: 15px; color: var(--np-dark);
+    }
+    .stat-label { font-size: 11px; font-weight: 800; color: #666; text-transform: uppercase; letter-spacing: 0.5px; }
   </style>
 </head>
 <body>
@@ -214,12 +229,29 @@
       <button class="btn" onclick="finishWorkspace()" style="margin-top: 16px;">Завершити зміну та підрахувати бали</button>
     </div>
 
-    <!-- ЕКРАН 5: РЕЗУЛЬТАТ -->
+  <!-- ЕКРАН 5: РЕЗУЛЬТАТ -->
     <div id="screen-result" class="card hidden">
       <h2>Підсумки тестування</h2>
       <p id="res-candidate" style="color: #666; margin-top: 4px; font-size: 14px;"></p>
       
       <div style="font-size: 48px; font-weight: 900; color: var(--np-red); margin: 16px 0 4px 0;" id="res-score">0 / 100</div>
+
+      <!-- Наші нові кругові діаграми -->
+      <div class="stats-container">
+        <div class="stat-box">
+          <div class="circle-wrap" id="ring-calls"><div class="circle-inner" id="val-calls">0%</div></div>
+          <div class="stat-label">📞 Дзвінки</div>
+        </div>
+        <div class="stat-box">
+          <div class="circle-wrap" id="ring-chats"><div class="circle-inner" id="val-chats">0%</div></div>
+          <div class="stat-label">💬 Чати</div>
+        </div>
+        <div class="stat-box">
+          <div class="circle-wrap" id="ring-emails"><div class="circle-inner" id="val-emails">0%</div></div>
+          <div class="stat-label">✉️ Листи</div>
+        </div>
+      </div>
+
       <div id="res-stars" style="font-size: 42px; color: #F59E0B; margin-bottom: 12px; letter-spacing: 4px;">★★★★★</div>
       
       <button class="btn" onclick="location.reload()" style="margin-top: 10px;">Пройти знову</button>
@@ -1175,22 +1207,42 @@
       document.getElementById('cnt-emails').innerText = countEmails;
     }
 
-  function finishWorkspace() {
+function finishWorkspace() {
       // 1. Зупиняємо всі таймери
       clearInterval(callInterval);
       clearInterval(breakInterval);
       chatIntervals.forEach(clearInterval);
       emailIntervals.forEach(clearInterval);
 
-      // 2. Підраховуємо бали
-      let totalQuestions = 15;
-      let correctCount = 0;
+      // 2. Підрахунок по кожному каналу окремо
+      let correctCalls = 0, totalCalls = 6;
+      let correctChats = 0, totalChats = 6;
+      let correctEmails = 0, totalEmails = 3;
 
       for (let k in userAnswers) {
-        if (userAnswers[k] === true) correctCount++;
+        if (userAnswers[k] === true) {
+          if (k.startsWith('call_')) correctCalls++;
+          else if (k.startsWith('chat_')) correctChats++;
+          else if (k.startsWith('email_')) correctEmails++;
+        }
       }
 
+      let correctCount = correctCalls + correctChats + correctEmails;
+      let totalQuestions = totalCalls + totalChats + totalEmails;
+
       const finalScore = Math.round((correctCount / totalQuestions) * 100);
+      
+      // Вираховуємо відсотки для кілець
+      const pctCalls = Math.round((correctCalls / totalCalls) * 100);
+      const pctChats = Math.round((correctChats / totalChats) * 100);
+      const pctEmails = Math.round((correctEmails / totalEmails) * 100);
+
+      // Функція визначення кольору за правилами (0-33, 34-66, 67-100)
+      function getColor(pct) {
+        if (pct <= 33) return "var(--np-red)";
+        if (pct <= 66) return "#F59E0B"; // Жовтий
+        return "var(--np-green)";        // Зелений
+      }
 
       function getStars(score) {
         if (score <= 20) return "★☆☆☆☆";
@@ -1206,13 +1258,14 @@
       // 3. ВІДПРАВКА РЕЗУЛЬТАТІВ У TELEGRAM
       // ==========================================
       const botToken = '8866032822:AAGIOiXro_YNWVvGyOunl-zyyenvx9YTvBk';
-      const chatId = '-5305676304'; // Ваш ID групи
+      const chatId = '-5305676304'; 
 
       const textMessage = `
 🚨 <b>Новий результат тестування!</b>
 👤 <b>Оператор:</b> ${candidateName}
 🌍 <b>Мова:</b> ${selectedLangCode.toUpperCase()}
-📊 <b>Результат:</b> ${finalScore}/100 балів (${stars})
+📊 <b>Загальний бал:</b> ${finalScore}/100 (${stars})
+📞 Дзвінки: ${pctCalls}% | 💬 Чати: ${pctChats}% | ✉️ Листи: ${pctEmails}%
       `;
 
       fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
@@ -1229,13 +1282,26 @@
       }).catch(err => console.error('Помилка мережі:', err));
       // ==========================================
 
-      // 4. Відображення результатів на екрані фахівця
+      // 4. Відображення загального результату
       document.getElementById('screen-workspace').classList.add('hidden');
       document.getElementById('screen-result').classList.remove('hidden');
 
       document.getElementById('res-candidate').innerText = `Оператор: ${candidateName} | Мова: ${selectedLangCode.toUpperCase()}`;
       document.getElementById('res-score').innerText = `${finalScore} / 100`;
       document.getElementById('res-stars').innerText = stars;
+
+      // 5. Рендеримо заповнення та кольори кругових діаграм
+      document.getElementById('ring-calls').style.background = `conic-gradient(${getColor(pctCalls)} ${pctCalls}%, var(--np-border) 0)`;
+      document.getElementById('val-calls').innerText = `${pctCalls}%`;
+      document.getElementById('val-calls').style.color = getColor(pctCalls);
+
+      document.getElementById('ring-chats').style.background = `conic-gradient(${getColor(pctChats)} ${pctChats}%, var(--np-border) 0)`;
+      document.getElementById('val-chats').innerText = `${pctChats}%`;
+      document.getElementById('val-chats').style.color = getColor(pctChats);
+
+      document.getElementById('ring-emails').style.background = `conic-gradient(${getColor(pctEmails)} ${pctEmails}%, var(--np-border) 0)`;
+      document.getElementById('val-emails').innerText = `${pctEmails}%`;
+      document.getElementById('val-emails').style.color = getColor(pctEmails);
     }
 
     
