@@ -1175,12 +1175,14 @@
       document.getElementById('cnt-emails').innerText = countEmails;
     }
 
-    function finishWorkspace() {
+  function finishWorkspace() {
+      // 1. Зупиняємо всі таймери
       clearInterval(callInterval);
       clearInterval(breakInterval);
       chatIntervals.forEach(clearInterval);
       emailIntervals.forEach(clearInterval);
 
+      // 2. Підраховуємо бали
       let totalQuestions = 15;
       let correctCount = 0;
 
@@ -1190,11 +1192,51 @@
 
       const finalScore = Math.round((correctCount / totalQuestions) * 100);
 
+      function getStars(score) {
+        if (score <= 20) return "★☆☆☆☆";
+        if (score <= 40) return "★★☆☆☆";
+        if (score <= 60) return "★★★☆☆";
+        if (score <= 80) return "★★★★☆";
+        return "★★★★★";
+      }
+
+      const stars = getStars(finalScore);
+
+      // ==========================================
+      // 3. ВІДПРАВКА РЕЗУЛЬТАТІВ У TELEGRAM
+      // ==========================================
+      const botToken = '8866032822:AAGIOiXro_YNWVvGyOunl-zyyenvx9YTvBk';
+      const chatId = '-5305676304'; // Ваш ID групи
+
+      const textMessage = `
+🚨 <b>Новий результат тестування!</b>
+👤 <b>Оператор:</b> ${candidateName}
+🌍 <b>Мова:</b> ${selectedLangCode.toUpperCase()}
+📊 <b>Результат:</b> ${finalScore}/100 балів (${stars})
+      `;
+
+      fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: textMessage,
+          parse_mode: 'HTML'
+        })
+      }).then(response => {
+        if (response.ok) console.log("Успішно відправлено в Telegram!");
+        else console.error("Помилка Telegram API:", response);
+      }).catch(err => console.error('Помилка мережі:', err));
+      // ==========================================
+
+      // 4. Відображення результатів на екрані фахівця
       document.getElementById('screen-workspace').classList.add('hidden');
       document.getElementById('screen-result').classList.remove('hidden');
 
       document.getElementById('res-candidate').innerText = `Оператор: ${candidateName} | Мова: ${selectedLangCode.toUpperCase()}`;
       document.getElementById('res-score').innerText = `${finalScore} / 100`;
+      document.getElementById('res-stars').innerText = stars;
+    }
 
       function getStars(score) {
         if (score <= 20) return "★☆☆☆☆";
